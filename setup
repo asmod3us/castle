@@ -1,0 +1,23 @@
+#!/bin/bash
+if [ -r ~/.bashrc ]; then
+	mv ~/.bashrc ~/bashrc.dotfile
+fi
+
+if [ -r ~/.bash_profile ]; then
+	mv ~/.bash_profile ~/bash_profile.dotfile
+fi
+
+if [ -r ~/.bash_logout]; then
+	mv ~/.bash_logout ~/bash_logout.dotfile
+fi
+
+shelldir=~/myshell
+dotfiles=$shelldir/dotfiles
+shellcfg=$dotfiles/shell
+
+ln -s $shelldir/bootstrap ~/.bashrc
+for fname in "bash_profile" "bash_logout"; do
+	if [ -r $shellcfg/$fname ]; then
+		ln -s $shellcfg/$fname ~/.$fname
+	fi
+done
