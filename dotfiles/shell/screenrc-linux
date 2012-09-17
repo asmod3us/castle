@@ -1,0 +1,29 @@
+escape ^pp  # suggested binding for emacs users
+
+vbellwait 0
+vbell_msg ^G
+bell_msg ^G
+
+startup_message off
+
+hardstatus on
+hardstatus alwayslastline
+# hardstatus string "%H|%w%=|%d/%m %c"
+hardstatus string "%-w%{= BW}%50>%n %t%{-}%+w%<"
+
+# Don't block command output if the terminal stops responding
+# (like if the ssh connection times out for example).
+nonblock on
+
+# auto-screen support; see http://taint.org/wk/RemoteLoginAutoScreen
+# detach on hangup
+autodetach on
+# no startup msg
+startup_message off
+# always use a login shell
+shell -$SHELL
+
+# auto-log location
+logfile $HOME/log/screen-logs/%Y%m%d-%n.log
+# turn log on by default
+deflog on

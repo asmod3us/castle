@@ -1,0 +1,26 @@
+#!/bin/bash
+if [ -z "$PS1" ]; then
+   return
+fi
+
+dropboxshelldir=~/Dropbox/Projects/myshell
+dotfiles=$dropboxshelldir/dotfiles
+dropboxdir=$dropboxshelldir/shell
+masterbashrc=$dropboxdir/bashrc
+osbashrc=$masterbashrc-$(uname)
+localbashrc=$osbashrc-$(hostname | cut -d. -f1)
+
+echo -n "Applicable shell configs: "
+for bashfile in "$masterbashrc" "$osbashrc" "$localbashrc"; do
+  if [ -r $bashfile ]; then
+    . $bashfile
+    echo -n "`basename $bashfile` "
+  fi
+done
+echo
+
+# Set convenience aliases
+myed=${VISUAL:-${EDITOR:-vim}}
+alias editbashrc="$myed $masterbashrc"
+alias editosbashrc="$myed $osbashrc"
+alias editlocalbashrc="$myed $localbashrc"
