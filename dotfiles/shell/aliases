@@ -23,10 +23,13 @@ alias du='du -h'
 # alias vdir='ls --color=auto --format=long'
 alias ll='ls -l'
 alias la='ls -A'
-alias l='ls -laF'
-alias lc='ls -CF'
-alias ..="cd .."
+alias l='ls -lAF'
+#alias lc='ls -CF'
+alias lc="(printf 'PERM LINKS OWNER GROUP SIZE MONTH DAY HH:MM/YEAR NAME\n'; ls -la | sed 1d) | column -t"
 alias cd..="cd .."
+alias ..="cd .."
+alias ...="cd ..."
+alias md="mkdir"
 alias cdb="cd $BUILD_HOME"
 alias grep='grep --color'
 alias n="nautilus ."
@@ -38,11 +41,14 @@ alias nr="nautilus /reference"
 alias na="nautilus /archive"
 alias nt="nautilus /tools"
 alias pgrep="ps aux| grep"
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 alias t='task'
 alias ack='ack-grep'
+
+alias h='history'
+# If using Linux alias pbcopy and pbpaste
+if [[ "$OSTYPE" =~ ^linux ]]; then
+	alias pbcopy='xsel --clipboard --input'
+	alias pbpaste='xsel --clipboard --output'
+fi
 
 

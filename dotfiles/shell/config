@@ -1,0 +1,51 @@
+# Don't wait for job termination notification
+# set -o notify
+
+# Don't use ^D to exit
+# set -o ignoreeof
+
+# Use case-insensitive filename globbing
+shopt -s nocaseglob
+
+# Use hidden file globbing
+shopt -s cmdhist
+
+# Make bash append rather than overwrite the history on disk
+shopt -s histappend
+
+# When changing directory small typos can be ignored by bash
+# for example, cd /vr/lgo/apaache would find /var/log/apache
+shopt -s cdspell
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# save multi-line commands as one history entry
+shopt -s cmdhist
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# set up prompt
+function prompt_command() {
+	# display git branch in prompt
+	if [ "\$(type -t __git_ps1)" ]; then # if we're in a Git repo, show current branch
+			BRANCH="\$(__git_ps1 '[ %s ] ')"
+	fi
+	local TIME="\A"
+	local USER_HOST="\u@\h"
+	local PATH="\w"
+	#local TIME="\[\e]0;\w\a\]\n\t"
+	#local USER_HOST="\[\e[32m\]\u@\h"
+	#local PATH="\[\e[33m\]\w\[\e[0m\]"
+	# return color to Terminal setting for text color
+	local DEFAULT="\[\e[0;39m\]"
+# export PS1="\n${TIME} ${USER_HOST} ${PATH}\n${BRANCH}${DEFAULT}$ "
+	export PS1="\\[\\033[01;37m\\]\\A \\[\\033[01;32m\\]\\u@\\h \\[\\033[01;36m\\]\\w\n${DEFAULT}${BRANCH} \\\$ \\[\\033[00m\\]"
+}
+
+# Whenever displaying the prompt, write the previous line to disk (-a) and read
+# the new line into the history list (-n)
+export PROMPT_COMMAND="history -a; history -n; prompt_command; ${PROMPT_COMMAND}"
+

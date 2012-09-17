@@ -1,4 +1,5 @@
 #!/bin/bash
+# make backups
 if [ -r ~/.bashrc ]; then
 	mv ~/.bashrc ~/bashrc.dotfile
 fi
@@ -13,11 +14,23 @@ fi
 
 shelldir=~/myshell
 dotfiles=$shelldir/dotfiles
-shellcfg=$dotfiles/shell
+cfgdir=$dotfiles/shell
 
+osSuffix=$(uname|tr 'A-Z' 'a-z')
+hostSuffix=$(hostname | cut -d. -f1)
+
+# link to bootstrap file
 ln -s $shelldir/bootstrap ~/.bashrc
+
+# link to most specific version available
 for fname in "bash_profile" "bash_logout"; do
-	if [ -r $shellcfg/$fname ]; then
-		ln -s $shellcfg/$fname ~/.$fname
-	fi
+	master=$cfgdir/$fname
+	os=$cfgdir/$fname-$osSuffix
+	host=$cfgdir/$fname-$hostSuffix
+	for bashfile in $host $os $master; do
+		if [ -r $bashfile ]; then
+			ln -s $bashfile ~/.$fname
+			break
+		fi
+	done
 done

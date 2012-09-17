@@ -1,26 +1,25 @@
-#!/bin/bash
+# If not running interactively, don't do anything
 if [ -z "$PS1" ]; then
    return
 fi
 
-myshelldir=~/myshell
-dotfiles=$myshelldir/dotfiles
-cfgdir=$dotfiles/shell
+export myshelldir=~/myshell
+export dotfiles=$myshelldir/dotfiles
+export cfgdir=$dotfiles/shell
+export osSuffix=$(uname|tr 'A-Z' 'a-z')
+export hostSuffix=$(hostname | cut -d. -f1)
 
-osSuffix=$(uname|tr 'A-Z' 'a-z')
-hostSuffix=$(hostname | cut -d. -f1)
-for fname in "bashrc"; do
-	master=$cfgdir/$fname
-	os=$cfgdir/$fname-$osSuffix
-	host=$cfgdir/$fname-$hostSuffix
+function include {
+	master=$cfgdir/$1
+	os=$cfgdir/$1-$osSuffix
+	host=$cfgdir/$1-hostSuffix
 
-	echo -n "Reading shell config: "
 	for bashfile in $master $os $host; do
 		if [ -r $bashfile ]; then
+			echo "Including $(basename $bashfile)"
 			. $bashfile
-			echo -n "`basename $bashfile` "
 		fi
 	done
-done
+}
 
-echo
+include bashrc
