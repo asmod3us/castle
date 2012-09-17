@@ -7,14 +7,14 @@ myshelldir=~/myshell
 dotfiles=$myshelldir/dotfiles
 cfgdir=$dotfiles/shell
 
-osSuffix=$(uname)
+osSuffix=$(uname|tr 'A-Z' 'a-z')
 hostSuffix=$(hostname | cut -d. -f1)
 for fname in "bashrc"; do
 	master=$cfgdir/$fname
 	os=$cfgdir/$fname-$osSuffix
 	host=$cfgdir/$fname-$hostSuffix
 
-	echo -n "Applicable shell configs: "
+	echo -n "Reading shell config: "
 	for bashfile in $master $os $host; do
 		if [ -r $bashfile ]; then
 			. $bashfile

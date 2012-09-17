@@ -7,7 +7,7 @@ if [ -r ~/.bash_profile ]; then
 	mv ~/.bash_profile ~/bash_profile.dotfile
 fi
 
-if [ -r ~/.bash_logout]; then
+if [ -r ~/.bash_logout ]; then
 	mv ~/.bash_logout ~/bash_logout.dotfile
 fi
 
