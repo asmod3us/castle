@@ -19,7 +19,7 @@ export GRAILS_HOME=${TOOLS}/grails
 export PYTHONPATH=${PYTHONPATH}:${HOME}/python
 
 export EDITOR=vim
-export TERM=xterm-color
+#export TERM=xterm-color
 export CLICOLOR=true
 export LSCOLORS=gxfxcxdxbxegedabagacad
 
