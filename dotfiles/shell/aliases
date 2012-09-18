@@ -51,4 +51,7 @@ if [[ "$OSTYPE" =~ ^linux ]]; then
 	alias pbpaste='xsel --clipboard --output'
 fi
 
-
+alias g="grep"
+alias e="$EDITOR"
+alias h='history'
+alias j='jobs -l'
