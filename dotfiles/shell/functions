@@ -2,3 +2,19 @@
 function down4me() {
   curl -s "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g'
 }
+
+function pathPrepend() {
+	if [[ "$PATH" =~ (^|:)"${1}"(:|$) ]]
+	then
+		return 0
+	fi
+	PATH=$1:$PATH
+}
+
+function pathAdd() {
+	if [[ "$PATH" =~ (^|:)"${1}"(:|$) ]]
+	then
+		return 0
+	fi
+	PATH=$PATH:$1
+}

@@ -31,18 +31,17 @@ shopt -s cmdhist
 function prompt_command() {
 	# display git branch in prompt
 	if [ "\$(type -t __git_ps1)" ]; then # if we're in a Git repo, show current branch
-			BRANCH="\$(__git_ps1 '[ %s ] ')"
+		BRANCH="\$(__git_ps1 '[%s] ')"
+	else
+		BRANCH=""
 	fi
+
 	local TIME="\A"
 	local USER_HOST="\u@\h"
 	local PATH="\w"
-	#local TIME="\[\e]0;\w\a\]\n\t"
-	#local USER_HOST="\[\e[32m\]\u@\h"
-	#local PATH="\[\e[33m\]\w\[\e[0m\]"
 	# return color to Terminal setting for text color
 	local DEFAULT="\[\e[0;39m\]"
-# export PS1="\n${TIME} ${USER_HOST} ${PATH}\n${BRANCH}${DEFAULT}$ "
-	export PS1="\\[\\033[01;37m\\]\\A \\[\\033[01;32m\\]\\u@\\h \\[\\033[01;36m\\]\\w\n${DEFAULT}${BRANCH} \\\$ \\[\\033[00m\\]"
+	export PS1="\\[\\033[01;37m\\]\\A \\[\\033[01;32m\\]\\u@\\h \\[\\033[01;36m\\]\\w\n${DEFAULT}${BRANCH}$ \\[\\033[00m\\]"
 }
 
 # Whenever displaying the prompt, write the previous line to disk (-a) and read

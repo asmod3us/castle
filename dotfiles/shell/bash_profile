@@ -1,0 +1,16 @@
+#~/.bash_profile: sourced by bash when you log in interactively.
+# startup debugging
+STARTUP="${STARTUP}~/.bash_profile, "
+[ -f ~/.bashrc ] && . ~/.bashrc
+
+# Completion for interactive shells
+case $- in
+	i*)
+		[[ -f /etc/bash_completion ]] && . /etc/bash_completion
+		if [ -x "$(which brew)" ] ; then
+			if [ -f $(brew --prefix)/etc/bash_completion ]; then
+				. $(brew --prefix)/etc/bash_completion
+			fi
+		fi
+		;;
+esac

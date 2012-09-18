@@ -25,20 +25,22 @@ export LSCOLORS=gxfxcxdxbxegedabagacad
 
 # Set PATH so it includes user's private bin if it exists
 if [ -d "${HOME}/bin" ] ; then
-  PATH=${HOME}/bin:${PATH}
+	pathPrepend ${HOME}/bin
 fi
 
-PATH=/usr/local/bin:/usr/local/sbin:$PATH
-PATH=${PATH}:/sbin:/usr/sbin
-PATH=${PATH}:${GROOVY_HOME}/bin
-PATH=${PATH}:${GRAILS_HOME}/bin
-PATH=${PATH}:${JAVA_HOME}/bin
-PATH=${PATH}:${SCALA_HOME}/bin
-PATH=${PATH}:${ANDROID_HOME}/tools
-PATH=${PATH}:${ASPECTJ_HOME}/bin
-PATH=${PATH}:${SCALA_HOME}/bin
-PATH=${PATH}:${PLAY_HOME}
-PATH=${PATH}:${MVN_HOME}/bin
+pathPrepend /usr/local/bin
+pathPrepend /usr/local/sbin
+pathAdd /sbin
+pathAdd /usr/sbin
+pathAdd ${GROOVY_HOME}/bin
+pathAdd ${GRAILS_HOME}/bin
+pathAdd ${JAVA_HOME}/bin
+pathAdd ${SCALA_HOME}/bin
+pathAdd ${ANDROID_HOME}/tools
+pathAdd ${ASPECTJ_HOME}/bin
+pathAdd ${SCALA_HOME}/bin
+pathAdd ${PLAY_HOME}
+pathAdd ${MVN_HOME}/bin
 
 export PATH
 

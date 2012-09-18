@@ -1,7 +1,0 @@
-STARTUP="${STARTUP}~/.bash_profile, "
-#This file is sourced by bash when you log in interactively.
-[ -f ~/.bashrc ] && . ~/.bashrc
-
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-	. $(brew --prefix)/etc/bash_completion
-fi

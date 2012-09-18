@@ -1,5 +1,5 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
-# bash startup debugging
+# startup debugging
 STARTUP="${STARTUP}~/.bashrc, "
 
 # Source global definitions
@@ -8,7 +8,7 @@ if [ -f /etc/bashrc ]; then
 fi
 
 export TOOLS=~/Tools
+include functions
 include env
 include config
 include aliases
-include functions
