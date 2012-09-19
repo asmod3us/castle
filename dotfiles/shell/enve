@@ -30,17 +30,17 @@ fi
 
 pathPrepend /usr/local/bin
 pathPrepend /usr/local/sbin
-pathAppend /sbin
-pathAppend /usr/sbin
-pathAppend ${GROOVY_HOME}/bin
-pathAppend ${GRAILS_HOME}/bin
-pathAppend ${JAVA_HOME}/bin
-pathAppend ${SCALA_HOME}/bin
-pathAppend ${ANDROID_HOME}/tools
-pathAppend ${ASPECTJ_HOME}/bin
-pathAppend ${SCALA_HOME}/bin
-pathAppend ${PLAY_HOME}
-pathAppend ${MVN_HOME}/bin
+pathAdd /sbin
+pathAdd /usr/sbin
+pathAdd ${GROOVY_HOME}/bin
+pathAdd ${GRAILS_HOME}/bin
+pathAdd ${JAVA_HOME}/bin
+pathAdd ${SCALA_HOME}/bin
+pathAdd ${ANDROID_HOME}/tools
+pathAdd ${ASPECTJ_HOME}/bin
+pathAdd ${SCALA_HOME}/bin
+pathAdd ${PLAY_HOME}
+pathAdd ${MVN_HOME}/bin
 
 export PATH
 

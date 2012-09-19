@@ -3,21 +3,25 @@ function down4me() {
   curl -s "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g'
 }
 
-function pathPrepend() {
-	if [[ "$PATH" =~ (^|:)"${1}"(:|$) ]]
-	then
-		return 0
-	fi
-	PATH=$1:$PATH
-}
+# function pathPrepend() {
+# 	if [[ "$PATH" =~ (^|:)"${1}"(:|$) ]]
+# 	then
+# 		return 0
+# 	fi
+# 	PATH=$1:$PATH
+# }
+# 
+# function pathAdd() {
+# 	if [[ "$PATH" =~ (^|:)"${1}"(:|$) ]]
+# 	then
+# 		return 0
+# 	fi
+# 	PATH=$PATH:$1
+# }
 
-function pathAdd() {
-	if [[ "$PATH" =~ (^|:)"${1}"(:|$) ]]
-	then
-		return 0
-	fi
-	PATH=$PATH:$1
-}
+function pathAppend ()  { pathRemove $1; export PATH="$PATH:$1"; }
+function pathPrepend () { pathRemove $1; export PATH="$1:$PATH"; }
+function pathRemove ()  { export PATH=`echo -n $PATH | awk -v RS=: -v ORS=: '$0 != "'$1'"' | sed 's/:$//'`; }
 
 # acd_func 1.0.5, 10-nov-2004
 # petar marinov, http:/geocities.com/h2428, this is public domain
