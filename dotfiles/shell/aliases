@@ -55,3 +55,6 @@ alias g="grep"
 alias e="$EDITOR"
 alias h='history'
 alias j='jobs -l'
+alias ag="sudo apt-fast"
+alias get="sudo apt-fast install"
+alias search="sudo apt-cache search"
