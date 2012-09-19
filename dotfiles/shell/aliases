@@ -58,3 +58,12 @@ alias j='jobs -l'
 alias ag="sudo apt-fast"
 alias get="sudo apt-fast install"
 alias search="sudo apt-cache search"
+
+# git aliases
+alias ga='git add'
+alias gpom='git push origin master'
+alias gci='git commit -m'
+alias gs='git status'
+alias gbr='git branch'
+alias gd='git diff'
+
