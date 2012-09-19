@@ -79,3 +79,6 @@ alias cd=cd_func
 #  # ctrl+w shows the menu
 #  bind -x "\"\C-w\":cd_func -- ;"
 #fi
+#
+zipit () { zip -r "$1".zip "$1" ; }
+
