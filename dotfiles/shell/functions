@@ -104,3 +104,9 @@ function webserver() {
 	python -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port"
 }
 
+# debug_http: download a web page and show info on what took time
+speed() { /usr/bin/curl $@ -s -o /dev/null -w "dns: %{time_namelookup}, connect: %{time_connect}, pretransfer: %{time_pretransfer}, starttransfer: %{time_starttransfer}, total: %{time_total}, #connect: %{num_connects}, size: %{size_download}, speed: %{speed_download}\n" ; }
+
+# http_headers: get just the HTTP headers from a web page (and its redirects)
+headers() { /usr/bin/curl -I -L $@ ; }
+
