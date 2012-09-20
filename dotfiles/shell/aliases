@@ -66,4 +66,5 @@ alias gci='git commit -m'
 alias gs='git status'
 alias gbr='git branch'
 alias gd='git diff'
+alias gp='git push'
 
