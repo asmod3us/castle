@@ -110,3 +110,27 @@ speed() { /usr/bin/curl $@ -s -o /dev/null -w "dns: %{time_namelookup}, connect:
 # http_headers: get just the HTTP headers from a web page (and its redirects)
 headers() { /usr/bin/curl -I -L $@ ; }
 
+function newff() {
+	pn="ff-$(tr -dc "0-9a-f" < /dev/urandom | head -c 8)"
+	firefox -CreateProfile "$pn /tmp/$pn"
+	firefox -no-remote -P "$pn" &> /dev/null &
+}
+
+function newcr() {
+	pn="cr-$(tr -dc "0-9a-f" < /dev/urandom | head -c 8)"
+	echo "Starting Chrome with profile $pn"
+	google-chrome --no-first-run --user-data-dir="/tmp/$pn" &> /dev/null &
+}
+
+function getScreenSize() {
+    xdpyinfo | awk '/dimensions:/ { print $2; exit }'
+}
+
+function getScreenWidth() {
+    xdpyinfo | awk '/dimensions:/ { split($2,a,"x");print a[1]; exit }'
+}
+
+function getScreenHeight() {
+    xdpyinfo | awk '/dimensions:/ { split($2,a,"x");print a[2]; exit }'
+}
+
