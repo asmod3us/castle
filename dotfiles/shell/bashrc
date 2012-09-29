@@ -23,8 +23,8 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-# export TOOLS=~/Tools
 include functions
+include preEnv
 include env
 include config
 include aliases

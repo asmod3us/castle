@@ -13,6 +13,7 @@ export ANDROID_HOME=${TOOLS}/android
 export ASPECTJ_HOME=${TOOLS}/aspectj
 export SCALA_HOME=${TOOLS}/scala
 export PLAY_HOME=${TOOLS}/play
+export PLAY20_HOME=${TOOLS}/Play20
 export MVN_HOME=${TOOLS}/maven
 export GROOVY_HOME=${TOOLS}/groovy
 export GRAILS_HOME=${TOOLS}/grails
@@ -30,6 +31,7 @@ fi
 
 pathPrepend /usr/local/bin
 pathPrepend /usr/local/sbin
+pathPrepend ${PLAY20_HOME}
 pathAppend /sbin
 pathAppend /usr/sbin
 pathAppend ${GROOVY_HOME}/bin
