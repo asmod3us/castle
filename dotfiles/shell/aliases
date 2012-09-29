@@ -61,10 +61,10 @@ alias search="sudo apt-cache search"
 
 # git aliases
 alias ga='git add'
-alias gpom='git push origin master'
-alias gci='git commit -m'
-alias gs='git status'
-alias gbr='git branch'
-alias gd='git diff'
 alias gp='git push'
+alias gpom='git push origin master'
+alias gc='git commit -m'
+alias gs='git status'
+alias gb='git branch'
+alias gd='git diff'
 
