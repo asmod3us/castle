@@ -18,13 +18,12 @@ then
 fi
 # [end of auto-screen snippet]
 
-
 # Source global definitions
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-export TOOLS=~/Tools
+# export TOOLS=~/Tools
 include functions
 include env
 include config
