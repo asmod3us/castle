@@ -1,6 +1,0 @@
-export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
-export LANG="en_US.UTF-8"
-export HISTFILE=~/Dropbox/.bash_history
-export TOOLS=~/Tools
-pathPreprend ${TOOLS}/Play20
-export HOMEBREW_TMP=~/tmp
