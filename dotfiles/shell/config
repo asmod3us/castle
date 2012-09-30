@@ -30,38 +30,93 @@ shopt -s cmdhist
 # set up prompt
 function prompt_command() {
 	exitCode=$?
-		
-	# display git branch in prompt
-	if [ "\$(type -t __git_ps1)" ]; then # if we're in a Git repo, show current branch
-		BRANCH="\$(__git_ps1 '[%s] ')"
+
+# setup colors for solarized
+	if tput setaf 1 &> /dev/null; then
+		tput sgr0
+		if [[ $(tput colors) -ge 256 ]] 2>/dev/null; then
+			BASE03=$(tput setaf 234)
+			BASE02=$(tput setaf 235)
+			BASE01=$(tput setaf 240)
+			BASE00=$(tput setaf 241)
+			BASE0=$(tput setaf 244)
+			BASE1=$(tput setaf 245)
+			BASE2=$(tput setaf 254)
+			BASE3=$(tput setaf 230)
+			YELLOW=$(tput setaf 136)
+			ORANGE=$(tput setaf 166)
+			RED=$(tput setaf 160)
+			MAGENTA=$(tput setaf 125)
+			VIOLET=$(tput setaf 61)
+			BLUE=$(tput setaf 33)
+			CYAN=$(tput setaf 37)
+			GREEN=$(tput setaf 64)
+		else
+			BASE03=$(tput setaf 8)
+			BASE02=$(tput setaf 0)
+			BASE01=$(tput setaf 10)
+			BASE00=$(tput setaf 11)
+			BASE0=$(tput setaf 12)
+			BASE1=$(tput setaf 14)
+			BASE2=$(tput setaf 7)
+			BASE3=$(tput setaf 15)
+			YELLOW=$(tput setaf 3)
+			ORANGE=$(tput setaf 9)
+			RED=$(tput setaf 1)
+			MAGENTA=$(tput setaf 5)
+			VIOLET=$(tput setaf 13)
+			BLUE=$(tput setaf 4)
+			CYAN=$(tput setaf 6)
+			GREEN=$(tput setaf 2)
+		fi
+		BOLD=$(tput bold)
+		RESET=$(tput sgr0)
 	else
-		BRANCH=""
+# linux term, these colors might not match solarized
+		BASE03="\033[0;90m" # br black
+		BASE02="\033[0;30m" # black
+		BASE01="\033[0;92m" # br green
+		BASE00="\033[0;93m" # br yellow
+		BASE0="\033[0;94m" # br blue
+		BASE1="\033[0;96m" # br cyan
+		BASE2="\033[1;37m" # white
+		BASE3="\033[0;97m" # br white
+		YELLOW="\033[0;33m"
+		ORANGE="\033[1;91m"
+		RED="\033[0;31m"
+		MAGENTA="\033[0;35m"
+		VIOLET="\033[0;95m" # br magenta
+		BLUE="\033[0;34m"
+		CYAN="\033[0;36m"
+		GREEN="\033[0;32m"
+		WHITE="\033[1;37m"
+		BOLD=""
+		RESET="\033[m"
 	fi
 
-	local TIME="\A"
-	local PATH="\w"
-	local RESET='\[\e[0m\]'
-	local WHITE='\[\e[1;37m\]'
-	local GREEN='\[\e[1;32m\]'
-	local CYAN='\[\e[1;36m\]'
-	local RED='\[\e[1;31m\]'
-
+	TIME="\A"
+	BRANCH="\$(type -t __git_ps1 &> /dev/null && __git_ps1 '[%s] ')"
+	DISPLAYPATH="\w"
 	# red color for  root
 	if [ $UID -eq 0 ]; then
-		USER_HOST="${RED}\u@\h"
+		USER_HOST="\[${RED}\]\u@\h"
 	else
-		USER_HOST="${GREEN}\u@\h"
+		USER_HOST="\[${CYAN}\]\u@\h"
 	fi
 
 	# red exit code and dollar prompt if non-zero
-	if [ $exitCode -ne 0 ]; then
-		EXIT_CODE="${RED}($exitCode) ${RESET}"
-		DOLLAR="${RED}\$ ${RESET}"
+	if [[ $exitCode -ne 0 ]]; then
+		EXIT_CODE="\[${RED}\]($exitCode) "
+		DOLLAR="\[${RED}\]\$ "
 	else
 		EXIT_CODE=""
 		DOLLAR="\$ "
 	fi
-	export PS1="${RESET}${WHITE}${TIME} ${USER_HOST} ${EXIT_CODE}${CYAN}${PATH}\n${RESET}${BRANCH}${DOLLAR}"
+
+	export PS1="\[${RESET}${BASE1}\]\A ${USER_HOST} ${EXIT_CODE}\[${BLUE}\]${BRANCH}\[${ORANGE}\]${DISPLAYPATH}\n\[${RESET}\]${DOLLAR}\[${BASE0}\]"
+
+# show colors
+# export PS1="\[${BASE03}\]BASE03 \[${BASE02}\]BASE02 \[${BASE01}\]BASE01 \[${BASE3}\]BASE00 \[${BASE2}\]BASE2 \[${BASE1}\]BASE1 \[${BASE0}\]BASE0 \[${YELLOW}\]YELLOW \[${ORANGE}\]ORANGE \[${RED}\[RED \[${MAGENTA}\]MAGENTA \[${VIOLET}\]VIOLET \[${BLUE}\]BLUE \[${CYAN}\]CYAN \[${GREEN}\]GREEN "
 }
 
 # Whenever displaying the prompt, write the previous line to disk (-a) and read
