@@ -1,10 +1,11 @@
+#!/bin/bash
 # If not running interactively, don't do anything
 if [ -z "$PS1" ]; then
    return
 fi
 
-export myshelldir=~/myshell
-export dotfiles=$myshelldir/dotfiles
+export castledir=~/castle
+export dotfiles=$castledir/dotfiles
 export cfgdir=$dotfiles/shell
 export osSuffix=$(uname|tr 'A-Z' 'a-z')
 export hostSuffix=$(hostname | cut -d. -f1)

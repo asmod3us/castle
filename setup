@@ -12,15 +12,15 @@ if [ -r ~/.bash_logout ]; then
 	mv ~/.bash_logout ~/bash_logout.dotfile
 fi
 
-shelldir=~/myshell
-dotfiles=$shelldir/dotfiles
+castledir=~/castle
+dotfiles=$castledir/dotfiles
 cfgdir=$dotfiles/shell
 
 osSuffix=$(uname|tr 'A-Z' 'a-z')
 hostSuffix=$(hostname | cut -d. -f1)
 
 # link to bootstrap file
-ln -s $shelldir/bootstrap ~/.bashrc
+ln -s $castledir/bootstrap ~/.bashrc
 
 # link to most specific version available
 for fname in "bash_profile" "bash_logout"; do
