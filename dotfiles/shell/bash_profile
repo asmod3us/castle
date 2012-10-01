@@ -1,3 +1,4 @@
+#! /bin/bash
 #~/.bash_profile: sourced by bash when you log in interactively.
 # startup debugging
 STARTUP="${STARTUP}~/.bash_profile, "

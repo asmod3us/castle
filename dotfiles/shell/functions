@@ -1,3 +1,4 @@
+#! /bin/bash
 # Check if a Web site is down within local network or not
 function down4me() {
   curl -s "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g'

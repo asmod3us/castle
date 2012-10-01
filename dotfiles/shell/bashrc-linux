@@ -1,3 +1,4 @@
+#! /bin/bash
 # emulate middle mouse
 if [[ $XTERM =~ xterm ]]; then
 	xinput set-prop 11 'Evdev Middle Button Emulation' 1

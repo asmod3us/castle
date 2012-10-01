@@ -1,3 +1,4 @@
+#! /bin/bash
 # Don't wait for job termination notification
 # set -o notify
 
@@ -29,12 +30,14 @@ shopt -s cmdhist
 
 # set up prompt
 function prompt_command() {
+	# remember exit code for coloring
 	exitCode=$?
 
-# setup colors for solarized
+	# setup colors for solarized
 	if tput setaf 1 &> /dev/null; then
 		tput sgr0
-		if [[ $(tput colors) -ge 256 ]] 2>/dev/null; then
+		TPUTCOLORS=$(tput colors)
+		if [[ $TPUTCOLORS -ge 256 ]]; then
 			BASE03=$(tput setaf 234)
 			BASE02=$(tput setaf 235)
 			BASE01=$(tput setaf 240)
@@ -51,7 +54,8 @@ function prompt_command() {
 			BLUE=$(tput setaf 33)
 			CYAN=$(tput setaf 37)
 			GREEN=$(tput setaf 64)
-		else
+		elif [[  TPUTCOLORS -ge 16 ]]; then
+			# 16 colors available
 			BASE03=$(tput setaf 8)
 			BASE02=$(tput setaf 0)
 			BASE01=$(tput setaf 10)
@@ -68,11 +72,15 @@ function prompt_command() {
 			BLUE=$(tput setaf 4)
 			CYAN=$(tput setaf 6)
 			GREEN=$(tput setaf 2)
+   		else
+			# hmm, less than 16 colors
+			# TODO
+			echo "Less than 16 colors available."
 		fi
 		BOLD=$(tput bold)
 		RESET=$(tput sgr0)
 	else
-# linux term, these colors might not match solarized
+		# no tput, let's try with ansi escape sequences
 		BASE03="\033[0;90m" # br black
 		BASE02="\033[0;30m" # black
 		BASE01="\033[0;92m" # br green
@@ -113,10 +121,11 @@ function prompt_command() {
 		DOLLAR="\$ "
 	fi
 
-	export PS1="\[${RESET}${BASE1}\]\A ${USER_HOST} ${EXIT_CODE}\[${BLUE}\]${BRANCH}\[${ORANGE}\]${DISPLAYPATH}\n\[${RESET}\]${DOLLAR}\[${BASE0}\]"
+	# set the prompt
+	export PS1="\[${RESET}${BASE1}\]\A ${USER_HOST} ${EXIT_CODE}\[${BLUE}\]${BRANCH}\[${ORANGE}\]${DISPLAYPATH}\n\[${RESET}\]${DOLLAR}\[${BASE0}${RESET}\]"
 
-# show colors
-# export PS1="\[${BASE03}\]BASE03 \[${BASE02}\]BASE02 \[${BASE01}\]BASE01 \[${BASE3}\]BASE00 \[${BASE2}\]BASE2 \[${BASE1}\]BASE1 \[${BASE0}\]BASE0 \[${YELLOW}\]YELLOW \[${ORANGE}\]ORANGE \[${RED}\[RED \[${MAGENTA}\]MAGENTA \[${VIOLET}\]VIOLET \[${BLUE}\]BLUE \[${CYAN}\]CYAN \[${GREEN}\]GREEN "
+	# quick color test with echo $TESTCOLOR
+	export TESTCOLOR="${BASE03}BASE03 ${BASE02}BASE02 ${BASE01}BASE01 ${BASE3}BASE00 ${BASE2}BASE2 ${BASE1}BASE1 ${BASE0}BASE0 ${YELLOW}YELLOW ${ORANGE}ORANGE ${RED}RED ${MAGENTA}MAGENTA ${VIOLET}VIOLET ${BLUE}BLUE ${CYAN}CYAN ${GREEN}GREEN "
 }
 
 # Whenever displaying the prompt, write the previous line to disk (-a) and read
