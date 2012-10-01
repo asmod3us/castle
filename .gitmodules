@@ -1,0 +1,42 @@
+[submodule "dotfiles/vim/bundle/syntastic"]
+	path = dotfiles/vim/bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git
+[submodule "dotfiles/vim/bundle/scss-syntax"]
+	path = dotfiles/vim/bundle/scss-syntax
+	url = https://github.com/cakebaker/scss-syntax.vim.git
+[submodule "dotfiles/vim/bundle/nerdtree"]
+	path = dotfiles/vim/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule "dotfiles/vim/bundle/zencoding"]
+	path = dotfiles/vim/bundle/zencoding
+	url = http://github.com/mattn/zencoding-vim.git
+[submodule "dotfiles/vim/bundle/fugitive"]
+	path = dotfiles/vim/bundle/fugitive
+	url = git://github.com/tpope/vim-fugitive.git
+[submodule "dotfiles/vim/bundle/ctrlp"]
+	path = dotfiles/vim/bundle/ctrlp
+	url = https://github.com/kien/ctrlp.vim
+[submodule "dotfiles/vim/bundle/syntaxFolds"]
+	path = dotfiles/vim/bundle/syntaxFolds
+	url = https://github.com/zalun/vim-SyntaxFolds
+[submodule "dotfiles/vim/bundle/solarized"]
+	path = dotfiles/vim/bundle/solarized
+	url = https://github.com/altercation/vim-colors-solarized
+[submodule "dotfiles/vim/bundle/javacomplete"]
+	path = dotfiles/vim/bundle/javacomplete
+	url = https://github.com/vim-scripts/javacomplete.git
+[submodule "dotfiles/vim/bundle/powerline"]
+	path = dotfiles/vim/bundle/powerline
+	url = https://github.com/Lokaltog/vim-powerline
+[submodule "dotfiles/vim/bundle/vim-surround"]
+	path = dotfiles/vim/bundle/vim-surround
+	url = https://github.com/tpope/vim-surround
+[submodule "dotfiles/vim/bundle/less"]
+	path = dotfiles/vim/bundle/less
+	url = https://github.com/groenewege/vim-less
+[submodule "dotfiles/vim/bundle/css-color"]
+	path = dotfiles/vim/bundle/css-color
+	url = https://github.com/skammer/vim-css-color
+[submodule "dotfiles/vim/bundle/css3-syntax"]
+	path = dotfiles/vim/bundle/css3-syntax
+	url = https://github.com/hail2u/vim-css3-syntax
