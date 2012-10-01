@@ -1,0 +1,209 @@
+" Use Vim settings, rather then Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+
+" Pathogen needs to run before syntax on or filetype plugin indent
+call pathogen#infect()
+
+" Don't use Ex mode, use Q for formatting
+map Q gq
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  set hlsearch
+endif
+
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+
+  " Enable file type detection.
+  " Use the default filetype settings, so that mail gets 'tw' set to 72,
+  " 'cindent' is on in C files, etc.
+  " Also load indent files, to automatically do language-dependent indenting.
+  filetype on
+  filetype plugin on
+  filetype plugin indent on
+
+  " Put these in an autocmd group, so that we can delete them easily.
+  augroup vimrcEx
+  au!
+
+  " For all text files set 'textwidth' to 78 characters.
+  autocmd FileType text setlocal textwidth=78
+
+  " enable omnicomplete
+  autocmd Filetype java setlocal omnifunc=javacomplete#Complete
+  autocmd Filetype java setlocal completefunc=javacomplete#CompleteParamsInfo
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it when the position is invalid or when inside an event handler
+  " (happens when dropping a file on gvim).
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
+  augroup END
+
+  " disable matching parantheses detection on network volumes
+  autocmd BufReadPre //* :NoMatchParen
+  " don't expand tabs in makefiles
+  autocmd FileType make set noexpandtab
+  autocmd BufNewFile,BufReadPost Makefile se noexpandtab
+
+else
+
+  set autoindent " always set autoindenting on
+
+endif " has("autocmd")
+
+set guifont=Monaco:h13 " TODO only for os x
+set encoding=utf-8
+set termencoding=utf-8
+set ch=2
+let c_comment_strings=1
+set cindent
+set wildmenu
+set shell=bash
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
+set noexpandtab
+set autoindent
+set smartindent
+set ts=4
+set sw=4
+set ruler " show the cursor position all the time
+set laststatus=2
+set incsearch " do incremental searching
+set showmatch
+set showmode
+set showcmd " display incomplete commands
+set listchars=tab:<-,trail:_,extends:>,precedes:<,eol:$
+set list
+set shellslash
+set cul
+set gcr=a:block-blinkon0
+set ignorecase
+set smartcase
+set shiftround
+set joinspaces
+set directory=~/tmp
+set virtualedit=all
+set history=50 " keep 50 lines of command line history
+set shiftwidth=4
+set tabstop=4
+set noexpandtab
+set number
+" show tabs and line ends visually
+set lcs=tab:»·
+set lcs+=trail:·
+set lcs+=eol:$
+set nostartofline
+set mouse=
+set ls=2
+set iskeyword=@,48-57,_,192-255,-
+set visualbell
+set nowrapscan
+set cursorline " highlight current line
+set cursorcolumn " hightlight current column
+set textwidth=75
+set winminheight=0
+set winminwidth=0
+set foldenable
+set mousemodel=popup_setpos
+set wildignore=*.o,*.obj,*.bak,*.exe,*~
+set viminfo='100,<50,s10,h,f1
+
+hi Comment ctermfg=Grey
+let mapleader=","
+
+syntax on
+
+" map <F7> :bp<RETURN>
+" map <F8> :bn<RETURN>
+" map <F1> :make<RETURN>
+" map <F2> :cl!<RETURN>
+" map <F3> :cp<RETURN>
+" map <F4> :cn<RETURN>
+" nmap <F9> :if has("syntax_items")<CR>syntax off<CR>else<CR>syntax on<CR>endif<CR><CR>
+"
+nmap :W :w
+nmap :Q :q
+
+map ,x vawy:! grep <C-R>" .* *<CR>
+cmap CO !co -l %<CR>:e! %<CR><CR>
+cmap CI !ci -u %<CR>:e! %<CR><CR>
+map ,dir :sp ~/tmp/vimdir<CR>G1dG:r!ls -al<CR>:se nomod<CR>
+
+fun MyIndent()
+let oldLine=line('.')
+normal(gg=G)
+execute ':' . oldLine
+endfun
+
+map -- :call MyIndent()<cr>
+" remap mode switch to C-j
+map! <C-j> <Esc>
+
+" conflict with linux terminal tab move commands, hence commented out
+" map! <C-J> <C-W>j
+" map! <C-K> <C-W>k
+" map! <C-H> <C-W>h
+" map! <C-L> <C-W>l
+
+noremap <silent> <F11> :cal VimCommanderToggle()<CR>
+
+map <D-Left> 0
+map <D-Right> $
+map <M-Left> b
+map <M-Right> w
+map <C-k> gqap
+imap <C-]> <Esc>
+imap <D-j> <Esc>
+
+" nnoremap <2-LeftMouse> :exe "/".expand("<cword>")<CR>
+
+" Nerd tree on Shift-Space
+" Does not seem to work in terminal; works in GUI though
+map <S-Space> :NERDTreeToggle<CR>
+
+inoremap <buffer> <C-X><C-U> <C-X><C-U><C-P>
+inoremap <buffer> <C-S-Space> <C-X><C-U><C-P>
+
+" Remap code completion to C-Space
+if has("gui_running")
+    " C-Space seems to work under gVim on both Linux and win32
+    inoremap <C-Space> <C-x><C-o>
+else " no gui
+  if has("unix")
+    inoremap <Nul> <C-x><C-o>
+  else
+  " I have no idea of the name of Ctrl-Space elsewhere
+  endif
+endif
+
+" powerline symbols
+" let g:Powerline_symbols = 'fancy'
+
+" spelling in vim 7
+map <C-S>c <Esc>:setlocal spell spelllang=en_us<CR>
+map <C-S>u <Esc>:setlocal nospell<CR>
+highlight SpellBad guifg=Red
+
+" keep swap and backup files in one directory
+set dir=~/.vim-tmp,~/tmp,/var/tmp,$HOME/tmp
+set backupdir=~/.vim-tmp,~/tmp,/var/tmp,$HOME/tmp
+
+" solarized
+let g:solarized_contrast = "high"
+set background=dark
+colorscheme solarized
+
+source $VIMRUNTIME/macros/matchit.vim
+
+" automatically open nerdtree if started without args
+autocmd vimenter * if !argc() | NERDTree | endif
+
+" automatically close vim if the only open window is a nerdtree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
