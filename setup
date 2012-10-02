@@ -9,12 +9,15 @@ function moveDotfile() {
 	f=~/.$fname
 	if [ -L $f ]; then
 		# remove link
+		echo unlink $f
 		unlink $f
 	elif [ -f $f -a -r $f ]; then
 		# rename existing file
+		echo mv $f ~/${fname}_${now}.dotfile
 		mv $f ~/${fname}_${now}.dotfile
 	elif [ -d $f -a -r $f ]; then
 		# rename directory
+		echo mv $f ~/${fname}_${now}.dotfile
 		mv $f ~/${fname}_${now}.dotfile
 	fi
 }
@@ -39,6 +42,7 @@ function placeBestDotfile() {
 	host=$cfgdir/$fname-$hostSuffix
 	for bashfile in $host $os $master; do
 		if [ -r $bashfile ]; then
+			echo ln -s $bashfile ~/.$fname
 			ln -s $bashfile ~/.$fname
 			break
 		fi
@@ -57,6 +61,7 @@ done
 for fname in $(find $dotfiles -maxdepth 1 -type f -o -type l); do
 	dotfile=$(basename $fname)
 	moveDotfile $dotfile
+	echo ln -s $dotfiles/$fname ~/.$dotfile
 	ln -s $dotfiles/$fname ~/.$dotfile
 done
 
@@ -64,6 +69,7 @@ done
 for dname in $(find $dotfiles -mindepth 1 -maxdepth 1 -type d -name shell -prune -o -type d -print); do
 	dotdir=$(basename $dname)
 	moveDotfile $dotdir
+	echo ln -s $dname ~/.$dotdir
 	ln -s $dname ~/.$dotdir
 done
 
