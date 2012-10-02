@@ -33,7 +33,8 @@ that are in its way and create backup files following the naming convention
 ## bash configuration
 castle has a special directory at `~/castle/dotfiles/shell` that holds a
 modularized bash configuration. This configuration is bootstrapped by
-linking `~/castle/bootstrap` to your `$HOME/.bashrc`.
+linking `~/castle/bootstrap` to your `$HOME/.bashrc`. This is also done by
+the setup script.
 
 In the shell directory, put os or host specific configuration in files that
 follow a `filename-<os>` or `filename-<hostname>` naming convention. For
