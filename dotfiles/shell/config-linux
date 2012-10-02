@@ -22,10 +22,9 @@ if [ "$TERM" = "xterm" ] ; then
                 # based upon the value. This is, perhaps, too simplistic.
                 TERM="gnome-256color"
                 ;;
-			roxterm)
-				TERM="gnome-256color"
-# or TERM="xterm-256color"
-				;;
+            roxterm)
+                TERM="xterm-256color"
+                ;;
             *)
                 echo "Warning: Unrecognized COLORTERM: $COLORTERM"
                 ;;
