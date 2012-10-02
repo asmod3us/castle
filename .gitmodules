@@ -43,3 +43,6 @@
 [submodule "dotfiles/vim/bundle/markdown"]
 	path = dotfiles/vim/bundle/markdown
 	url = https://github.com/tpope/vim-markdown
+[submodule "dotfiles/vim/bundle/xml"]
+	path = dotfiles/vim/bundle/xml
+	url = https://github.com/othree/xml.vim
