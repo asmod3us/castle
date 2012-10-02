@@ -1,16 +1,28 @@
 #!/bin/bash
-# make backups
-if [ -r ~/.bashrc ]; then
-	mv ~/.bashrc ~/bashrc.dotfile
-fi
 
-if [ -r ~/.bash_profile ]; then
-	mv ~/.bash_profile ~/bash_profile.dotfile
-fi
+# timestamp for backups
+now=$(date +"%F-%H%M%S")
 
-if [ -r ~/.bash_logout ]; then
-	mv ~/.bash_logout ~/bash_logout.dotfile
-fi
+# moves existing stuff out of the way, doing a backup to file-<timestamp>.dotfile if necessary
+function moveDotfile() {
+	fname=$1
+	f=~/.$fname
+	if [ -L $f ]; then
+		# remove link
+		unlink $f
+	elif [ -f $f -a -r $f ]; then
+		# rename existing file
+		mv $f ~/${fname}_${now}.dotfile
+	elif [ -d $f -a -r $f ]; then
+		# rename directory
+		mv $f ~/${fname}_${now}.dotfile
+	fi
+}
+
+# unlink and/or make backups
+for fname in "bashrc" "bash_profile" "bash_logout"; do
+	moveDotfile $fname
+done
 
 castledir=~/castle
 dotfiles=$castledir/dotfiles
@@ -19,11 +31,9 @@ cfgdir=$dotfiles/shell
 osSuffix=$(uname|tr 'A-Z' 'a-z')
 hostSuffix=$(hostname | cut -d. -f1)
 
-# link to bootstrap file
-ln -s $castledir/bootstrap ~/.bashrc
-
-# link to most specific version available
-for fname in "bash_profile" "bash_logout"; do
+# place best matching dot file
+function placeBestDotfile() {
+	fname=$1
 	master=$cfgdir/$fname
 	os=$cfgdir/$fname-$osSuffix
 	host=$cfgdir/$fname-$hostSuffix
@@ -33,4 +43,27 @@ for fname in "bash_profile" "bash_logout"; do
 			break
 		fi
 	done
+}
+
+# link to bootstrap file
+ln -s $castledir/bootstrap ~/.bashrc
+
+# link to most specific version available
+for fname in "bash_profile" "bash_logout"; do
+	placeBestDotfile $fname
 done
+
+# put files and links into place
+for fname in $(find $dotfiles -maxdepth 1 -type f -o -type l); do
+	dotfile=$(basename $fname)
+	moveDotfile $dotfile
+	ln -s $dotfiles/$fname ~/.$dotfile
+done
+
+# put directories into place, ignore shell dir
+for dname in $(find $dotfiles -mindepth 1 -maxdepth 1 -type d -name shell -prune -o -type d -print); do
+	dotdir=$(basename $dname)
+	moveDotfile $dotdir
+	ln -s $dname ~/.$dotdir
+done
+
