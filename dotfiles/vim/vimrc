@@ -207,3 +207,12 @@ autocmd vimenter * if !argc() | NERDTree | endif
 
 " automatically close vim if the only open window is a nerdtree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" os-specific configuration
+let s:os = system("uname")
+if s:os =~ "Darwin"
+	so ~/.vim/os/darwin.vim
+else
+	so ~/.vim/os/linux.vim
+endif
+
