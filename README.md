@@ -7,14 +7,14 @@ you to quickly "move in" on a new machine by cloning the git repo and using
 its setup script.
 
 Disclaimer: castle was not written by a bash scripting expert. The
-configuration presented here is from my own Macbook and Ubuntu boxes and
-may not necessarily be useful to you. Things might not even work at all.
+configuration presented here is from my own Mac and Linux boxes and
+may not necessarily be useful to you.
 
 ## Features
 
 - modularized bash configuration that allows to customize settings per host and per os
 - vim configuration based on pathogen
-- solarized color theme for bash (including dircolors) and vim
+- solarized color theme for bash, vim and dircolors
 - a setup script to quickly "move in" on new machines
 
 ## Installation
@@ -31,14 +31,18 @@ that are in its way and create backup files following the naming convention
 `filename-<timestamp>.dotfile`.
 
 ## bash configuration
-castle has a special directory at `~/castle/dotfiles/shell` that holds a
-modularized bash configuration. This configuration is bootstrapped by
-linking `~/castle/bootstrap` to your `$HOME/.bashrc`. This is also done by
-the setup script.
+castle has a special directory at `~/castle/dotfiles/shell` which holds a
+modularized bash configuration. This configuration is bootstrapped with the
+setup script by linking `~/castle/bootstrap` to your `$HOME/.bashrc`.
 
 In the shell directory, put os or host specific configuration in files that
 follow a `filename-<os>` or `filename-<hostname>` naming convention. For
 instance, I keep my OS X specific environment variables in `env-darwin`.
+
+## vim configuration
+castle also supports os-specific configuration files for vim in
+`castle/dotfiles/vim/os`. It matches the output of `uname` against
+hard-coded strings (currently: `Darwin` for Mac; otherwise Linux is assumed).
 
 ## Adding dotfiles
 To let castle manage a dotfile, just move it from `~/.dotfile` into
