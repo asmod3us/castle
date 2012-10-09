@@ -118,9 +118,11 @@ function newff() {
 }
 
 function newcr() {
-	pn="cr-$(tr -dc "0-9a-f" < /dev/urandom | head -c 8)"
-	echo "Starting Chrome with profile $pn"
-	google-chrome --no-first-run --user-data-dir="/tmp/$pn" &> /dev/null &
+	#pn="cr-$(tr -dc "0-9a-f" < /dev/urandom | head -c 8)"
+	pn=$(mktemp --tmpdir -dq chrome-XXX)
+
+	echo "Starting Chrome with profile in $pn"
+	google-chrome --no-first-run --user-data-dir="$pn" &> /dev/null &
 }
 
 function getScreenSize() {
