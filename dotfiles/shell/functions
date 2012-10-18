@@ -85,6 +85,7 @@ if [[ $BASH_VERSION > "2.05a" ]]; then
 	bind -x "\"\C-w\":cd_func -- ;"
 fi
 
+# zip a directory
 zipit () { zip -r "$1".zip "$1" ; }
 
 # Create a data URL from a file
@@ -111,18 +112,22 @@ speed() { /usr/bin/curl $@ -s -o /dev/null -w "dns: %{time_namelookup}, connect:
 # http_headers: get just the HTTP headers from a web page (and its redirects)
 headers() { /usr/bin/curl -I -L $@ ; }
 
+# open firefox with a fresh profile
 function newff() {
 	pn="ff-$(tr -dc "0-9a-f" < /dev/urandom | head -c 8)"
 	firefox -CreateProfile "$pn /tmp/$pn"
-	firefox -no-remote -P "$pn" &> /dev/null &
+	firefox -no-remote -P "$pn" "$@" &> /dev/null &
 }
 
+# open chrome with a fresh profile
 function newcr() {
 	#pn="cr-$(tr -dc "0-9a-f" < /dev/urandom | head -c 8)"
 	pn=$(mktemp --tmpdir -dq chrome-XXX)
 
+	# dock devtools to right
+	# sed -i -e 's/\"browser\": {/"devtools": { "dock_side": "right" }, "browser": {/' "$pn/Default/Preferences"
 	echo "Starting Chrome with profile in $pn"
-	google-chrome --no-first-run --user-data-dir="$pn" &> /dev/null &
+	google-chrome --no-first-run --user-data-dir="$pn" "$@" &> /dev/null &
 }
 
 function getScreenSize() {
