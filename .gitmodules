@@ -34,9 +34,6 @@
 [submodule "dotfiles/vim/bundle/less"]
 	path = dotfiles/vim/bundle/less
 	url = https://github.com/groenewege/vim-less
-[submodule "dotfiles/vim/bundle/css-color"]
-	path = dotfiles/vim/bundle/css-color
-	url = https://github.com/ap/vim-css-color
 [submodule "dotfiles/vim/bundle/css3-syntax"]
 	path = dotfiles/vim/bundle/css3-syntax
 	url = https://github.com/hail2u/vim-css3-syntax
