@@ -114,6 +114,7 @@ set foldenable
 set mousemodel=popup_setpos
 set wildignore=*.o,*.obj,*.bak,*.exe,*~
 set viminfo='100,<50,s10,h,f1
+set conceallevel=2 " hide quotes in json for cleaner look
 
 hi Comment ctermfg=Grey
 let mapleader=","
