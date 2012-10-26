@@ -40,6 +40,7 @@ pathAppend ${GRAILS_HOME}/bin
 pathAppend ${JAVA_HOME}/bin
 pathAppend ${SCALA_HOME}/bin
 pathAppend ${ANDROID_HOME}/tools
+pathAppend ${ANDROID_HOME}/platform-tools
 pathAppend ${ASPECTJ_HOME}/bin
 pathAppend ${SCALA_HOME}/bin
 pathAppend ${PLAY_HOME}
