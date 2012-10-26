@@ -1,0 +1,2 @@
+alias present='disper -e -t right -d DFP-0,CRT-0'
+alias clone='disper -c -r 1024x768'
