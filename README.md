@@ -18,10 +18,12 @@ may not necessarily be useful to you.
 - a setup script to quickly "move in" on new machines
 
 ## Installation
-castle uses git submodules to manage vim pathogen plugins. It is intended to be cloned in your $HOME directory.
-To install it, use 
 
-	git clone --recursive
+castle uses git submodules to manage vim plugins with pathogen. The
+recommended (as in: the only tested and supported) install location is to clone
+it into your $HOME directory. To install it, use
+
+	git clone --recursive https://github.com/asmod3us/castle $HOME/castle
 
 to ensure that all submodule repos are pulled. After cloning into
 `~/castle` there is a setup script in `~/castle/setup`. Note that this
