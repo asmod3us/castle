@@ -55,7 +55,7 @@ export PATH
 export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 # ... or force ignoredups and ignorespace
 export HISTCONTROL=ignoreboth
-export HISTFILE=/home/sta/Strongbox/.bash_history
+export HISTFILE=~/Dropbox/Reference/ShellHistory/bash_history-${hostSuffix}
 export HISTFILESIZE=1000000000
 export HISTSIZE=100000000
 
