@@ -10,7 +10,8 @@ fi
 export GROOVY_HOME=${TOOLS}/groovy
 export GRAILS_HOME=${TOOLS}/grails
 export SCALA_HOME=${TOOLS}/scala
-export ANDROID_HOME=${TOOLS}/android
+export ANDROID_HOME=${TOOLS}/android-sdk
+export ANDROID_SDK_ROOT=${TOOLS}/android-sdk
 export ASPECTJ_HOME=${TOOLS}/aspectj
 export SCALA_HOME=${TOOLS}/scala
 export PLAY_HOME=${TOOLS}/play
@@ -45,6 +46,7 @@ pathAppend ${ASPECTJ_HOME}/bin
 pathAppend ${SCALA_HOME}/bin
 pathAppend ${PLAY_HOME}
 pathAppend ${MVN_HOME}/bin
+pathAppend ${HOME}/.rvm/bin
 
 export PATH
 
