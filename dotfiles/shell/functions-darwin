@@ -1,0 +1,20 @@
+function ff {
+	osascript -e 'tell application "Finder"' -e "if (${1-1} <= (count Finder windows)) then" -e "get POSIX path of (target of window ${1-1} as alias)" -e 'else' -e 'get POSIX path of (desktop as alias)' -e 'end if' -e 'end tell';
+}
+
+function cdff {
+	cd "`ff $@`";
+}
+
+tab () {
+	osascript 2>/dev/null <<EOF
+	tell application "System Events"
+		tell process "Terminal" to keystroke "t" using command down
+	end
+	tell application "Terminal"
+		activate
+		do script with command "cd $PWD; $*" in window 1
+	end tell
+EOF
+}
+
