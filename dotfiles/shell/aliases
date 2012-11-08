@@ -43,7 +43,6 @@ alias na="nautilus /archive"
 alias nt="nautilus /tools"
 alias pgrep="ps aux| grep"
 alias t='task'
-alias ack='ack-grep'
 
 alias h='history'
 # If using Linux alias pbcopy and pbpaste
