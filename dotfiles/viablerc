@@ -1,4 +1,4 @@
 inoremap <C-j> <Esc>
 set smartcase
 set hls
-set virtualedit=all
+" set virtualedit=all
