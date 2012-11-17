@@ -76,13 +76,13 @@ set sw=4
 set ruler " show the cursor position all the time
 set laststatus=2
 set incsearch " do incremental searching
-set showmatch
+set showmatch " show matching bracket for char at cursor
 set showmode
 set showcmd " display incomplete commands
 set listchars=tab:<-,trail:_,extends:>,precedes:<,eol:$
 set list
 set shellslash
-set cul
+set cul " highlight screen line of cursor
 set gcr=a:block-blinkon0
 set ignorecase
 set smartcase
@@ -153,21 +153,20 @@ map! <C-j> <Esc>
 " map! <C-H> <C-W>h
 " map! <C-L> <C-W>l
 
-noremap <silent> <F11> :cal VimCommanderToggle()<CR>
-
 map <D-Left> 0
 map <D-Right> $
 map <M-Left> b
 map <M-Right> w
 map <C-k> gqap
 imap <C-]> <Esc>
-imap <D-j> <Esc>
+" mode switch on command key
+inoremap <D-j> <Esc>
 
 " nnoremap <2-LeftMouse> :exe "/".expand("<cword>")<CR>
 
-" Nerd tree on Shift-Space
-" Does not seem to work in terminal; works in GUI though
-map <S-Space> :NERDTreeToggle<CR>
+" Nerd tree on Shift-Space Does not seem to work in terminal; works in GUI
+" though
+map <C-o> :NERDTreeToggle<CR>
 
 inoremap <buffer> <C-X><C-U> <C-X><C-U><C-P>
 inoremap <buffer> <C-S-Space> <C-X><C-U><C-P>
@@ -178,7 +177,8 @@ if has("gui_running")
     inoremap <C-Space> <C-x><C-o>
 else " no gui
   if has("unix")
-    inoremap <Nul> <C-x><C-o>
+  " this doesn't seem to work
+  " inoremap <Nul> <C-x><C-o>
   else
   " I have no idea of the name of Ctrl-Space elsewhere
   endif
