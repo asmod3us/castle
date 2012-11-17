@@ -72,10 +72,26 @@ function prompt_command() {
 			BLUE=$(tput setaf 4)
 			CYAN=$(tput setaf 6)
 			GREEN=$(tput setaf 2)
-   		else
+		else
 			# hmm, less than 16 colors
-			# TODO
-			echo "Less than 16 colors available."
+			# let's try with one of the 5 color palette modes:
+			# base02, base1, base2, magenta, violet
+			BASE03=
+			BASE02=$(tput setaf 0)
+			BASE01=
+			BASE00=
+			BASE0=
+			BASE1=$(tput setaf 14)
+			BASE2=$(tput setaf 7)
+			BASE3=
+			YELLOW=
+			ORANGE=
+			RED=
+			MAGENTA=$(tput setaf 5)
+			VIOLET=$(tput setaf 13)
+			BLUE=
+			CYAN=
+			GREEN=
 		fi
 		BOLD=$(tput bold)
 		RESET=$(tput sgr0)
