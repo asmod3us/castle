@@ -31,7 +31,6 @@ alias cd..="cd .."
 alias ..="cd .."
 alias ...="cd ..."
 alias md="mkdir"
-alias cdb="cd $BUILD_HOME"
 alias grep='grep --color'
 alias n="nautilus ."
 alias mp="makeProject"
