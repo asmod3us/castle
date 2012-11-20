@@ -115,12 +115,13 @@ function newff() {
 # open chrome with a fresh profile
 function newcr() {
 	#pn="cr-$(tr -dc "0-9a-f" < /dev/urandom | head -c 8)"
-	pn=$(mktemp --tmpdir -dq chrome-XXX)
+	# pn=$(mktemp --tmpdir -dq chrome-XXX)
+	pn=$(mktemp -dq -t chrome-XXX)
 
 	# dock devtools to right
 	# sed -i -e 's/\"browser\": {/"devtools": { "dock_side": "right" }, "browser": {/' "$pn/Default/Preferences"
 	echo "Starting Chrome with profile in $pn"
-	open -a 'Google-chrome' --args --no-first-run --user-data-dir="$pn" "$@" &> /dev/null &
+	open -n -a 'Google Chrome' --args --disable-web-security -–allow-file-access-from-files --no-first-run --user-data-dir=$pn "$@" &> /dev/null &
 }
 
 function getScreenSize() {
