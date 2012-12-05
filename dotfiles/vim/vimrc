@@ -264,3 +264,8 @@ else
 	so ~/.vim/os/linux.vim
 endif
 
+" fancy symbols for syntax checker
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+
+so ~/.vim/tagbar-coffeescript-config
