@@ -64,3 +64,9 @@
 [submodule "dotfiles/vim/bundle/unimpaired"]
 	path = dotfiles/vim/bundle/unimpaired
 	url = git://github.com/tpope/vim-unimpaired.git
+[submodule "dotfiles/vim/bundle/javascript"]
+	path = dotfiles/vim/bundle/javascript
+	url = https://github.com/pangloss/vim-javascript.git
+[submodule "dotfiles/vim/bundle/stylus"]
+	path = dotfiles/vim/bundle/stylus
+	url = https://github.com/wavded/vim-stylus
