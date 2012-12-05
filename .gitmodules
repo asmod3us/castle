@@ -55,3 +55,12 @@
 [submodule "dotfiles/vim/bundle/numbertoggle"]
 	path = dotfiles/vim/bundle/numbertoggle
 	url = https://github.com/jeffkreeftmeijer/vim-numbertoggle
+[submodule "dotfiles/vim/bundle/ack"]
+	path = dotfiles/vim/bundle/ack
+	url = https://github.com/mileszs/ack.vim
+[submodule "dotfiles/vim/bundle/tagbar"]
+	path = dotfiles/vim/bundle/tagbar
+	url = https://github.com/majutsushi/tagbar
+[submodule "dotfiles/vim/bundle/unimpaired"]
+	path = dotfiles/vim/bundle/unimpaired
+	url = git://github.com/tpope/vim-unimpaired.git
