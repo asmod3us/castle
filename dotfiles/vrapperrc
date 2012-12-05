@@ -1,0 +1,9 @@
+inoremap <C-j> <Esc>
+inoremap <D-j> <Esc>
+set virtualedit=all
+set autoindent
+set ignorecase
+set smartcase
+set list
+set clipboard=unnamed
+
