@@ -73,3 +73,6 @@
 [submodule "dotfiles/vim/bundle/jade"]
 	path = dotfiles/vim/bundle/jade
 	url = https://github.com/digitaltoad/vim-jade
+[submodule "dotfiles/vim/bundle/tcomment"]
+	path = dotfiles/vim/bundle/tcomment
+	url = https://github.com/tomtom/tcomment_vim
