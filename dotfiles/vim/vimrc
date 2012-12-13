@@ -268,4 +268,7 @@ endif
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
 
+" use system clipboard
+set clipboard=unnamed
+
 so ~/.vim/tagbar-coffeescript-config
