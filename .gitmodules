@@ -76,3 +76,6 @@
 [submodule "dotfiles/vim/bundle/tcomment"]
 	path = dotfiles/vim/bundle/tcomment
 	url = https://github.com/tomtom/tcomment_vim
+[submodule "dotfiles/vim/bundle/node"]
+	path = dotfiles/vim/bundle/node
+	url = https://github.com/guileen/vim-node
