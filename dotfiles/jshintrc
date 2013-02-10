@@ -19,6 +19,7 @@
 
     "predef"        : [  // Extra globals.
         "google",
+        "WL"
     ],
 
 
