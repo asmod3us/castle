@@ -79,3 +79,6 @@
 [submodule "dotfiles/vim/bundle/node"]
 	path = dotfiles/vim/bundle/node
 	url = https://github.com/guileen/vim-node
+[submodule "dotfiles/vim/bundle/indent-guides"]
+	path = dotfiles/vim/bundle/indent-guides
+	url = git://github.com/nathanaelkane/vim-indent-guides.git
