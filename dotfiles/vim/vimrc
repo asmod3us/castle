@@ -81,8 +81,6 @@ set incsearch " do incremental searching
 set showmatch " show matching bracket for char at cursor
 set showmode
 set showcmd " display incomplete commands
-set listchars=tab:<-,trail:_,extends:>,precedes:<,eol:$
-set list
 set shellslash
 set cul " highlight screen line of cursor
 set gcr=a:block-blinkon0
@@ -96,10 +94,20 @@ set shiftwidth=4
 set tabstop=4
 set noexpandtab
 set number
-" show tabs and line ends visually
-set lcs=tab:»·
-set lcs+=trail:·
-set lcs+=eol:$
+
+" show tabs, line ends and other control characters visually
+" other choices:
+" set lcs=tab:»·
+" set lcs+=trail:·
+" set lcs+=eol:$
+set list
+if &listchars ==# 'eol:$'
+  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+  if &termencoding ==# 'utf-8' || &encoding ==# 'utf-8'
+    let &listchars = "tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u00b7"
+  endif
+endif
+
 set nostartofline
 set mouse=
 set ls=2
@@ -116,6 +124,15 @@ set mousemodel=popup_setpos
 set wildignore=*.o,*.obj,*.bak,*.exe,*~
 set viminfo='100,<50,s10,h,f1
 set conceallevel=2 " hide quotes in json for cleaner look
+
+" always show one line/five chars of context
+if !&scrolloff
+  set scrolloff=1
+endif
+if !&sidescrolloff
+  set sidescrolloff=5
+endif
+set display+=lastline
 
 hi Comment ctermfg=Grey
 let mapleader=","
@@ -286,3 +303,4 @@ let g:syntastic_warning_symbol='⚠'
 set clipboard=unnamed
 
 so ~/.vim/tagbar-coffeescript-config
+	
