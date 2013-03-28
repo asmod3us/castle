@@ -2,8 +2,11 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+" Pathogen is a submodule like all others
+runtime bundle/pathogen/autoload/pathogen.vim
 " Pathogen needs to run before syntax on or filetype plugin indent
 call pathogen#infect()
+Helptags " generate helptags so that all help files are available
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -71,34 +74,41 @@ set backspace=indent,eol,start " allow backspacing over everything in insert mod
 set noexpandtab
 set autoindent
 set smartindent
+set smarttab
 set ts=4
-set sw=4
 set ruler " show the cursor position all the time
 set laststatus=2
 set incsearch " do incremental searching
 set showmatch " show matching bracket for char at cursor
 set showmode
 set showcmd " display incomplete commands
-set listchars=tab:<-,trail:_,extends:>,precedes:<,eol:$
-set list
 set shellslash
 set cul " highlight screen line of cursor
 set gcr=a:block-blinkon0
 set ignorecase
 set smartcase
-set shiftround
+set shiftround " round indent to multiple of shiftwidth
+set shiftwidth=4
 set joinspaces
-set directory=~/tmp
 set virtualedit=all
 set history=50 " keep 50 lines of command line history
-set shiftwidth=4
 set tabstop=4
 set noexpandtab
 set number
-" show tabs and line ends visually
-set lcs=tab:»·
-set lcs+=trail:·
-set lcs+=eol:$
+
+" show tabs, line ends and other control characters visually
+" other choices:
+" set lcs=tab:»·
+" set lcs+=trail:·
+" set lcs+=eol:$
+set list
+if &listchars ==# 'eol:$'
+  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+  if &termencoding ==# 'utf-8' || &encoding ==# 'utf-8'
+    let &listchars = "tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u00b7"
+  endif
+endif
+
 set nostartofline
 set mouse=
 set ls=2
@@ -115,6 +125,15 @@ set mousemodel=popup_setpos
 set wildignore=*.o,*.obj,*.bak,*.exe,*~
 set viminfo='100,<50,s10,h,f1
 set conceallevel=2 " hide quotes in json for cleaner look
+
+" always show one line/five chars of context
+if !&scrolloff
+  set scrolloff=1
+endif
+if !&sidescrolloff
+  set sidescrolloff=5
+endif
+set display+=lastline
 
 hi Comment ctermfg=Grey
 let mapleader=","
@@ -198,9 +217,22 @@ map <C-S>c <Esc>:setlocal spell spelllang=en_us<CR>
 map <C-S>u <Esc>:setlocal nospell<CR>
 highlight SpellBad guifg=Red
 
-" keep swap and backup files in one directory
-set dir=~/.vim-tmp,~/tmp,/var/tmp,$HOME/tmp
-set backupdir=~/.vim-tmp,~/tmp,/var/tmp,$HOME/tmp
+" keep swap, backup and undo files in one directory, ~/Library/Vim for Mac
+let s:dir = has('win32') ? '$APPDATA/Vim' : match(system('uname'), "Darwin") > -1 ? '~/Library/Vim' : empty($XDG_DATA_HOME) ? '~/.local/share/vim' : '$XDG_DATA_HOME/vim'
+if isdirectory(expand(s:dir))
+  if &directory =~# '^\.,'
+    let &directory = expand(s:dir) . '/swap//,' . &directory
+  endif
+  if &backupdir =~# '^\.,'
+    let &backupdir = expand(s:dir) . '/backup//,' . &backupdir
+  endif
+  if exists('+undodir') && &undodir =~# '^\.\%(,\|$\)'
+    let &undodir = expand(s:dir) . '/undo//,' . &undodir
+  endif
+endif
+if exists('+undofile')
+  set undofile
+endif
 
 " solarized
 let g:solarized_contrast = "high"
@@ -270,5 +302,15 @@ let g:syntastic_warning_symbol='⚠'
 
 " use system clipboard
 set clipboard=unnamed
+
+" shorter keboard timeouts
+set ttimeout
+set ttimeoutlen=50
+
+" default to move by display line. use gj/gk to move by physical line
+nnoremap k gk
+nnoremap j gj
+nnoremap gk k
+nnoremap gj j
 
 so ~/.vim/tagbar-coffeescript-config
