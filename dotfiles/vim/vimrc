@@ -6,6 +6,7 @@ set nocompatible
 runtime bundle/pathogen/autoload/pathogen.vim
 " Pathogen needs to run before syntax on or filetype plugin indent
 call pathogen#infect()
+Helptags " generate helptags so that all help files are available
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
