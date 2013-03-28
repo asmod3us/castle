@@ -2,6 +2,8 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+" Pathogen is a submodule like all others
+runtime bundle/pathogen/autoload/pathogen.vim
 " Pathogen needs to run before syntax on or filetype plugin indent
 call pathogen#infect()
 
