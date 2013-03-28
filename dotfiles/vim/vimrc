@@ -306,5 +306,10 @@ set clipboard=unnamed
 set ttimeout
 set ttimeoutlen=50
 
+" default to move by display line. use gj/gk to move by physical line
+nnoremap k gk
+nnoremap j gj
+nnoremap gk k
+nnoremap gj j
+
 so ~/.vim/tagbar-coffeescript-config
-	
