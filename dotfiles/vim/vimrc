@@ -90,7 +90,6 @@ set ignorecase
 set smartcase
 set shiftround
 set joinspaces
-set directory=~/tmp
 set virtualedit=all
 set history=50 " keep 50 lines of command line history
 set shiftwidth=4
@@ -200,9 +199,22 @@ map <C-S>c <Esc>:setlocal spell spelllang=en_us<CR>
 map <C-S>u <Esc>:setlocal nospell<CR>
 highlight SpellBad guifg=Red
 
-" keep swap and backup files in one directory
-set dir=~/.vim-tmp,~/tmp,/var/tmp,$HOME/tmp
-set backupdir=~/.vim-tmp,~/tmp,/var/tmp,$HOME/tmp
+" keep swap, backup and undo files in one directory, ~/Library/Vim for Mac
+let s:dir = has('win32') ? '$APPDATA/Vim' : match(system('uname'), "Darwin") > -1 ? '~/Library/Vim' : empty($XDG_DATA_HOME) ? '~/.local/share/vim' : '$XDG_DATA_HOME/vim'
+if isdirectory(expand(s:dir))
+  if &directory =~# '^\.,'
+    let &directory = expand(s:dir) . '/swap//,' . &directory
+  endif
+  if &backupdir =~# '^\.,'
+    let &backupdir = expand(s:dir) . '/backup//,' . &backupdir
+  endif
+  if exists('+undodir') && &undodir =~# '^\.\%(,\|$\)'
+    let &undodir = expand(s:dir) . '/undo//,' . &undodir
+  endif
+endif
+if exists('+undofile')
+  set undofile
+endif
 
 " solarized
 let g:solarized_contrast = "high"
