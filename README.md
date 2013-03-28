@@ -51,6 +51,12 @@ To let castle manage a dotfile, just move it from `~/.dotfile` into
 `~/castle/dotfile` and run `~/castle/setup` or create the symbolic link
 yourself.
 
+## Ignore generated documentation
+From [StackOverFlow
+Tip](http://stackoverflow.com/questions/4343544/generating-tags-to-different-location-by-pathogen/4346300#4346300): this will ignore untracked content in submodules and thereby also generated documentation.
+
+	for s in `git submodule  --quiet foreach 'echo $name'` ; do git config submodule.$s.ignore untracked ; done
+
 ## Credits
 castle is inspired by dotfiles and a stackoverflow posting that I am unable
 to find in my browser history.
