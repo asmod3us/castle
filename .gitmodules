@@ -85,3 +85,6 @@
 [submodule "dotfiles/vim/bundle/pathogen"]
 	path = dotfiles/vim/bundle/pathogen
 	url = https://github.com/tpope/vim-pathogen
+[submodule "dotfiles/vim/bundle/vim-web-indent"]
+	path = dotfiles/vim/bundle/vim-web-indent
+	url = https://github.com/asmod3us/vim-web-indent
