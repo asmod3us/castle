@@ -95,6 +95,8 @@ function prompt_command() {
 		fi
 		BOLD=$(tput bold)
 		RESET=$(tput sgr0)
+		CLEAREOL=$(tput el)
+		PROMPTBG=$(tput setab 0)
 	else
 		# no tput, let's try with ansi escape sequences
 		BASE03="\033[0;90m" # br black
@@ -116,6 +118,8 @@ function prompt_command() {
 		WHITE="\033[1;37m"
 		BOLD=""
 		RESET="\033[m"
+		CLEAREOL="\033[K"
+		PROMPTBG="\033[0;0;30m"
 	fi
 
 	TIME="\A"
@@ -138,7 +142,7 @@ function prompt_command() {
 	fi
 
 	# set the prompt
-	export PS1="\[${RESET}${BASE1}\]\A ${USER_HOST} ${EXIT_CODE}\[${BLUE}\]${BRANCH}\[${ORANGE}\]${DISPLAYPATH}\n\[${RESET}\]${DOLLAR}\[${BASE0}${RESET}\]"
+	export PS1="\[${RESET}${PROMPTBG}${BASE1}\]\A ${USER_HOST} ${EXIT_CODE}\[${BLUE}\]${BRANCH}\[${ORANGE}\]${DISPLAYPATH}${CLEAREOL}\n\[${RESET}\]${DOLLAR}\[${BASE0}${RESET}\]"
 
 	# quick color test with echo $TESTCOLOR
 	export TESTCOLOR="${BASE03}BASE03 ${BASE02}BASE02 ${BASE01}BASE01 ${BASE3}BASE00 ${BASE2}BASE2 ${BASE1}BASE1 ${BASE0}BASE0 ${YELLOW}YELLOW ${ORANGE}ORANGE ${RED}RED ${MAGENTA}MAGENTA ${VIOLET}VIOLET ${BLUE}BLUE ${CYAN}CYAN ${GREEN}GREEN "
