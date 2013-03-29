@@ -16,9 +16,6 @@
 [submodule "dotfiles/vim/bundle/ctrlp"]
 	path = dotfiles/vim/bundle/ctrlp
 	url = https://github.com/kien/ctrlp.vim
-[submodule "dotfiles/vim/bundle/syntaxFolds"]
-	path = dotfiles/vim/bundle/syntaxFolds
-	url = https://github.com/zalun/vim-SyntaxFolds
 [submodule "dotfiles/vim/bundle/solarized"]
 	path = dotfiles/vim/bundle/solarized
 	url = https://github.com/altercation/vim-colors-solarized
