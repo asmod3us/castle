@@ -35,11 +35,6 @@ alias grep='grep --color'
 alias n="nautilus ."
 alias mp="makeProject"
 alias sp=". setProject"
-alias ni="nautilus /inbox"
-alias np="nautilus /projects"
-alias nr="nautilus /reference"
-alias na="nautilus /archive"
-alias nt="nautilus /tools"
 alias pgrep="ps aux| grep"
 alias t='task'
 

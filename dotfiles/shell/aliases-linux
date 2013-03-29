@@ -1,3 +1,8 @@
 alias present='disper -e -t right -d DFP-0,CRT-0'
 alias clone='disper -c -r 1024x768'
 alias ack='ack-grep'
+alias ni="nautilus /inbox"
+alias np="nautilus /projects"
+alias nr="nautilus /reference"
+alias na="nautilus /archive"
+alias nt="nautilus /tools"
