@@ -32,7 +32,6 @@ alias ..="cd .."
 alias ...="cd ..."
 alias md="mkdir"
 alias grep='grep --color'
-alias n="nautilus ."
 alias mp="makeProject"
 alias sp=". setProject"
 alias pgrep="ps aux| grep"
