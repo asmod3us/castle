@@ -9,7 +9,7 @@
 	url = https://github.com/scrooloose/nerdtree.git
 [submodule "dotfiles/vim/bundle/zencoding"]
 	path = dotfiles/vim/bundle/zencoding
-	url = http://github.com/mattn/zencoding-vim.git
+	url = https://github.com/mattn/zencoding-vim
 [submodule "dotfiles/vim/bundle/fugitive"]
 	path = dotfiles/vim/bundle/fugitive
 	url = git://github.com/tpope/vim-fugitive.git
