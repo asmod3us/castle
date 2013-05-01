@@ -85,3 +85,6 @@
 [submodule "dotfiles/vim/bundle/powerline"]
 	path = dotfiles/vim/bundle/powerline
 	url = https://github.com/Lokaltog/vim-powerline
+[submodule "dotfiles/vim/bundle/jsbeautify"]
+	path = dotfiles/vim/bundle/jsbeautify
+	url = https://github.com/maksimr/vim-jsbeautify
