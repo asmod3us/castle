@@ -58,3 +58,4 @@ alias gs='git status'
 alias gb='git branch'
 alias gd='git diff'
 alias p=play
+alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])"'
