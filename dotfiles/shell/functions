@@ -137,3 +137,11 @@ function getScreenHeight() {
 	xdpyinfo | awk '/dimensions:/ { split($2,a,"x");print a[2]; exit }'
 }
 
+function urlencode() {
+	python -c "import sys, urllib as ul; print ul.quote_plus('$1')"
+}
+
+function urldecode() {
+	python -c "import sys, urllib as ul; print ul.unquote_plus('$1')"
+}
+
