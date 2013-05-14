@@ -1,4 +1,5 @@
 #! /bin/bash
+ulimit -n 2048
 # Don't wait for job termination notification
 # set -o notify
 
@@ -150,5 +151,7 @@ function prompt_command() {
 
 # Whenever displaying the prompt, write the previous line to disk (-a) and read
 # the new line into the history list (-n)
-export PROMPT_COMMAND="prompt_command; history -a; history -n; ${PROMPT_COMMAND}"
+if [[ ! ${PROMPT_COMMAND} =~ 'prompt_command' ]]; then
+	export PROMPT_COMMAND="prompt_command; history -a; history -n; ${PROMPT_COMMAND}"
+fi
 
