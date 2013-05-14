@@ -56,6 +56,16 @@ if has("autocmd")
   autocmd FileType make set noexpandtab
   autocmd BufNewFile,BufReadPost Makefile se noexpandtab
 
+  " remove trailing whitespace on save
+  " http://stackoverflow.com/questions/356126/how-can-you-automatically-remove-trailing-whitespace-in-vim
+	fun! <SID>StripTrailingWhitespaces()
+		let l = line(".")
+		let c = col(".")
+		%s/\s\+$//e
+		call cursor(l, c)
+	endfun
+
+	autocmd FileType c,cpp,java,php,ruby,python,javascript autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 else
 
   set autoindent " always set autoindenting on
