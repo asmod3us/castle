@@ -332,5 +332,8 @@ nnoremap j gj
 nnoremap gk k
 nnoremap gj j
 
+" do not write netrwhist
+let g:netrw_dirhistmax=0
+
 so ~/.vim/tagbar-coffeescript-config
 
