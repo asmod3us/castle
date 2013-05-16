@@ -57,6 +57,15 @@ Tip](http://stackoverflow.com/questions/4343544/generating-tags-to-different-loc
 
 	for s in `git submodule  --quiet foreach 'echo $name'` ; do git config submodule.$s.ignore untracked ; done
 
+## Update all submodules to latest
+From [StackOverflow discussion](http://stackoverflow.com/questions/1030169/git-easy-way-pull-latest-of-all-submodules): update all submodules to latest version
+
+	git submodule foreach git pull origin master
+
+or maybe a bit faster by running in parallel:
+
+	git submodule foreach "(git checkout master; git pull)&"
+
 ## Credits
 castle is inspired by dotfiles and a stackoverflow posting that I am unable
 to find in my browser history.
