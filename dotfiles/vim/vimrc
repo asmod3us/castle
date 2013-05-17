@@ -132,16 +132,24 @@ set winminheight=0
 set winminwidth=0
 set foldenable
 set mousemodel=popup_setpos
-set wildignore=*.o,*.obj,*.bak,*.exe,*~
+
+" completion settings
+set wildignore=*.o,*.so,*.obj,*.bak,*.exe,*.dll,*~
+set wildignore+=*sass-cache*
+set wildignore+=*DS_Store*
+set wildignore+=log/**
+set wildignore+=tmp/**
+set wildignore+=*.png,*.jpg,*.gif
+
 set viminfo='100,<50,s10,h,f1
 set conceallevel=2 " hide quotes in json for cleaner look
 
-" always show one line/five chars of context
+" always show eight lines/fifteen chars of context
 if !&scrolloff
-  set scrolloff=1
+  set scrolloff=8
 endif
 if !&sidescrolloff
-  set sidescrolloff=5
+  set sidescrolloff=15
 endif
 set display+=lastline
 
@@ -187,7 +195,7 @@ map <D-Right> $
 map <M-Left> b
 map <M-Right> w
 map <C-k> gqap
-imap <C-]> <Esc>
+"imap <C-]> <Esc>
 " mode switch on command key
 inoremap <D-j> <Esc>
 
@@ -256,6 +264,18 @@ autocmd vimenter * if !argc() | NERDTree | endif
 
 " automatically close vim if the only open window is a nerdtree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" hide line numbers in nerd tree
+let NERDTreeShowLineNumbers=0
+
+" make nerd tree bigger 
+let NERDTreeWinSize=45
+
+" hide help text and bookmarks label
+let NERDTreeMinimalUI=1
+
+" use fancy arrows for directories
+let NERDTreeDirArrows=1
 
 " http://stackoverflow.com/questions/676600/vim-search-and-replace-selected-text
 " Escape special characters in a string for exact matching.
@@ -353,3 +373,30 @@ let g:netrw_dirhistmax=0
 
 so ~/.vim/tagbar-coffeescript-config
 
+" tern mappings for navigation
+" map <C-]> TernDef<CR>
+
+" Alt-h, Alt-l to navigate forward/backward in the tags stack
+" only works in MacVim, not in Terminal
+" map <M-h> pop
+" map <M-l> <C-]>
+
+" cache ctrlp files across sessions
+let g:ctrlp_clear_cache_on_exit = 0
+" ignore these files for ctrlp
+" this will exclude them from globbing: set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
+
+let g:ctrlp_custom_ignore = {
+	\ 'dir':  '\v[\/]\.(git|hg|svn)$',
+	\ 'file': '\v\.(exe|so|dll)$',
+	\ 'link': '',
+	\ }
+
+" default to filename searc
+ let g:ctrlp_by_filename = 1
+
+" adjust indent guides colors for solarized
+let g:indent_guides_auto_colors = 0
+
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=8
