@@ -140,6 +140,7 @@ set wildignore+=*DS_Store*
 set wildignore+=log/**
 set wildignore+=tmp/**
 set wildignore+=*.png,*.jpg,*.gif
+set wildignore+=node_modules
 
 set viminfo='100,<50,s10,h,f1
 set conceallevel=2 " hide quotes in json for cleaner look
@@ -381,16 +382,20 @@ so ~/.vim/tagbar-coffeescript-config
 " map <M-h> pop
 " map <M-l> <C-]>
 
+" use better matcher for ctrl-p
+let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
+
 " cache ctrlp files across sessions
 let g:ctrlp_clear_cache_on_exit = 0
 " ignore these files for ctrlp
 " this will exclude them from globbing: set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 
 let g:ctrlp_custom_ignore = {
-	\ 'dir':  '\v[\/]\.(git|hg|svn)$',
+	\ 'dir':  '\v[\/](\.(git|hg|svn)|node_modules)$',
 	\ 'file': '\v\.(exe|so|dll)$',
 	\ 'link': '',
 	\ }
+
 
 " default to filename searc
  let g:ctrlp_by_filename = 1
