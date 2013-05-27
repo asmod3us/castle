@@ -122,7 +122,21 @@ function devcr() {
 	# dock devtools to right
 	# sed -i -e 's/\"browser\": {/"devtools": { "dock_side": "right" }, "browser": {/' "$pn/Default/Preferences"
 	echo "Starting Chrome for development with profile in $pn"
-	open -n -a 'Google Chrome' "$@" --args --no-default-browser-check --disable-web-security -–allow-file-access-from-files --no-first-run --disk-cache-dir=/dev/null --disk-cache-size=1 --user-data-dir=$pn &> /dev/null &
+
+	read -d '' params <<EOM
+--ignore-certificate-errors
+--no-default-browser-check
+--disable-web-security
+--disable-application-cache
+--allow-file-access-from-files
+--no-first-run
+--disk-cache-dir=/dev/null
+--disk-cache-size=1
+--media-cache-size=1
+--user-data-dir=$pn
+EOM
+
+	open -na 'Google Chrome' "$@" --args $params &> /dev/null &
 }
 
 # open chrome with a fresh profile
@@ -134,7 +148,14 @@ function newcr() {
 	# dock devtools to right
 	# sed -i -e 's/\"browser\": {/"devtools": { "dock_side": "right" }, "browser": {/' "$pn/Default/Preferences"
 	echo "Starting Chrome with new profile in $pn"
-	open -n -a 'Google Chrome' "$@" --args --no-default-browser-check --no-first-run --user-data-dir=$pn &> /dev/null &
+
+	read -d '' params <<EOM
+--no-default-browser-check
+--no-first-run
+--user-data-dir=$pn
+EOM
+
+	open -na 'Google Chrome' "$@" --args $params &> /dev/null &
 }
 
 function getScreenSize() {
