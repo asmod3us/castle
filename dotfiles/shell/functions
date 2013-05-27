@@ -157,3 +157,14 @@ function urldecode() {
 	python -c "import sys, urllib as ul; print ul.unquote_plus('$1')"
 }
 
+# faster grep with mdfind and ack. pattern is a literal
+function g() {
+	mdfind -onlyin ${PWD} "$1"| ack -xsQ "$@"
+}
+
+# faster grep with mdfind and ack. pattern is a perl regex and needs to be
+# escaped
+function gr() {
+	mdfind -onlyin ${PWD} "$1" | ack -xs "$@"
+}
+
