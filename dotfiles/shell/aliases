@@ -44,7 +44,6 @@ if [[ "$OSTYPE" =~ ^linux ]]; then
 	alias pbpaste='xsel --clipboard --output'
 fi
 
-alias g="grep"
 alias e="$EDITOR"
 alias h='history'
 alias j='jobs -l'
@@ -57,4 +56,5 @@ alias gc='git commit -m'
 alias gs='git status'
 alias gb='git branch'
 alias gd='git diff'
-alias p=play
+alias f='find'
+alias br='brew'
