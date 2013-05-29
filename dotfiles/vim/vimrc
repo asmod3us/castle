@@ -384,9 +384,10 @@ so ~/.vim/tagbar-coffeescript-config
 
 " use better matcher for ctrl-p
 let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
+" let g:ctrlp_user_command = 'find %s -type f'
 
-" cache ctrlp files across sessions
-let g:ctrlp_clear_cache_on_exit = 0
+" do not cache ctrlp files across sessions
+let g:ctrlp_clear_cache_on_exit = 1
 " ignore these files for ctrlp
 " this will exclude them from globbing: set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 
@@ -396,6 +397,8 @@ let g:ctrlp_custom_ignore = {
 	\ 'link': '',
 	\ }
 
+"""" limit on files
+let g:ctrlp_max_files=0
 
 " default to filename searc
  let g:ctrlp_by_filename = 1
