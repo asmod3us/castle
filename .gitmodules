@@ -97,3 +97,9 @@
 [submodule "dotfiles/vim/bundle/easymotion"]
 	path = dotfiles/vim/bundle/easymotion
 	url = https://github.com/Lokaltog/vim-easymotion
+[submodule "dotfiles/vim/bundle/webapi"]
+	path = dotfiles/vim/bundle/webapi
+	url = https://github.com/mattn/webapi-vim
+[submodule "dotfiles/vim/bundle/gist"]
+	path = dotfiles/vim/bundle/gist
+	url = https://github.com/mattn/gist-vim
