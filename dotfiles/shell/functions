@@ -189,3 +189,20 @@ function gr() {
 	mdfind -onlyin ${PWD} "$1" | ack -xs "$@"
 }
 
+# fix invisible output with some node runners and solarized
+# see https://github.com/visionmedia/mocha/issues/802
+# and https://github.com/altercation/solarized/issues/220
+ mocha() {
+   	 mocha=$(type -P mocha)
+	 substitution='s/\x1b\[90m/\x1b[92m/g'
+
+	 $mocha -c "$@" > >(perl -pe "$substitution") 2> >(perl -pe "$substitution" 1>&2)
+ }
+
+
+appium() {
+   	 appium=$(type -P appium)
+	 substitution='s/\x1b\[90m/\x1b[92m/g'
+
+	 $appium "$@" > >(perl -pe "$substitution") 2> >(perl -pe "$substitution" 1>&2)
+}
