@@ -94,3 +94,6 @@
 [submodule "dotfiles/vim/bundle/ctrlp-matcher"]
 	path = dotfiles/vim/bundle/ctrlp-matcher
 	url = https://github.com/JazzCore/ctrlp-cmatcher
+[submodule "dotfiles/vim/bundle/easymotion"]
+	path = dotfiles/vim/bundle/easymotion
+	url = https://github.com/Lokaltog/vim-easymotion
