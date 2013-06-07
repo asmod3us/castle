@@ -209,7 +209,6 @@ appium() {
 
 # cd into a Project home
 cdp() {
-	echo $1
 	local proj="${HOME}/Projects/$1"
 	if [[ -d "$proj" ]]; then
 		cd "$proj"
