@@ -206,3 +206,13 @@ appium() {
 
 	 $appium "$@" > >(perl -pe "$substitution") 2> >(perl -pe "$substitution" 1>&2)
 }
+
+# cd into a Project home
+cdp() {
+	echo $1
+	local proj="${HOME}/Projects/$1"
+	if [[ -d "$proj" ]]; then
+		cd "$proj"
+	fi
+}
+
