@@ -94,3 +94,6 @@
 [submodule "dotfiles/vim/bundle/ctrlp-matcher"]
 	path = dotfiles/vim/bundle/ctrlp-matcher
 	url = https://github.com/JazzCore/ctrlp-cmatcher
+[submodule "dotfiles/vim/bundle/neocomplcache"]
+	path = dotfiles/vim/bundle/neocomplcache
+	url = https://github.com/Shougo/neocomplcache.vim
