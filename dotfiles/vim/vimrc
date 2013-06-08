@@ -209,21 +209,23 @@ map <C-o> :NERDTreeToggle<CR>
 " map tagbar toggle to C-t
 map <C-t> :TagbarToggle<CR>
 
-inoremap <buffer> <C-X><C-U> <C-X><C-U><C-P>
-inoremap <buffer> <C-S-Space> <C-X><C-U><C-P>
-
-" Remap code completion to C-Space
-if has("gui_running")
-    " C-Space seems to work under gVim on both Linux and win32
-    inoremap <C-Space> <C-x><C-o>
-else " no gui
-  if has("unix")
-  " this doesn't seem to work
-  " inoremap <Nul> <C-x><C-o>
-  else
-  " I have no idea of the name of Ctrl-Space elsewhere
-  endif
-endif
+" seems to map autocompletion
+" disable whole block to test neocomplcache
+" inoremap <buffer> <C-X><C-U> <C-X><C-U><C-P>
+" inoremap <buffer> <C-S-Space> <C-X><C-U><C-P>
+" 
+" " Remap code completion to C-Space
+" if has("gui_running")
+"     " C-Space seems to work under gVim on both Linux and win32
+"     inoremap <C-Space> <C-x><C-o>
+" else " no gui
+"   if has("unix")
+"   " this doesn't seem to work
+"   " inoremap <Nul> <C-x><C-o>
+"   else
+"   " I have no idea of the name of Ctrl-Space elsewhere
+"   endif
+" endif
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! %!sudo tee > /dev/null %
@@ -407,3 +409,40 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=8
 
 set grepprg=ack\ -k " use ack instead of grep
+
+" neocomplcache settings
+
+ " Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplcache.
+let g:neocomplcache_enable_at_startup = 1
+" Use smartcase.
+let g:neocomplcache_enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+
+" Define keyword.
+if !exists('g:neocomplcache_keyword_patterns')
+    let g:neocomplcache_keyword_patterns = {}
+endif
+let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return neocomplcache#smart_close_popup() . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+ " Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
