@@ -413,7 +413,6 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=8
 
 set grepprg=ack\ -k " use ack instead of grep
 
-<<<<<<< HEAD
 " neocomplcache settings
 
  " Disable AutoComplPop.
