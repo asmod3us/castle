@@ -386,9 +386,10 @@ so ~/.vim/tagbar-coffeescript-config
 
 " use better matcher for ctrl-p
 let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
+" let g:ctrlp_user_command = 'find %s -type f'
 
-" cache ctrlp files across sessions
-let g:ctrlp_clear_cache_on_exit = 0
+" do not cache ctrlp files across sessions
+let g:ctrlp_clear_cache_on_exit = 1
 " ignore these files for ctrlp
 " this will exclude them from globbing: set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 
@@ -398,8 +399,10 @@ let g:ctrlp_custom_ignore = {
 	\ 'link': '',
 	\ }
 
+" no limit on files
+let g:ctrlp_max_files=0
 
-" default to filename searc
+" default to filename search
  let g:ctrlp_by_filename = 1
 
 " adjust indent guides colors for solarized
@@ -410,6 +413,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=8
 
 set grepprg=ack\ -k " use ack instead of grep
 
+<<<<<<< HEAD
 " neocomplcache settings
 
  " Disable AutoComplPop.
@@ -445,4 +449,13 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Mac clipboard
+let g:gist_clip_command = 'pbcopy'
+
+" detect filetype form extension
+let g:gist_detect_filetype = 1
+
+" show gist in browser
+let g:gist_open_browser_after_post = 1
 

@@ -32,12 +32,11 @@ alias ..="cd .."
 alias ...="cd ..."
 alias md="mkdir"
 alias grep='grep --color'
-alias mp="makeProject"
-alias sp=". setProject"
+#alias mp="makeProject"
+#alias sp=". setProject"
 alias pgrep="ps aux| grep"
 alias t='task'
 
-alias h='history'
 # If using Linux alias pbcopy and pbpaste
 if [[ "$OSTYPE" =~ ^linux ]]; then
 	alias pbcopy='xsel --clipboard --input'
