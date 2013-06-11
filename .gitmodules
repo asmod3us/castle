@@ -107,3 +107,6 @@
 	path = dotfiles/vim/bundle/gist
 	url = https://github.com/mattn/gist-vim
 
+[submodule "dotfiles/vim/bundle/neosnippet"]
+	path = dotfiles/vim/bundle/neosnippet
+	url = https://github.com/Shougo/neosnippet.vim
