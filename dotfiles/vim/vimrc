@@ -448,9 +448,6 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-" Mac clipboard
-let g:gist_clip_command = 'pbcopy'
-
 " detect filetype form extension
 let g:gist_detect_filetype = 1
 
