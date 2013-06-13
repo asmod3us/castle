@@ -211,7 +211,11 @@ appium() {
 cdp() {
 	local proj="${HOME}/Projects/$1"
 	if [[ -d "$proj" ]]; then
-		cd "$proj"
+		if [[ -d "$proj/ws" ]]; then
+			cd "$proj/ws"
+		else
+			cd "$proj"
+		fi
 	fi
 }
 
