@@ -478,3 +478,9 @@ let g:neosnippet#enable_snipmate_compatibility = 1
 " Tell Neosnippet about the other snippets
 let g:neosnippet#snippets_directory='~/.vim/bundle/snippets/snippets'
 
+" gitgutter customizations
+let g:gitgutter_sign_added = '⇒'
+let g:gitgutter_sign_modified = '⇔'
+let g:gitgutter_sign_removed = '⇐'
+"let g:gitgutter_sign_modified_removed = 'ww'
+
