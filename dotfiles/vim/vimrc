@@ -484,3 +484,9 @@ let g:gitgutter_sign_modified = '⇔'
 let g:gitgutter_sign_removed = '⇐'
 "let g:gitgutter_sign_modified_removed = 'ww'
 
+" tmux navigator config
+let g:tmux_navigator_no_mappings = 1
+" nmap <silent> {Left-mapping} :TmuxNavigateLeft<cr>
+" nmap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
+" nmap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
+" nmap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
