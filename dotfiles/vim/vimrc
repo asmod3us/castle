@@ -359,7 +359,7 @@ let g:syntastic_check_on_open=1
 let g:syntastic_always_populate_loc_list=1
 
 " use system clipboard
-set clipboard=unnamed
+set clipboard+=unnamed
 
 " shorter keboard timeouts
 set ttimeout
@@ -455,9 +455,9 @@ let g:gist_detect_filetype = 1
 let g:gist_open_browser_after_post = 1
 
  " Plugin key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets behavior.
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
@@ -485,8 +485,17 @@ let g:gitgutter_sign_removed = '⇐'
 "let g:gitgutter_sign_modified_removed = 'ww'
 
 " tmux navigator config
-let g:tmux_navigator_no_mappings = 1
-" nmap <silent> {Left-mapping} :TmuxNavigateLeft<cr>
-" nmap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
-" nmap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
-" nmap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
+" let g:tmux_navigator_no_mappings = 1
+" nmap <silent> <C-w>h :TmuxNavigateLeft<cr>
+" nmap <silent> <C-w>j :TmuxNavigateDown<cr>
+" nmap <silent> <C-w>k :TmuxNavigateUp<cr>
+" nmap <silent> <C-w>l :TmuxNavigateRight<cr>
+
+" easier window navigation with ctrl pressed
+nmap <silent> <C-w><C-h> :TmuxNavigateLeft<cr>
+nmap <silent> <C-w><C-j> :TmuxNavigateDown<cr>
+nmap <silent> <C-w><C-k> :TmuxNavigateUp<cr>
+nmap <silent> <C-w><C-l> :TmuxNavigateRight<cr>
+
+" allow window movement in insert mode
+" imap <C-w> <C-o><C-w>
