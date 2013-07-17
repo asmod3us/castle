@@ -209,3 +209,8 @@ cdp() {
 	fi
 }
 
+rendermd() {
+	local style=${HOME}/Reference/pandoc-template/style.html
+	pandoc -s -H $style $1 -f markdown+auto_identifiers+implicit_header_references -t html5 -o out.html
+}
+
