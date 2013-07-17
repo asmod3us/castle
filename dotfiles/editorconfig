@@ -14,7 +14,7 @@ indent_style = tab
 tab_width = 4
 
 ; Tab indentation
-[**.js]
+[**.{js,coffee}]
 indent_style = tab
 tab_width = 4
 trim_trailing_whitespace = true
@@ -22,7 +22,7 @@ charset = utf-8
 jslint_happy = true
 indent_with_tabs = true
 
-[**.css]
+[**.{css,scss,less}]
 indent_style = tab
 tab_width = 4
 trim_trailing_whitespace = true
@@ -36,3 +36,5 @@ max_char = 120
 brace_style = expand
 charset = utf-8
 
+[Makefile]
+indent_style = tab
