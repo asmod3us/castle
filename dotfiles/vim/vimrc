@@ -171,8 +171,9 @@ nmap :W :w
 nmap :Q :q
 
 map ,x vawy:! grep <C-R>" .* *<CR>
-cmap CO !co -l %<CR>:e! %<CR><CR>
-cmap CI !ci -u %<CR>:e! %<CR><CR>
+" rcs maps? seems i don't use these. disable for a while and then remove
+" cmap CO !co -l %<CR>:e! %<CR><CR>
+" cmap CI !ci -u %<CR>:e! %<CR><CR>
 map ,dir :sp ~/tmp/vimdir<CR>G1dG:r!ls -al<CR>:se nomod<CR>
 
 fun MyIndent()
