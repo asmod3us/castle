@@ -90,7 +90,7 @@ set ruler " show the cursor position all the time
 set laststatus=2
 set incsearch " do incremental searching
 set showmatch " show matching bracket for char at cursor
-set showmode
+set noshowmode " modes are shown by airline
 set showcmd " display incomplete commands
 set shellslash
 set cul " highlight screen line of cursor
