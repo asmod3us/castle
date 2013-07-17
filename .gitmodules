@@ -113,3 +113,6 @@
 [submodule "dotfiles/vim/bundle/tmux-navigator"]
 	path = dotfiles/vim/bundle/tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator
+[submodule "dotfiles/vim/bundle/airline"]
+	path = dotfiles/vim/bundle/airline
+	url = https://github.com/bling/vim-airline
