@@ -504,11 +504,12 @@ imap <C-w> <C-o><C-w>
 " toggle background for solarized
 " done manually since i only need it in normal mode
 
-function solarizedToggleBg()
+function! SolarizedToggleBg()
 	let &background = ( &background == "dark"? "light" : "dark" )
 	if exists("g:colors_name")
 		exe "colorscheme " . g:colors_name
 	endif
 endfunction
 
-map <leader>t :solarizedToggleBg()<CR>
+nmap <leader>t :call SolarizedToggleBg()<CR>
+
