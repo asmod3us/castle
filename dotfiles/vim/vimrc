@@ -264,7 +264,22 @@ source $VIMRUNTIME/macros/matchit.vim
 autocmd vimenter * if !argc() | NERDTree | endif
 
 " automatically close vim if the only open window is a nerdtree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" From https://github.com/scrooloose/nerdtree/issues/21
+autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+
+" Close all open buffers on entering a window if the only
+" buffer that's left is the NERDTree buffer
+function! s:CloseIfOnlyNerdTreeLeft()
+	if exists("t:NERDTreeBufName")
+		if bufwinnr(t:NERDTreeBufName) != -1
+			if winnr("$") == 1
+				q
+			endif
+		endif
+	endif
+endfunction
 
 " hide line numbers in nerd tree
 let NERDTreeShowLineNumbers=0
