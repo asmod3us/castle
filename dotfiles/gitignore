@@ -58,8 +58,3 @@ local.properties
 # PDT-specific
 .buildpath
 
-# wsbld
-buildDependencies.log
-test.log
-*.dependants.log
-
