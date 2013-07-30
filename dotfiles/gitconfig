@@ -1,0 +1,33 @@
+[credential]
+	helper = osxkeychain
+[user]
+	email = sta@de.ibm.com
+	name = Achim Staebler
+[push]
+	default = simple
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
+[github]
+	user = asmod3us
+[mergetool]
+	keepBackup = false
+[core]
+	excludesfile = /Users/achim/.gitignore_global
+	autocrlf = input
+	whitespace = blank-at-eol,space-before-tabs,indent-with-non-tab,-tab-in-indent,-blank-at-eof,tabwidth=4
+[difftool "sourcetree"]
+	cmd = /usr/local/bin/ksdiff -w \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /usr/local/bin/ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
+[color]
+	ui = auto
+[mergetool "p4mergetool"]
+	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $PWD/$BASE $PWD/$REMOTE $PWD/$LOCAL $PWD/$MERGED
+	trustExitCode = false
+[difftool "p4mergetool"]
+	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $LOCAL $REMOTE
