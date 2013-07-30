@@ -65,7 +65,7 @@ if has("autocmd")
 		call cursor(l, c)
 	endfun
 
-	autocmd FileType c,cpp,java,php,ruby,python,javascript autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+	autocmd FileType c,cpp,java,php,ruby,python,javascript,html,xml autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 else
 
   set autoindent " always set autoindenting on
@@ -296,6 +296,12 @@ let NERDTreeMinimalUI=1
 
 " use fancy arrows for directories
 let NERDTreeDirArrows=1
+
+" show hidden files
+let NERDTreeShowHidden=1
+
+" easily open java packages
+let NERDTreeCasadeOpenSingleChildDir=1
 
 " http://stackoverflow.com/questions/676600/vim-search-and-replace-selected-text
 " Escape special characters in a string for exact matching.
