@@ -94,7 +94,7 @@ set noshowmode " modes are shown by airline
 set showcmd " display incomplete commands
 set shellslash
 set cul " highlight screen line of cursor
-set gcr=a:block-blinkon0
+set gcr=a:block-blinkon0 " block cursor in all modes, no blinking
 set ignorecase
 set smartcase
 set shiftround " round indent to multiple of shiftwidth
