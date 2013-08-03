@@ -127,7 +127,7 @@ set visualbell
 set nowrapscan
 set cursorline " highlight current line
 set cursorcolumn " hightlight current column
-set textwidth=75
+" set textwidth=75
 set winminheight=0
 set winminwidth=0
 set foldenable
