@@ -105,6 +105,9 @@ set history=50 " keep 50 lines of command line history
 set tabstop=4
 set noexpandtab
 set number
+set formatoptions+=j " when applicable, remove comment leader when joining lines
+set formatoptions-=t " do not auto-wrap to textwidth
+" set formatoptions-=c " do not auto-wrap comments to textwidth
 
 " show tabs, line ends and other control characters visually
 " other choices:
