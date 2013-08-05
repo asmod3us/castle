@@ -139,7 +139,9 @@ function prompt_command() {
 	if [ $UID -eq 0 ]; then
 		USER_HOST="\[${RED}\]\u@\h"
 	else
-		USER_HOST="\[${CYAN}\]\u@\h"
+		# toggle comment to show user and host
+		# USER_HOST="\[${CYAN}\]\u@\h"
+		USER_HOST=""
 	fi
 
 	# red exit code and dollar prompt if non-zero
