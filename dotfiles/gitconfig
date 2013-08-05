@@ -18,7 +18,6 @@
 	excludesfile = /Users/achim/.gitignore_global
 	autocrlf = input
 	whitespace = blank-at-eol,space-before-tabs,indent-with-non-tab,-tab-in-indent,-blank-at-eof,tabwidth=4
-	editor = vim
 [difftool "sourcetree"]
 	cmd = /usr/local/bin/ksdiff -w \"$LOCAL\" \"$REMOTE\"
 	path = 
