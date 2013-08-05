@@ -29,6 +29,15 @@ shopt -s cmdhist
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
+# show dirty state in __git_ps1
+GIT_PS1_SHOWDIRTYSTATE=1
+
+# show status relative to upstream in __git_ps1
+GIT_PS1_SHOWUPSTREAM=auto
+
+# show stashes in __git_ps1
+GIT_PS1_SHOWSTASHSTATE=1
+
 # set up prompt
 function prompt_command() {
 	# remember exit code for coloring
