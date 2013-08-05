@@ -132,9 +132,6 @@ function prompt_command() {
 		PROMPTBG="\033[0;0;30m"
 	fi
 
-	TIME="\A"
-	BRANCH="\$(type -t __git_ps1 &> /dev/null && __git_ps1 '[%s] ')"
-	DISPLAYPATH="\w"
 	# red color for  root
 	if [ $UID -eq 0 ]; then
 		USER_HOST="\[${RED}\]\u@\h"
@@ -152,6 +149,10 @@ function prompt_command() {
 		EXIT_CODE=""
 		SIGN="❯ "
 	fi
+
+	TIME="\A "
+	GITINFO="\$(type -t __git_ps1 &> /dev/null && __git_ps1 '[%s] ')"
+	DISPLAYPATH="\w"
 
 	# set the prompt
 	export PS1="\[${RESET}${PROMPTBG}${BASE1}\]${TIME}${USER_HOST}${EXIT_CODE}\[${BLUE}\]${GITINFO}\[${ORANGE}\]${DISPLAYPATH}\[${CLEAREOL}${RESET}\]\n\[${RESET}\]${SIGN}\[${BASE0}${RESET}\]"
