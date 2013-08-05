@@ -144,13 +144,13 @@ function prompt_command() {
 		USER_HOST=""
 	fi
 
-	# red exit code and dollar prompt if non-zero
+	# red exit code and prompt sign if non-zero
 	if [[ $exitCode -ne 0 ]]; then
 		EXIT_CODE="\[${RED}\]($exitCode) "
-		DOLLAR="\[${RED}\]\$ "
+		SIGN="\[${RED}\]❯ "
 	else
 		EXIT_CODE=""
-		DOLLAR="\$ "
+		SIGN="❯ "
 	fi
 
 	# set the prompt
