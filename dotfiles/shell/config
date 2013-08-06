@@ -161,7 +161,9 @@ function prompt_command() {
 	fi
 
 	TIME="\A "
-	GITINFO="\$(type -t __git_ps1 &> /dev/null && __git_ps1 '[%s] ')"
+	# __git_ps1 is a bit slow
+	# GITINFO="\$(type -t __git_ps1 &> /dev/null && __git_ps1 '[%s] ')"
+	GITINFO="\$(gitInfo)"
 	DISPLAYPATH="\w"
 
 	# set the prompt
