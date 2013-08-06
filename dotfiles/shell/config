@@ -30,13 +30,13 @@ shopt -s cmdhist
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # show dirty state in __git_ps1
-GIT_PS1_SHOWDIRTYSTATE=1
+# GIT_PS1_SHOWDIRTYSTATE=1
 
 # show status relative to upstream in __git_ps1
-GIT_PS1_SHOWUPSTREAM=auto
+# GIT_PS1_SHOWUPSTREAM=auto
 
 # show stashes in __git_ps1
-GIT_PS1_SHOWSTASHSTATE=1
+# GIT_PS1_SHOWSTASHSTATE=1
 
 # setup colors for solarized
 if tput setaf 1 &> /dev/null; then
