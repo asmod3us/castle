@@ -127,6 +127,16 @@ else
 	PROMPTBG="\033[0;0;30m"
 fi
 
+# fastest possible way to check if repo is dirty
+gitInfo() {
+	# check if we're in a git repo
+	git rev-parse --is-inside-work-tree &>/dev/null || return
+	BRANCH=$(git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||')
+	echo -n "[$BRANCH"
+	# check if it's dirty
+	git diff --quiet --ignore-submodules HEAD &>/dev/null; [ $? -eq 1 ] && echo '*] ' || echo '] '
+}
+
 # set up prompt
 function prompt_command() {
 	# remember exit code for coloring
