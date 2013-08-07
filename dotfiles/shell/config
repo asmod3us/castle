@@ -137,17 +137,126 @@ gitInfo() {
 	git diff --quiet --ignore-submodules HEAD &>/dev/null; [ $? -eq 1 ] && echo '*] ' || echo '] '
 }
 
+# command timing
+timerStart() {
+	timer=${timer:-$SECONDS}
+}
+
+timerStop() {
+	if [[ -n "$timer" ]]; then
+		lastElapsed=$(($SECONDS - $timer))
+		unset timer
+	fi
+}
+
+# display human readable time
+displayTime() {
+	local T=$1
+	local D=$((T/60/60/24))
+	local H=$((T/60/60%24))
+	local M=$((T/60%60))
+	local S=$((T%60))
+	[[ $D > 0 ]] && printf '%dd' $D
+	[[ $H > 0 ]] && printf '%dh' $H
+	[[ $M > 0 ]] && printf '%dm' $M
+	# [[ $D > 0 || $H > 0 || $M > 0 ]] && printf ' '
+	printf '%ds' $S
+}
+
+# This variable describes whether we are currently in "interactive mode";
+# i.e. whether this shell has just executed a prompt and is waiting for user
+# input.  It documents whether the current command invoked by the trace hook is
+# run interactively by the user; it's set immediately after the prompt hook,
+# and unset as soon as the trace hook is run.
+
+preexec_interactive_mode=""
+
+# Default do-nothing implementation of preexec.
+preexec() {
+	true
+}
+
+# Default do-nothing implementation of precmd.
+precmd() {
+	true
+}
+
+# This function is installed as the PROMPT_COMMAND; it is invoked before each
+# interactive prompt display.  It sets a variable to indicate that the prompt
+# was just displayed, to allow the DEBUG trap, below, to know that the next
+# command is likely interactive.
+preexec_invoke_cmd() {
+	precmd
+	preexec_interactive_mode="yes"
+}
+
+# This function is installed as the DEBUG trap.  It is invoked before each
+# interactive prompt display.  Its purpose is to inspect the current
+# environment to attempt to detect if the current command is being invoked
+# interactively, and invoke 'preexec' if so.
+preexec_invoke_exec() {
+	if [[ -n "$COMP_LINE" ]]
+	then
+		# We're in the middle of a completer.  This obviously can't be
+		# an interactively issued command.
+		return
+	fi
+	if [[ -z "$preexec_interactive_mode" ]]
+	then
+		# We're doing something related to displaying the prompt.  Let the
+		# prompt set the title instead of me.
+		return
+	else
+		# If we're in a subshell, then the prompt won't be re-displayed to put
+		# us back into interactive mode, so let's not set the variable back.
+		# In other words, if you have a subshell like
+		#   (sleep 1; sleep 2)
+		# You want to see the 'sleep 2' as a set_command_title as well.
+		if [[ 0 -eq "$BASH_SUBSHELL" ]]
+		then
+			preexec_interactive_mode=""
+		fi
+	fi
+	if [[ "preexec_invoke_cmd" == "$BASH_COMMAND" ]]
+	then
+		# Sadly, there's no cleaner way to detect two prompts being displayed
+		# one after another.  This makes it important that PROMPT_COMMAND
+		# remain set _exactly_ as below in preexec_install.  Let's switch back
+		# out of interactive mode and not trace any of the commands run in
+		# precmd.
+
+		# Given their buggy interaction between BASH_COMMAND and debug traps,
+		# versions of bash prior to 3.1 can't detect this at all.
+		preexec_interactive_mode=""
+		return
+	fi
+
+	# In more recent versions of bash, this could be set via the "BASH_COMMAND"
+	# variable, but using history here is better in some ways: for example, "ps
+	# auxf | less" will show up with both sides of the pipe if we use history,
+	# but only as "ps auxf" if not.
+	local this_command=`history 1 | sed -e "s/^[ ]*[0-9]*[ ]*//g"`;
+
+	# If none of the previous checks have earlied out of this function, then
+	# the command is in fact interactive and we should invoke the user's
+	# preexec hook with the running command as an argument.
+	preexec "$this_command"
+}
+
+STARTUID=$(id -u)
+
 # set up prompt
 function prompt_command() {
 	# remember exit code for coloring
 	exitCode=$?
 
-	# red color for  root
+	# red color for root
 	if [ $UID -eq 0 ]; then
-		USER_HOST="\[${RED}\]\u@\h"
-	else
-		# toggle comment to show user and host
-		# USER_HOST="\[${CYAN}\]\u@\h"
+		USER_HOST="\[${RED}\]\u@\h "
+	elif [ ! $UID -eq $STARTUID ]; then
+		# show user and host
+		USER_HOST="\[${CYAN}\]\u@\h "
+	else 
 		USER_HOST=""
 	fi
 
@@ -161,21 +270,62 @@ function prompt_command() {
 	fi
 
 	TIME="\A "
+	if [ -n "$lastElapsed" ]; then
+		# threshold is 5 seconds
+		if [ $lastElapsed -gt 5 ]; then
+			ELAPSED="\$(displayTime $lastElapsed) "
+			unset timer
+			unset lastElapsed
+		fi
+	else
+		ELAPSED=""
+	fi
+
 	# __git_ps1 is a bit slow
 	# GITINFO="\$(type -t __git_ps1 &> /dev/null && __git_ps1 '[%s] ')"
 	GITINFO="\$(gitInfo)"
 	DISPLAYPATH="\w"
 
 	# set the prompt
-	export PS1="\[${RESET}${PROMPTBG}${BASE1}\]${TIME}${USER_HOST}${EXIT_CODE}\[${BLUE}\]${GITINFO}\[${ORANGE}\]${DISPLAYPATH}\[${CLEAREOL}${RESET}\]\n\[${RESET}\]${SIGN}\[${BASE0}${RESET}\]"
+	export PS1="\[${RESET}${PROMPTBG}${BASE1}\]${TIME}\[${VIOLET}\]${ELAPSED}${USER_HOST}${EXIT_CODE}\[${BLUE}\]${GITINFO}\[${ORANGE}\]${DISPLAYPATH}\[${CLEAREOL}${RESET}\]\n\[${RESET}\]${SIGN}\[${BASE0}${RESET}\]"
 
 	# uncomment to get a quick color test with echo $TESTCOLOR
 	#export TESTCOLOR="${BASE03}BASE03 ${BASE02}BASE02 ${BASE01}BASE01 ${BASE3}BASE00 ${BASE2}BASE2 ${BASE1}BASE1 ${BASE0}BASE0 ${YELLOW}YELLOW ${ORANGE}ORANGE ${RED}RED ${MAGENTA}MAGENTA ${VIOLET}VIOLET ${BLUE}BLUE ${CYAN}CYAN ${GREEN}GREEN${RESET} "
 }
 
+# Execute this to set up preexec and precmd execution.
+function preexec_install() {
+
+	# *BOTH* of these options need to be set for the DEBUG trap to be invoked
+	# in ( ) subshells.  This smells like a bug in bash to me.  The null stderr
+	# redirections are to quiet errors on bash2.05 (i.e. OSX's default shell)
+	# where the options can't be set, and it's impossible to inherit the trap
+	# into subshells.
+
+	set -o functrace > /dev/null 2>&1
+	shopt -s extdebug > /dev/null 2>&1
+
+	# Finally, install the actual traps.
+	# prompt is set below
+	# PROMPT_COMMAND="preexec_invoke_cmd; ${PROMPT_COMMAND}"
+	trap 'preexec_invoke_exec' DEBUG
+}
+
+# Add real hooks for command timing
+preexec() {
+	timerStart
+}
+
+precmd() {
+	timerStop
+}
+
+# Install command timing
+preexec_install
+
 # Whenever displaying the prompt, write the previous line to disk (-a) and read
-# the new line into the history list (-n)
+# the new line into the history list (-n). Also run the command timing hook.
 if [[ ! ${PROMPT_COMMAND} =~ 'prompt_command' ]]; then
-	export PROMPT_COMMAND="prompt_command; history -a; history -n; ${PROMPT_COMMAND}"
+	export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND:-} preexec_invoke_cmd; prompt_command"
 fi
 
