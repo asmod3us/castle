@@ -58,5 +58,5 @@ alias gd='git diff'
 alias f='find'
 alias br='brew'
 alias gl='git log --oneline --abbrev-commit --all --graph --decorate --color'
-alias listening=lsof -n -iTCP -sTCP:LISTEN
+alias listening='lsof -n -iTCP -sTCP:LISTEN'
 
