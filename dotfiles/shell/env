@@ -20,6 +20,7 @@ export MVN_HOME=${TOOLS}/maven
 export GROOVY_HOME=${TOOLS}/groovy
 export GRAILS_HOME=${TOOLS}/grails
 export PYTHONPATH=${PYTHONPATH}:${HOME}/python
+export RBENV_ROOT=/usr/local/var/rbenv
 
 export EDITOR=vim
 #export TERM=xterm-color
