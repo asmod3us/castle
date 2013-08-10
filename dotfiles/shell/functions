@@ -1,25 +1,25 @@
 #! /bin/bash
 
 # Check if a Web site is down within local network or not
-function down4me() {
+down4me() {
 	curl -s "http://www.downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g'
 }
 
-function pathAppend ()  {
+pathAppend()  {
 	pathRemove $1; export PATH="$PATH:$1";
 }
 
-function pathPrepend () {
+pathPrepend() {
 	pathRemove $1; export PATH="$1:$PATH";
 }
 
-function pathRemove ()  {
+pathRemove()  {
 	export PATH=`echo -n $PATH | awk -v RS=: -v ORS=: '$0 != "'$1'"' | sed 's/:$//'`;
 }
 
 # acd_func 1.0.5, 10-nov-2004
 # petar marinov, http:/geocities.com/h2428, this is public domain
-function cd_hist() {
+cd_hist() {
 	local x2 the_new_dir adir index
 	local -i cnt
 
@@ -73,12 +73,12 @@ if [[ $BASH_VERSION > "2.05a" ]]; then
 fi
 
 # zip a directory
-function zipit () {
+zipit() {
 	zip -r "$1".zip "$1" ;
 }
 
 # Create a data URL from a file
-function dataurl() {
+dataurl() {
 	local mimeType=$(file -b --mime-type "$1")
 	if [[ $mimeType == text/* ]]; then
 		mimeType="${mimeType};charset=utf-8"
@@ -87,7 +87,7 @@ function dataurl() {
 }
 
 # Start an HTTP server from a directory, optionally specifying the port
-function webserver() {
+webserver() {
 	local port="${1:-8000}"
 	sleep 1 && devcr "http://localhost:${port}/" &
 # Set the default Content-Type to `text/plain` instead of `application/octet-stream`
@@ -96,24 +96,24 @@ function webserver() {
 }
 
 # download a web page and show info on what took time
-function speed() {
+speed() {
 	/usr/bin/curl $@ -s -o /dev/null -w "dns: %{time_namelookup}, connect: %{time_connect}, pretransfer: %{time_pretransfer}, starttransfer: %{time_starttransfer}, total: %{time_total}, #connect: %{num_connects}, size: %{size_download}, speed: %{speed_download}\n" ;
 }
 
 # http_headers: get just the HTTP headers from a web page (and its redirects)
-function headers() {
+headers() {
 	/usr/bin/curl -I -L $@ ;
 }
 
 # open firefox with a fresh profile
-function newff() {
+newff() {
 	pn="ff-$(tr -dc "0-9a-f" < /dev/urandom | head -c 8)"
 	firefox -CreateProfile "$pn /tmp/$pn"
 	firefox -no-remote -P "$pn" "$@" &> /dev/null &
 }
 
 # open chrome with a fresh profile for development
-function devcr() {
+devcr() {
 	pn=$(mktemp -dq -t chrome-XXX)
 	echo "Starting Chrome for development with profile in $pn"
 
@@ -134,7 +134,7 @@ EOM
 }
 
 # open chrome with a fresh profile
-function newcr() {
+newcr() {
 	pn=$(mktemp -dq -t chrome-XXX)
 
 	echo "Starting Chrome with new profile in $pn"
@@ -148,53 +148,53 @@ EOM
 	open -na 'Google Chrome' --args "$@" $params &> /dev/null &
 }
 
-function getScreenSize() {
+getScreenSize() {
 	xdpyinfo | awk '/dimensions:/ { print $2; exit }'
 }
 
-function getScreenWidth() {
+getScreenWidth() {
 	xdpyinfo | awk '/dimensions:/ { split($2,a,"x");print a[1]; exit }'
 }
 
-function getScreenHeight() {
+getScreenHeight() {
 	xdpyinfo | awk '/dimensions:/ { split($2,a,"x");print a[2]; exit }'
 }
 
-function urlencode() {
+urlencode() {
 	python -c "import sys, urllib as ul; print ul.quote_plus('$1')"
 }
 
-function urldecode() {
+urldecode() {
 	python -c "import sys, urllib as ul; print ul.unquote_plus('$1')"
 }
 
 # faster grep with mdfind and ack. pattern is a literal
-function g() {
+g() {
 	mdfind -onlyin ${PWD} "$1"| ack -xsQ "$@"
 }
 
 # faster grep with mdfind and ack. pattern is a perl regex and needs to be
 # escaped
-function gr() {
+gr() {
 	mdfind -onlyin ${PWD} "$1" | ack -xs "$@"
 }
 
 # fix invisible output with some node runners and solarized
 # see https://github.com/visionmedia/mocha/issues/802
 # and https://github.com/altercation/solarized/issues/220
-mocha() {
-	mocha=$(type -P mocha)
-	substitution='s/\x1b\[90m/\x1b[92m/g'
-
-	$mocha -c "$@" > >(perl -pe "$substitution") 2> >(perl -pe "$substitution" 1>&2)
-}
-
-appium() {
-	appium=$(type -P appium)
-	substitution='s/\x1b\[90m/\x1b[92m/g'
-
-	$appium "$@" > >(perl -pe "$substitution") 2> >(perl -pe "$substitution" 1>&2)
-}
+# mocha() {
+# 	mocha=$(type -P mocha)
+# 	substitution='s/\x1b\[90m/\x1b[92m/g'
+# 
+# 	$mocha -c "$@" > >(perl -pe "$substitution") 2> >(perl -pe "$substitution" 1>&2)
+# }
+# 
+# appium() {
+# 	appium=$(type -P appium)
+# 	substitution='s/\x1b\[90m/\x1b[92m/g'
+# 
+# 	$appium "$@" > >(perl -pe "$substitution") 2> >(perl -pe "$substitution" 1>&2)
+# }
 
 # cd into a Project home
 cdp() {
