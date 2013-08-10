@@ -85,9 +85,6 @@
 [submodule "dotfiles/vim/bundle/ctrlp-matcher"]
 	path = dotfiles/vim/bundle/ctrlp-matcher
 	url = https://github.com/JazzCore/ctrlp-cmatcher
-[submodule "dotfiles/vim/bundle/neocomplcache"]
-	path = dotfiles/vim/bundle/neocomplcache
-	url = https://github.com/Shougo/neocomplcache.vim
 [submodule "dotfiles/vim/bundle/easymotion"]
 	path = dotfiles/vim/bundle/easymotion
 	url = https://github.com/Lokaltog/vim-easymotion
@@ -97,7 +94,6 @@
 [submodule "dotfiles/vim/bundle/gist"]
 	path = dotfiles/vim/bundle/gist
 	url = https://github.com/mattn/gist-vim
-
 [submodule "dotfiles/vim/bundle/neosnippet"]
 	path = dotfiles/vim/bundle/neosnippet
 	url = https://github.com/Shougo/neosnippet.vim
