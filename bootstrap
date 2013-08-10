@@ -10,10 +10,10 @@ export cfgdir=$dotfiles/shell
 export osSuffix=$(uname|tr 'A-Z' 'a-z')
 export hostSuffix=$(hostname | cut -d. -f1)
 
-function include {
-	master=$cfgdir/$1
-	os=$cfgdir/$1-$osSuffix
-	host=$cfgdir/$1-hostSuffix
+include() {
+	local master=$cfgdir/$1
+	local os=$cfgdir/$1-$osSuffix
+	local host=$cfgdir/$1-hostSuffix
 
 	for bashfile in $master $os $host; do
 		if [ -r $bashfile ]; then
