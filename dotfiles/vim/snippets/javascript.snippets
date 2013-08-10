@@ -1,0 +1,48 @@
+snippet req "CommonJS Require" w
+    var ${1:foo} = require('${2:$1}');$0
+endsnippet
+
+snippet def "Define an AMD Module" w
+    define([
+        '${1}'
+    ], function(
+        ${2}
+    ) {
+
+        $0
+
+        return {
+
+        };
+    });
+
+endsnippet
+
+snippet desc "Describe Block"
+    describe("$1", function() {
+      $0
+      });
+endsnippet
+
+snippet it "It block"
+    it("should $1", function() {
+      $0    
+      });
+endsnippet
+
+snippet ex "Expect"
+    expect($1).$0;
+endsnippet
+
+# Dojo 2.x
+snippet define "Dojo AMD define" b
+    define([$1], function($2){
+        $0
+        });
+endsnippet
+
+snippet require "Dojo AMD require" b
+    require([$1], function($2){
+        $0
+        });
+endsnippet
