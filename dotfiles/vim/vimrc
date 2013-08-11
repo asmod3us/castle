@@ -453,7 +453,7 @@ let g:neocomplete_lock_buffer_name_pattern = '\*ku\*'
 
 " Define keyword.
 if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
+	let g:neocomplete#keyword_patterns = {}
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
@@ -511,7 +511,7 @@ endif
 let g:neosnippet#enable_snipmate_compatibility = 1
 
 " Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/bundle/snippets/snippets,~/.vim/snippets/'
+let g:neosnippet#snippets_directory='~/.vim/bundle/snippets/snippets/,~/.vim/snippets/'
 
 " gitgutter customizations
 let g:gitgutter_sign_added = '⇒'
@@ -537,7 +537,6 @@ imap <C-w> <C-o><C-w>
 
 " toggle background for solarized
 " done manually since i only need it in normal mode
-
 function! SolarizedToggleBg()
 	let &background = ( &background == "dark"? "light" : "dark" )
 	if exists("g:colors_name")
@@ -548,7 +547,6 @@ endfunction
 nmap <leader>t :call SolarizedToggleBg()<CR>
 
 " airline config
-
 let g:airline_exclude_preview = 1
 let g:airline_left_sep = '▶'
 " let g:airline_left_sep = '◣'
@@ -564,6 +562,4 @@ nmap <leader>a= :Tabularize /=<CR>
 vmap <leader>a= :Tabularize /=<CR>
 nmap <leader>a: :Tabularize /:\zs/l0l1<CR>
 vmap <leader>a: :Tabularize /:\zs/l0l1<CR>
-" nmap <leader>a| :Tabularize /|<CR>
-" vmap <leader>a| :Tabularize /|<CR>
 
