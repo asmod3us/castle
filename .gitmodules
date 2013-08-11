@@ -124,3 +124,6 @@
 [submodule "dotfiles/vim/bundle/tabular"]
 	path = dotfiles/vim/bundle/tabular
 	url = https://github.com/godlygeek/tabular
+[submodule "dotfiles/vim/bundle/ultisnips"]
+	path = dotfiles/vim/bundle/ultisnips
+	url = https://github.com/MarcWeber/ultisnips.git
