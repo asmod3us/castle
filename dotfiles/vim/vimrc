@@ -559,3 +559,13 @@ let g:airline_branch_prefix = '⎇ '
 let g:airline_paste_symbol = 'ρ'
 let g:airline_theme='solarized'
 
+" Tabular mappings
+if exists(":Tabularize")
+	nmap <Leader>a= :Tabularize /=<CR>
+	vmap <Leader>a= :Tabularize /=<CR>
+	nmap <Leader>a: :Tabularize /:\zs<CR>
+	vmap <Leader>a: :Tabularize /:\zs<CR>
+	nmap <Leader>a| :Tabularize /|<CR>
+	vmap <Leader>a| :Tabularize /|<CR>
+endif
+
