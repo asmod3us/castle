@@ -7,6 +7,7 @@ filetype off " needs to be off for pathogen
 runtime bundle/pathogen/autoload/pathogen.vim
 " Pathogen needs to run before syntax on or filetype plugin indent
 call pathogen#infect()
+" call pathogen#helptags()
 Helptags " generate helptags so that all help files are available
 
 " Don't use Ex mode, use Q for formatting
@@ -94,7 +95,6 @@ set showmatch " show matching bracket for char at cursor
 set noshowmode " modes are shown by airline
 set showcmd " display incomplete commands
 set shellslash
-set cul " highlight screen line of cursor
 set gcr=a:block-blinkon0 " block cursor in all modes, no blinking
 set ignorecase
 set smartcase
@@ -104,22 +104,21 @@ set joinspaces
 set virtualedit=all
 set history=50 " keep 50 lines of command line history
 set tabstop=4
-set noexpandtab
 set number
 set formatoptions+=j " when applicable, remove comment leader when joining lines
 set formatoptions-=t " do not auto-wrap to textwidth
 " set formatoptions-=c " do not auto-wrap comments to textwidth
 
 " show tabs, line ends and other control characters visually
-" other choices:
-" set lcs=tab:»·
-" set lcs+=trail:·
-" set lcs+=eol:$
 set list
 if &listchars ==# 'eol:$'
   set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
   if &termencoding ==# 'utf-8' || &encoding ==# 'utf-8'
     let &listchars = "tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u00b7"
+" other choices:
+" set lcs=tab:»·
+" set lcs+=trail:·
+" set lcs+=eol:$
   endif
 endif
 
@@ -127,8 +126,9 @@ set nostartofline
 set mouse=
 set ls=2
 set iskeyword=@,48-57,_,192-255,-
-set visualbell
+set visualbell " no beeps
 set nowrapscan
+set colorcolumn=80 " Mark col 80 with a vertical line.
 set cursorline " highlight current line
 set cursorcolumn " hightlight current column
 " set textwidth=75
@@ -167,45 +167,32 @@ let mapleader=','
 
 syntax on
 
-" map <F7> :bp<RETURN>
-" map <F8> :bn<RETURN>
-" map <F1> :make<RETURN>
-" map <F2> :cl!<RETURN>
-" map <F3> :cp<RETURN>
-" map <F4> :cn<RETURN>
-" nmap <F9> :if has("syntax_items")<CR>syntax off<CR>else<CR>syntax on<CR>endif<CR><CR>
-"
 nmap :W :w
 nmap :Q :q
 
-map ,x vawy:! grep <C-R>" .* *<CR>
-" rcs maps? seems i don't use these. disable for a while and then remove
-" cmap CO !co -l %<CR>:e! %<CR><CR>
-" cmap CI !ci -u %<CR>:e! %<CR><CR>
 map ,dir :sp ~/tmp/vimdir<CR>G1dG:r!ls -al<CR>:se nomod<CR>
 
 fun MyIndent()
-let oldLine=line('.')
-normal(gg=G)
-execute ':' . oldLine
+	let oldLine=line('.')
+	normal(gg=G)
+	execute ':' . oldLine
 endfun
 
 map -- :call MyIndent()<cr>
+
 " remap mode switch to C-j
 map! <C-j> <Esc>
+nnoremap <C-j> <Esc> " cancel prefix keys
+vnoremap <C-j> <Esc>gV " cancel selection
+onoremap <C-j> <Esc> " cancel operator-pending commands
+cnoremap <C-j> <C-c>
+lnoremap <C-j> <Esc>
 
-" conflict with linux terminal tab move commands, hence commented out
-" map! <C-J> <C-W>j
-" map! <C-K> <C-W>k
-" map! <C-H> <C-W>h
-" map! <C-L> <C-W>l
-
+" mac gui only
 map <D-Left> 0
 map <D-Right> $
 map <M-Left> b
 map <M-Right> w
-"map <C-k> gqap
-"imap <C-]> <Esc>
 " mode switch on command key
 inoremap <D-j> <Esc>
 
@@ -217,24 +204,6 @@ map <C-o> :NERDTreeToggle<CR>
 
 " map tagbar toggle to C-t
 map <C-t> :TagbarToggle<CR>
-
-" seems to map autocompletion
-" disable whole block to test neocomplete
-" inoremap <buffer> <C-X><C-U> <C-X><C-U><C-P>
-" inoremap <buffer> <C-S-Space> <C-X><C-U><C-P>
-" 
-" " Remap code completion to C-Space
-" if has("gui_running")
-"     " C-Space seems to work under gVim on both Linux and win32
-"     inoremap <C-Space> <C-x><C-o>
-" else " no gui
-"   if has("unix")
-"   " this doesn't seem to work
-"   " inoremap <Nul> <C-x><C-o>
-"   else
-"   " I have no idea of the name of Ctrl-Space elsewhere
-"   endif
-" endif
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! %!sudo tee > /dev/null %
@@ -261,51 +230,7 @@ if exists('+undofile')
   set undofile
 endif
 
-" solarized
-let g:solarized_contrast = "high"
-set background=dark
-colorscheme solarized
-
 source $VIMRUNTIME/macros/matchit.vim
-
-" automatically open nerdtree if started without args
-autocmd vimenter * if !argc() | NERDTree | endif
-
-" automatically close vim if the only open window is a nerdtree
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-" From https://github.com/scrooloose/nerdtree/issues/21
-autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
-
-" Close all open buffers on entering a window if the only
-" buffer that's left is the NERDTree buffer
-function! s:CloseIfOnlyNerdTreeLeft()
-	if exists("t:NERDTreeBufName")
-		if bufwinnr(t:NERDTreeBufName) != -1
-			if winnr("$") == 1
-				q
-			endif
-		endif
-	endif
-endfunction
-
-" hide line numbers in nerd tree
-let NERDTreeShowLineNumbers=0
-
-" make nerd tree bigger 
-let NERDTreeWinSize=45
-
-" hide help text and bookmarks label
-let NERDTreeMinimalUI=1
-
-" use fancy arrows for directories
-let NERDTreeDirArrows=1
-
-" show hidden files
-let NERDTreeShowHidden=1
-
-" easily open java packages
-let NERDTreeCasadeOpenSingleChildDir=1
 
 " http://stackoverflow.com/questions/676600/vim-search-and-replace-selected-text
 " Escape special characters in a string for exact matching.
@@ -356,35 +281,6 @@ else
 	so ~/.vim/os/linux.vim
 endif
 
- if has('unix')
-	" let g:syntastic_error_symbol='★'
-	" fancy symbols for syntax checker
-	let g:syntastic_error_symbol='✗'
-	let g:syntastic_style_error_symbol='>'
-	let g:syntastic_warning_symbol='⚠'
-	let g:syntastic_style_warning_symbol='>'
-else
-	let g:syntastic_error_symbol='!'
-	let g:syntastic_style_error_symbol='>'
-	let g:syntastic_warning_symbol='.'
-	let g:syntastic_style_warning_symbol='>'
-endif
-
-" errors on left side
-let g:syntastic_enable_signs=1
-
-" gjslint configuration
-" let g:syntastic_gjslint_conf=" --nojsdoc --max_line_length 120"
-
-" disable gjslint for now
-let g:syntastic_javascript_checkers=['jshint']
-
-" check files on open
-let g:syntastic_check_on_open=1
-"
-" always stick any detected errors into the loclist
-let g:syntastic_always_populate_loc_list=1
-
 " use system clipboard
 set clipboard+=unnamed
 
@@ -401,8 +297,6 @@ nnoremap gj j
 " do not write netrwhist
 let g:netrw_dirhistmax=0
 
-so ~/.vim/tagbar-coffeescript-config
-
 " tern mappings for navigation
 " map <C-]> TernDef<CR>
 
@@ -410,27 +304,6 @@ so ~/.vim/tagbar-coffeescript-config
 " only works in MacVim, not in Terminal
 " map <M-h> pop
 " map <M-l> <C-]>
-
-" use better matcher for ctrl-p
-let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
-" let g:ctrlp_user_command = 'find %s -type f'
-
-" do not cache ctrlp files across sessions
-let g:ctrlp_clear_cache_on_exit = 1
-" ignore these files for ctrlp
-" this will exclude them from globbing: set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
-
-let g:ctrlp_custom_ignore = {
-	\ 'dir':  '\v[\/](\.(git|hg|svn)|node_modules)$',
-	\ 'file': '\v\.(exe|so|dll)$',
-	\ 'link': '',
-	\ }
-
-" no limit on files
-let g:ctrlp_max_files=0
-
-" default to filename search
- let g:ctrlp_by_filename = 1
 
 " adjust indent guides colors for solarized
 let g:indent_guides_auto_colors = 0
@@ -459,75 +332,17 @@ let g:gitgutter_sign_modified = '⇔'
 let g:gitgutter_sign_removed = '⇐'
 "let g:gitgutter_sign_modified_removed = 'ww'
 
-" tmux navigator config
-let g:tmux_navigator_no_mappings = 1
-nmap <silent> <C-w>h :TmuxNavigateLeft<cr>
-nmap <silent> <C-w>j :TmuxNavigateDown<cr>
-nmap <silent> <C-w>k :TmuxNavigateUp<cr>
-nmap <silent> <C-w>l :TmuxNavigateRight<cr>
-
-" easier window navigation with ctrl pressed
-nmap <silent> <C-w><C-h> :TmuxNavigateLeft<cr>
-nmap <silent> <C-w><C-j> :TmuxNavigateDown<cr>
-nmap <silent> <C-w><C-k> :TmuxNavigateUp<cr>
-nmap <silent> <C-w><C-l> :TmuxNavigateRight<cr>
-
 " allow window movement in insert mode
 imap <C-w> <C-o><C-w>
 
-" toggle background for solarized
-" done manually since i only need it in normal mode
-function! SolarizedToggleBg()
-	let &background = ( &background == "dark"? "light" : "dark" )
-	if exists("g:colors_name")
-		exe "colorscheme " . g:colors_name
-	endif
-endfunction
-
-nmap <leader>t :call SolarizedToggleBg()<CR>
-
-" airline config
-let g:airline_exclude_preview = 1
-let g:airline_left_sep = '▶'
-" let g:airline_left_sep = '◣'
-let g:airline_right_sep = '◀'
-" let g:airline_right_sep = '◢'
-let g:airline_linecolumn_prefix = '␤ '
-let g:airline_branch_prefix = '⎇ '
-let g:airline_paste_symbol = 'ρ'
-let g:airline_theme='solarized'
-
-" Tabular mappings
-nmap <leader>a= :Tabularize /=<CR>
-vmap <leader>a= :Tabularize /=<CR>
-nmap <leader>a: :Tabularize /:\zs/l0l1<CR>
-vmap <leader>a: :Tabularize /:\zs/l0l1<CR>
-nmap <Leader>a& :Tabularize /&<CR>
-vmap <Leader>a& :Tabularize /&<CR>
-nmap <Leader>a, :Tabularize /,<CR>
-vmap <Leader>a, :Tabularize /,<CR>
-nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-
-" Mark 80 columns as a line limit with a vertical line.
-set colorcolumn=80
-"
-" Ultisnip
-let g:UltiSnips = {}
-let g:UltiSnipsExpandTrigger = "<C-k>"
-let g:UltiSnipsJumpForwardTrigger = "<C-n>"
-let g:UltiSnipsJumpBackwardTrigger = "<C-p>"
-
-let g:UltiSnips.UltiSnips_ft_filter = {
-	\ 'default' : {'filetypes': ['all', 'FILETYPE' ] },
-	\ 'all' : {'filetypes': ['all'] },
-	\ }
-let g:UltiSnips.always_use_first_snippet = 1
 
 " Some convenient mappings
-" inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
-" inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
-" inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-" inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-" inoremap <expr> <C-d>      pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
-" inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
+" inoremap <expr> <Esc>  pumvisible() ? "\<C-e>" : "\<Esc>"
+" inoremap <expr> <CR>   pumvisible() ? "\<C-y>" : "\<CR>"
+" inoremap <expr> <Down> pumvisible() ? "\<C-n>" : "\<Down>"
+" inoremap <expr> <Up>   pumvisible() ? "\<C-p>" : "\<Up>"
+" inoremap <expr> <C-d>  pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
+" inoremap <expr> <C-u>  pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
+
+" let g:UltiSnipsSnippetsDir        = '~/.vim/snippets/'
+" let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'snippets']
