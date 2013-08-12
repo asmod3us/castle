@@ -127,3 +127,6 @@
 [submodule "dotfiles/vim/bundle/ultisnips"]
 	path = dotfiles/vim/bundle/ultisnips
 	url = https://github.com/MarcWeber/ultisnips.git
+[submodule "dotfiles/vim/bundle/YouCompleteMe"]
+	path = dotfiles/vim/bundle/YouCompleteMe
+	url = https://github.com/Valloric/YouCompleteMe
