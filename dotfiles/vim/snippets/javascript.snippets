@@ -1,0 +1,35 @@
+snippet def "Define an AMD Module" !w
+define([
+	'${1:deps}'
+], function(
+	${2:names}
+) {
+
+	$0
+
+	return {
+
+	};
+});
+endsnippet
+
+snippet desc "Describe Block"
+    describe("$1", function() {
+      $0
+    });
+endsnippet
+
+snippet ex "Expect"
+    expect($1).$0;
+endsnippet
+
+snippet it "It block"
+    it("should $1", function() {
+      $0    
+      });
+endsnippet
+
+snippet req "Boilerplate for calling require" !w
+require([${1:'dependencies'}], ${2:callback});
+endsnippet
+
