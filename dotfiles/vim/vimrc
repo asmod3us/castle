@@ -5,6 +5,7 @@ filetype off " needs to be off for pathogen
 
 " Pathogen is a submodule like all others
 runtime bundle/pathogen/autoload/pathogen.vim
+
 " Pathogen needs to run before syntax on or filetype plugin indent
 call pathogen#infect()
 " call pathogen#helptags()
@@ -16,8 +17,10 @@ map Q gq
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
+	if has('syntax') && !exists('g:syntax_on')
+		syntax enable
+		set hlsearch
+	endif
 endif
 
 " Only do this part when compiled with support for autocommands.
@@ -27,8 +30,8 @@ if has("autocmd")
   " Use the default filetype settings, so that mail gets 'tw' set to 72,
   " 'cindent' is on in C files, etc.
   " Also load indent files, to automatically do language-dependent indenting.
-  filetype on
-  filetype plugin on
+  " filetype on
+  " filetype plugin on
   filetype plugin indent on
 
   " Put these in an autocmd group, so that we can delete them easily.
@@ -186,7 +189,6 @@ nnoremap <C-j> <Esc> " cancel prefix keys
 vnoremap <C-j> <Esc>gV " cancel selection
 onoremap <C-j> <Esc> " cancel operator-pending commands
 cnoremap <C-j> <C-c>
-lnoremap <C-j> <Esc>
 
 " mac gui only
 map <D-Left> 0
@@ -230,7 +232,10 @@ if exists('+undofile')
   set undofile
 endif
 
-source $VIMRUNTIME/macros/matchit.vim
+" Load matchit.vim, but only if the user hasn't installed a newer version.
+if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+  runtime! macros/matchit.vim
+endif
 
 " http://stackoverflow.com/questions/676600/vim-search-and-replace-selected-text
 " Escape special characters in a string for exact matching.
@@ -281,8 +286,7 @@ else
 	so ~/.vim/os/linux.vim
 endif
 
-" use system clipboard
-set clipboard+=unnamed
+set clipboard+=unnamed " use system clipboard
 
 " shorter keboard timeouts
 set ttimeout
@@ -326,15 +330,8 @@ let g:gist_detect_filetype = 1
 " show gist in browser
 let g:gist_open_browser_after_post = 1
 
-" gitgutter customizations
-let g:gitgutter_sign_added = '⇒'
-let g:gitgutter_sign_modified = '⇔'
-let g:gitgutter_sign_removed = '⇐'
-"let g:gitgutter_sign_modified_removed = 'ww'
-
 " allow window movement in insert mode
 imap <C-w> <C-o><C-w>
-
 
 " Some convenient mappings
 " inoremap <expr> <Esc>  pumvisible() ? "\<C-e>" : "\<Esc>"
@@ -346,3 +343,12 @@ imap <C-w> <C-o><C-w>
 
 " let g:UltiSnipsSnippetsDir        = '~/.vim/snippets/'
 " let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'snippets']
+
+" modify search keys to center the result.
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
+
