@@ -136,3 +136,9 @@
 [submodule "dotfiles/vim/bundle/neosnippet"]
 	path = dotfiles/vim/bundle/neosnippet
 	url = https://github.com/Shougo/neosnippet.vim
+[submodule "dotfiles/vim/bundle/vimproc"]
+	path = dotfiles/vim/bundle/vimproc
+	url = https://github.com/Shougo/vimproc.vim
+[submodule "dotfiles/vim/bundle/neocomplete-ultisnips"]
+	path = dotfiles/vim/bundle/neocomplete-ultisnips
+	url = https://github.com/asmod3us/neocomplete-ultisnips
