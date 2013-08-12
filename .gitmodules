@@ -133,6 +133,3 @@
 [submodule "dotfiles/vim/bundle/delimitMate"]
 	path = dotfiles/vim/bundle/delimitMate
 	url = https://github.com/Raimondi/delimitMate
-[submodule "dotfiles/vim/bundle/tern"]
-	path = dotfiles/vim/bundle/tern
-	url = https://github.com/marijnh/tern_for_vim
