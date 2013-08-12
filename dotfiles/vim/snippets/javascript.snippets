@@ -1,35 +1,38 @@
-snippet def "Define an AMD Module" !w
+snippet def "define"
 define([
-	'${1:deps}'
+	'${1:mids}'
 ], function(
 	${2:names}
 ) {
 
 	$0
 
-	return {
-
-	};
 });
 endsnippet
 
-snippet desc "Describe Block"
-    describe("$1", function() {
-      $0
-    });
+snippet req "require"
+require([${1:'mids'}], function(${2:names});
 endsnippet
 
-snippet ex "Expect"
-    expect($1).$0;
+snippet decl "declare"
+return declare(${1:parent}, {
+	$0
+});
 endsnippet
 
-snippet it "It block"
-    it("should $1", function() {
-      $0    
-      });
+snippet desc "describe"
+describe("$1", function() {
+	$0
+});
 endsnippet
 
-snippet req "Boilerplate for calling require" !w
-require([${1:'dependencies'}], ${2:callback});
+snippet ex "expect"
+expect($1).$0;
+endsnippet
+
+snippet it "it block"
+it("should $1", function() {
+	$0    
+});
 endsnippet
 
