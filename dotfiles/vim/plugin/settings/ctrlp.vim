@@ -1,6 +1,7 @@
 " use better matcher for ctrl-p
 let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
 " let g:ctrlp_user_command = 'find %s -type f'
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
 " do not cache ctrlp files across sessions
 let g:ctrlp_clear_cache_on_exit = 1
