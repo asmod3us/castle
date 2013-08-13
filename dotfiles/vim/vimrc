@@ -336,9 +336,6 @@ imap <C-w> <C-o><C-w>
 " inoremap <expr> <C-d>  pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
 " inoremap <expr> <C-u>  pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
 
-" let g:UltiSnipsSnippetsDir        = '~/.vim/snippets/'
-" let g:UltiSnipsSnippetDirectories = ['UltiSnips', 'snippets']
-
 " modify search keys to center the result.
 nnoremap n nzz
 nnoremap N Nzz
