@@ -142,3 +142,6 @@
 [submodule "dotfiles/vim/bundle/neocomplete-ultisnips"]
 	path = dotfiles/vim/bundle/neocomplete-ultisnips
 	url = https://github.com/asmod3us/neocomplete-ultisnips
+[submodule "dotfiles/vim/bundle/ag"]
+	path = dotfiles/vim/bundle/ag
+	url = https://github.com/rking/ag.vim
