@@ -151,9 +151,9 @@ set wildignore+=*/android/native/assets/www/*
 set viminfo='100,<50,s10,h,f1
 set conceallevel=2 " hide quotes in json for cleaner look
 
-" always show eight lines/fifteen chars of context
+" always show 999 (was eight) lines/fifteen chars of context
 if !&scrolloff
-  set scrolloff=8
+  set scrolloff=999
 endif
 if !&sidescrolloff
   set sidescrolloff=15
@@ -346,4 +346,11 @@ nnoremap * *zz
 nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
+
+" adjust C-u/C-d scrolling to keep visual context
+let &scroll=winheight('%')/5
+
+" toggle between scrolloff 0 and 999
+" http://vim.wikia.com/wiki/Keep_your_cursor_centered_vertically_on_the_screen
+:nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
 
