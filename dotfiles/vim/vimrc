@@ -8,16 +8,15 @@ runtime bundle/pathogen/autoload/pathogen.vim
 
 " Pathogen needs to run before syntax on or filetype plugin indent
 call pathogen#infect()
-" call pathogen#helptags()
-Helptags " generate helptags so that all help files are available
+Helptags " generate all helptags
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-	if has('syntax') && !exists('g:syntax_on')
+if has('syntax') && !exists('g:syntax_on')
+	if &t_Co > 2 || has("gui_running")
 		syntax enable
 		set hlsearch
 	endif
@@ -26,12 +25,8 @@ endif
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
 
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
+  " Enable file type detection. Use the default filetype settings
   " Also load indent files, to automatically do language-dependent indenting.
-  " filetype on
-  " filetype plugin on
   filetype plugin indent on
 
   " Put these in an autocmd group, so that we can delete them easily.
@@ -70,7 +65,7 @@ if has("autocmd")
 		call cursor(l, c)
 	endfun
 
-	autocmd FileType c,cpp,java,php,ruby,python,javascript,html,xml autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+	autocmd FileType c,cpp,css,java,php,ruby,python,javascript,html,xml autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 else
 
   set autoindent " always set autoindenting on
