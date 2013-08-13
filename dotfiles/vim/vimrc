@@ -310,7 +310,8 @@ let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=8
 
-set grepprg=ack\ -k " use ack instead of grep
+" set grepprg=ack\ -k " use ack instead of grep
+" let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
