@@ -163,6 +163,22 @@ displayTime() {
 	printf '%ds' $S
 }
 
+# set tab title
+tabtitle() {
+	printf "\e]1;$1\a";
+}
+
+# set tab title to name of current dir
+setTabTitleToPwd() {
+	# printf "\e]1;$1\a";
+	printf "\e]1;${PWD##*/}\a";
+
+}
+
+wintitle() {
+	printf "\e]2;$1\a";
+}
+
 # This variable describes whether we are currently in "interactive mode";
 # i.e. whether this shell has just executed a prompt and is waiting for user
 # input.  It documents whether the current command invoked by the trace hook is
@@ -326,6 +342,6 @@ preexec_install
 # Whenever displaying the prompt, write the previous line to disk (-a) and read
 # the new line into the history list (-n). Also run the command timing hook.
 if [[ ! ${PROMPT_COMMAND} =~ 'prompt_command' ]]; then
-	export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND:-} preexec_invoke_cmd; prompt_command"
+	export PROMPT_COMMAND="history -a; history -n; tabname; ${PROMPT_COMMAND:-} preexec_invoke_cmd; prompt_command"
 fi
 
