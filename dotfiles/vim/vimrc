@@ -179,11 +179,11 @@ endfun
 map -- :call MyIndent()<cr>
 
 " remap mode switch to C-j
-map! <C-j> <Esc>
-nnoremap <C-j> <Esc> " cancel prefix keys
-vnoremap <C-j> <Esc>gV " cancel selection
-onoremap <C-j> <Esc> " cancel operator-pending commands
-cnoremap <C-j> <C-c>
+" map! <C-j> <Esc>
+" nnoremap <C-j> <Esc> " cancel prefix keys
+" vnoremap <C-j> <Esc>gV " cancel selection
+" onoremap <C-j> <Esc> " cancel operator-pending commands
+" cnoremap <C-j> <C-c>
 
 " mac gui only
 map <D-Left> 0
