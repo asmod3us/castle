@@ -1,38 +1,47 @@
-snippet def "define"
+snippet def "define AMD" b
 define([
-	'${1:mids}'
+    ${1:mids}
 ], function(
-	${2:names}
+`!p snip >> 1
+names = [ re.sub(r".*\/_?(\w+)'", r"\1", x) for x in t[1].split(',') ]
+snip.rv = ',\n'.join(snip.mkline(name) for name in names)`
 ) {
 
-	$0
+    $0
 
 });
 endsnippet
 
-snippet req "require"
-require([${1:'mids'}], function(${2:names});
-endsnippet
-
-snippet decl "declare"
-return declare(${1:parent}, {
+snippet req "require AMD" b
+require([${1:mids}], function(`!p
+names = [ re.sub(r".*\/_?(\w+)'", r"\1", x) for x in t[1].split(',') ]
+lines = [ snip.mkline(name) for name in names ]
+snip.rv = string.join(lines, ',')`) {
 	$0
 });
 endsnippet
 
-snippet desc "describe"
+snippet decl "declare AMD" b
+return declare(${1:name}, [ ${2:parents} ] {
+    constructor: function(${3:params}) {
+        $0
+    }
+});
+endsnippet
+
+snippet desc "describe" b
 describe("$1", function() {
-	$0
+    $0
 });
 endsnippet
 
-snippet ex "expect"
+snippet ex "expect" b
 expect($1).$0;
 endsnippet
 
-snippet it "it block"
+snippet it "it block" b
 it("should $1", function() {
-	$0    
+    $0
 });
 endsnippet
 
