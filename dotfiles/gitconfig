@@ -4,7 +4,7 @@
 	email = sta@de.ibm.com
 	name = Achim Staebler
 [push]
-	default = simple
+	default = current
 [difftool "Kaleidoscope"]
 	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [mergetool "Kaleidoscope"]
