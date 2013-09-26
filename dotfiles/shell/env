@@ -47,7 +47,6 @@ pathAppend ${ASPECTJ_HOME}/bin
 pathAppend ${SCALA_HOME}/bin
 pathAppend ${PLAY_HOME}
 pathAppend ${MVN_HOME}/bin
-pathAppend ${HOME}/.rvm/bin
 
 export PATH
 
