@@ -19,7 +19,7 @@ endfunction
 " hide line numbers in nerd tree
 let NERDTreeShowLineNumbers=0
 
-" make nerd tree bigger 
+" make nerd tree bigger
 let NERDTreeWinSize=45
 
 " hide help text and bookmarks label
