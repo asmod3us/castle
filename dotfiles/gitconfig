@@ -1,8 +1,8 @@
 [credential]
 	helper = osxkeychain
 [user]
-	email = sta@de.ibm.com
-	name = Achim Staebler
+	email = 4sm0d3us@gmail.com
+	name = asmod3us
 [push]
 	default = current
 [difftool "Kaleidoscope"]
