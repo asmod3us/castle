@@ -9,7 +9,7 @@ let g:ctrlp_clear_cache_on_exit = 1
 " this will exclude them from globbing: set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 
 let g:ctrlp_custom_ignore = {
-	\ 'dir':  '\v[\/](\.(git|hg|svn)|node_modules)$',
+	\ 'dir':  '\v[\/](\.(git|hg|svn)|node_modules|bower_components)$',
 	\ 'file': '\v\.(exe|so|dll)$',
 	\ 'link': '',
 	\ }
