@@ -31,6 +31,10 @@
 	trustExitCode = false
 [difftool "p4mergetool"]
 	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $LOCAL $REMOTE
+[difftool "dw"]
+		cmd = "/Applications/DeltaWalker.app/Contents/MacOS/git-diff" "$LOCAL" "$REMOTE"
+[mergetool "dw"]
+		cmd = "/Applications/DeltaWalker.app/Contents/MacOS/git-merge" "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
 [alias]
 	# list ignored files
 	ignored = ls-files --others -i --exclude-standard
