@@ -22,19 +22,6 @@ if has('syntax') && !exists('g:syntax_on')
 	endif
 endif
 
-" solarized config
-if !has('gui_running')
-	" Compatibility for Terminal
-	let g:solarized_termtrans=1
-
-	if (&t_Co >= 256 || $TERM == 'xterm-256color')
-		" Do nothing, it handles itself.
-	else
-		" Make Solarized use 16 colors for Terminal support
-		let g:solarized_termcolors=16
-	endif
-endif
-
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
 
@@ -327,12 +314,6 @@ let g:netrw_dirhistmax=0
 " only works in MacVim, not in Terminal
 " map <M-h> pop
 " map <M-l> <C-]>
-
-" adjust indent guides colors for solarized
-let g:indent_guides_auto_colors = 0
-
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=8
 
 " set grepprg=ack\ -k " use ack instead of grep
 " let g:ackprg = 'ag --nogroup --nocolor --column'
