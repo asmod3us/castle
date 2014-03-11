@@ -4,7 +4,7 @@ let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
 " do not cache ctrlp files across sessions
-let g:ctrlp_clear_cache_on_exit = 1
+let g:ctrlp_clear_cache_on_exit = 0
 " ignore these files for ctrlp
 " this will exclude them from globbing: set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 
