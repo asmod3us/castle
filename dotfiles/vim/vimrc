@@ -232,7 +232,7 @@ cmap w!! %!sudo tee > /dev/null %
 " spelling in vim 7
 map <C-S>c <Esc>:setlocal spell spelllang=en_us<CR>
 map <C-S>u <Esc>:setlocal nospell<CR>
-highlight SpellBad guifg=Red
+hi SpellBad guifg=Red
 
 " keep swap, backup and undo files in one directory, ~/Library/Vim for Mac
 let s:dir = has('win32') ? '$APPDATA/Vim' : match(system('uname'), "Darwin") > -1 ? '~/Library/Vim' : empty($XDG_DATA_HOME) ? '~/.local/share/vim' : '$XDG_DATA_HOME/vim'
