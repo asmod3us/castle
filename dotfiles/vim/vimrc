@@ -139,7 +139,7 @@ set ls=2
 set iskeyword=@,48-57,_,192-255,-
 set visualbell " no beeps
 set nowrapscan
-set colorcolumn=80 " Mark col 80 with a vertical line.
+let &colorcolumn="80," . join(range(120,999),",") " Mark column 80 and all after 120 with different background
 set cursorline " highlight current line
 set cursorcolumn " hightlight current column
 " set textwidth=75
