@@ -62,3 +62,5 @@ alias listening='lsof +c0 -Pni -sTCP:LISTEN'
 # yellow for paths, magenta for matches
 alias ag='ag --color-path=33 --color-match=35'
 alias srct="tree -d -L 3 -I 'node_modules|bin|server|bower_components'"
+alias gf='git flow'
+alias gff='git flow feature'
