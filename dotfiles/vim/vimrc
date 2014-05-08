@@ -212,16 +212,16 @@ inoremap <D-j> <Esc>
 " though
 
 " returns true iff is NERDTree open/active
-function! rc:isNTOpen()
+function! IsNTOpen()
 	return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
 endfunction
 
 " returns true iff focused window is NERDTree window
-function! rc:isNTFocused()
+function! IsNTFocused()
   return -1 != match(expand('%'), 'NERD_Tree')
 endfunction
 
-map <expr> <C-o> rc:isNTOpen() ? ':NERDTreeToggle<CR>' : ':NERDTreeFind<CR>'
+map <expr> <C-o> IsNTOpen() ? ':NERDTreeToggle<CR>' : ':NERDTreeFind<CR>'
 
 " map tagbar toggle to C-t
 map <C-t> :TagbarToggle<CR>
