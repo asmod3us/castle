@@ -21,6 +21,10 @@ export GROOVY_HOME=${TOOLS}/groovy
 export GRAILS_HOME=${TOOLS}/grails
 export PYTHONPATH=${PYTHONPATH}:${HOME}/python
 export RBENV_ROOT=/usr/local/var/rbenv
+export SENCHA_CMD_3_0_0="/Users/achim/Tools/Sencha/Cmd/4.0.4.84"
+export SENCHA_SDK_TOOLS_2_0_0_BETA3="/Users/achim/Tools/Sencha/SenchaSDKTools-2.0.0-beta3"
+export WLP_HOME=/opt/IBM/WebSphere/Liberty
+export WLP_USER_DIR=${WLP_HOME}/usr
 
 export EDITOR=vim
 #export TERM=xterm-color
@@ -47,6 +51,9 @@ pathAppend ${ASPECTJ_HOME}/bin
 pathAppend ${SCALA_HOME}/bin
 pathAppend ${PLAY_HOME}
 pathAppend ${MVN_HOME}/bin
+pathAppend ${SENCHA_CMD_3_0_0}
+# pathAppend ${SENCHA_SDK_TOOLS_2_0_0_BETA3}
+pathAppend ${WLP_HOME}/bin
 
 export PATH
 
