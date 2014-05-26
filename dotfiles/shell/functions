@@ -114,6 +114,7 @@ newff() {
 
 # open chrome with a fresh profile for development
 devcr() {
+	# or consider using /dev/null for profile
 	pn=$(mktemp -dq -t chrome-XXX)
 	echo "Starting Chrome for development with profile in $pn"
 
@@ -219,3 +220,8 @@ listeners() {
 	lsof +c0 -Pni -sTCP:LISTEN | grep -v COMMAND | awk '{ print $2 }' | sort -nu | xargs ps -fp
 }
 
+# start a packet capture on provided network interface, default en1
+pcap() {
+	interface=${1:-en1}
+	sudo tcpdump -i $interface -n -s 0 -w capture.pcap tcp or port 53}
+}
