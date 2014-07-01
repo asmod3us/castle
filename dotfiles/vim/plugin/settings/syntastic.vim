@@ -19,7 +19,7 @@ let g:syntastic_enable_signs=1
 " let g:syntastic_gjslint_conf=" --nojsdoc --max_line_length 120"
 
 " disable gjslint for now
-let g:syntastic_javascript_checkers=['jshint', 'eslint']
+let g:syntastic_javascript_checkers=['eslint', 'jshint']
 
 " check files on open
 let g:syntastic_check_on_open=1
