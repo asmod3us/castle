@@ -135,7 +135,7 @@ install tree
 install ttyrec
 install usbmuxd
 install v8
-install vim
+install vim --override-system-vim --with-lua --with-perl
 install webkit2png
 install wget
 install xmlto
