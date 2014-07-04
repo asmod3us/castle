@@ -1,4 +1,4 @@
 #! /bin/bash
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.6)
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
 export TOOLS=~/Tools
 export HOMEBREW_TEMP=~/tmp
