@@ -74,7 +74,15 @@ fi
 
 # zip a directory
 zipit() {
-	zip -r "$1".zip "$1" ;
+	# if no arg or . as arg
+	if [[ $# -eq 0 || $1 = '.' ]]; then
+		# name archive after current dir
+		fn="$(pwd)"
+		fn="${fn##*/}"
+		zip -r $fn.zip *
+	else
+		zip -r "$1.zip" "$1"
+	fi
 }
 
 # Create a data URL from a file
