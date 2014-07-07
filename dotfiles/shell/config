@@ -172,7 +172,6 @@ tabtitle() {
 setTabTitleToPwd() {
 	# printf "\e]1;$1\a";
 	printf "\e]1;${PWD##*/}\a";
-
 }
 
 wintitle() {
@@ -196,7 +195,7 @@ preexec() {
 precmd() {
 	true
 }
-
+# Adjusted from https://twistedmatrix.com/users/glyph/preexec.bash.txt.
 # This function is installed as the PROMPT_COMMAND; it is invoked before each
 # interactive prompt display.  It sets a variable to indicate that the prompt
 # was just displayed, to allow the DEBUG trap, below, to know that the next
