@@ -302,7 +302,18 @@ function prompt_command() {
 	DISPLAYPATH="\w"
 
 	# set the prompt
-	export PS1="\[${RESET}${PROMPTBG}${BASE1}\]${TIME}\[${VIOLET}\]${ELAPSED}${USER_HOST}${EXIT_CODE}\[${BLUE}\]${GITINFO}\[${ORANGE}\]${DISPLAYPATH}\[${CLEAREOL}${RESET}\]\n\[${RESET}\]${SIGN}\[${BASE0}${RESET}\]"
+	PS1="\[${RESET}${PROMPTBG}${BASE1}\]"
+	PS1+="${TIME}"
+	PS1+="\[${VIOLET}\]${ELAPSED}"
+	PS1+="${USER_HOST}"
+	PS1+="${EXIT_CODE}"
+	PS1+="\[${BLUE}\]${GITINFO}"
+	PS1+="\[${ORANGE}\]${DISPLAYPATH}"
+	PS1+="\[${CLEAREOL}${RESET}\]\n"
+	PS1+="\[${RESET}\]"
+	PS1+="${SIGN}"
+	PS1+="\[${BASE0}${RESET}\]"
+	export PS1
 
 	# uncomment to get a quick color test with echo $TESTCOLOR
 	# export TESTCOLOR="${BASE03}BASE03 ${BASE02}BASE02 ${BASE01}BASE01 ${BASE3}BASE00 ${BASE2}BASE2 ${BASE1}BASE1 ${BASE0}BASE0 ${YELLOW}YELLOW ${ORANGE}ORANGE ${RED}RED ${MAGENTA}MAGENTA ${VIOLET}VIOLET ${BLUE}BLUE ${CYAN}CYAN ${GREEN}GREEN${RESET} "
