@@ -47,3 +47,5 @@
 	eraser = !sh -c 'git rev-list -n 1 HEAD -- "$@"'
 [merge]
 # ff = false
+[diff]
+	renames = copies
