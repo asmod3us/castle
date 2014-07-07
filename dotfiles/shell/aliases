@@ -46,7 +46,7 @@ fi
 alias e="$EDITOR"
 alias v="$EDITOR"
 alias h='history'
-alias j='jobs -l'
+alias jl='jobs -l'
 
 # git aliases
 alias ga='git add'
