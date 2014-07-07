@@ -1,4 +1,6 @@
 #!/bin/bash
 
-# include directory jumping via z
+# configure and include directory jumping via z
+export _Z_CMD=j
+export _Z_DATA=~/Dropbox/Reference/ShellHistory/zdb-${hostSuffix}
 . $(brew --prefix)/etc/profile.d/z.sh
