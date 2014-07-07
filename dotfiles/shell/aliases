@@ -44,6 +44,7 @@ if [[ "$OSTYPE" =~ ^linux ]]; then
 fi
 
 alias e="$EDITOR"
+alias v="$EDITOR"
 alias h='history'
 alias j='jobs -l'
 
