@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# include directory jumping via z
+. $(brew --prefix)/etc/profile.d/z.sh
