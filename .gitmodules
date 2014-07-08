@@ -148,3 +148,6 @@
 [submodule "dotfiles/vim/bundle/editorconfig"]
 	path = dotfiles/vim/bundle/editorconfig
 	url = https://github.com/editorconfig/editorconfig-vim
+[submodule "dotfiles/vim/bundle/tern"]
+	path = dotfiles/vim/bundle/tern
+	url = https://github.com/marijnh/tern_for_vim
