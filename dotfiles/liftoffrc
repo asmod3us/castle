@@ -1,0 +1,80 @@
+############################################################################
+# The following keys can be used to configure defaults for project creation
+# project_name:
+company: IBM
+author: Achim Staebler
+prefix:
+company_identifier: com.sta.
+############################################################################
+
+configure_git: false
+warnings_as_errors: false
+enable_static_analyzer: true
+indentation_level: 4
+use_tabs: false
+use_cocoapods: false
+strict_prompts: false
+
+run_script_phases:
+  - todo.sh: Warn for TODO and FIXME comments
+
+templates:
+  - travis.yml: .travis.yml
+  - Gemfile.rb: Gemfile
+  - test.sh: bin/test
+  - setup.sh: bin/setup
+  - README.md: README.md
+
+warnings:
+  - GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED
+  - GCC_WARN_MISSING_PARENTHESES
+  - GCC_WARN_ABOUT_RETURN_TYPE
+  - GCC_WARN_SIGN_COMPARE
+  - GCC_WARN_CHECK_SWITCH_STATEMENTS
+  - GCC_WARN_UNUSED_FUNCTION
+  - GCC_WARN_UNUSED_LABEL
+  - GCC_WARN_UNUSED_VALUE
+  - GCC_WARN_UNUSED_VARIABLE
+  - GCC_WARN_SHADOW
+  - GCC_WARN_64_TO_32_BIT_CONVERSION
+  - GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS
+  - GCC_WARN_ABOUT_MISSING_NEWLINE
+  - GCC_WARN_UNDECLARED_SELECTOR
+  - GCC_WARN_TYPECHECK_CALLS_TO_PRINTF
+  - GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS
+  - CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS
+  - CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF
+  - CLANG_WARN_IMPLICIT_SIGN_CONVERSION
+  - CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION
+  - CLANG_WARN_EMPTY_BODY
+  - CLANG_WARN_ENUM_CONVERSION
+  - CLANG_WARN_INT_CONVERSION
+  - CLANG_WARN_CONSTANT_CONVERSION
+
+application_target_groups:
+  - <%= project_name %>:
+    - Classes:
+      - main.m
+      - Controllers:
+      - DataSources:
+      - Delegates:
+        - <%= prefix %>AppDelegate.h
+        - <%= prefix %>AppDelegate.m
+      - Models:
+      - Views:
+    - Constants:
+    - Resources:
+      - Images.xcassets
+      - Storyboards:
+      - Nibs:
+      - Supporting Files:
+        - <%= project_name %>-Info.plist
+        - <%= project_name %>-Prefix.pch
+
+unit_test_target_groups:
+  - <%= project_name%>Tests:
+    - Resources:
+        - Supporting Files:
+          - UnitTests-Info.plist
+          - UnitTests-Prefix.pch
+    - Tests:
