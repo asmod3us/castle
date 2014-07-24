@@ -154,3 +154,6 @@
 [submodule "dotfiles/vim/bundle/jsfmt"]
 	path = dotfiles/vim/bundle/jsfmt
 	url = https://github.com/mephux/vim-jsfmt.git
+[submodule "dotfiles/vim/bundle/swift.vim"]
+	path = dotfiles/vim/bundle/swift.vim
+	url = https://github.com/Keithbsmiley/swift.vim.git
