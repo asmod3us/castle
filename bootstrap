@@ -7,7 +7,7 @@ fi
 export castledir=~/castle
 export dotfiles=$castledir/dotfiles
 export cfgdir=$dotfiles/shell
-export osSuffix=$(uname|tr 'A-Z' 'a-z')
+export osSuffix=$(uname|tr '[:upper:]' '[:lower:]')
 export hostSuffix=$(hostname | cut -d. -f1)
 
 include() {
@@ -16,7 +16,7 @@ include() {
 	local host=$cfgdir/$1-hostSuffix
 
 	for bashfile in $master $os $host; do
-		if [ -r $bashfile ]; then
+		if [ -r "$bashfile" ]; then
 			echo "Including $(basename $bashfile)"
 			. $bashfile
 		fi
