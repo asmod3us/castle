@@ -157,3 +157,12 @@
 [submodule "dotfiles/vim/bundle/swift.vim"]
 	path = dotfiles/vim/bundle/swift.vim
 	url = https://github.com/Keithbsmiley/swift.vim.git
+[submodule "dotfiles/vim/bundle/matchit"]
+	path = dotfiles/vim/bundle/matchit
+	url = https://github.com/vim-scripts/matchit.zip
+[submodule "dotfiles/vim/bundle/dirdiff"]
+	path = dotfiles/vim/bundle/dirdiff
+	url = https://github.com/vim-scripts/DirDiff.vim
+[submodule "dotfiles/vim/bundle/haml"]
+	path = dotfiles/vim/bundle/haml
+	url = https://github.com/tpope/vim-haml
