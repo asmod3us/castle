@@ -178,14 +178,14 @@ urldecode() {
 }
 
 # faster grep with mdfind and ack. pattern is a literal
-g() {
-	mdfind -onlyin ${PWD} "$1"| ack -xsQ "$@"
+spotlight-g() {
+	mdfind -onlyin "${PWD}" "$1"| ack -xsQ "$@"
 }
 
 # faster grep with mdfind and ack. pattern is a perl regex and needs to be
 # escaped
-gr() {
-	mdfind -onlyin ${PWD} "$1" | ack -xs "$@"
+spotlight-r() {
+	mdfind -onlyin "${PWD}" "$1" | ack -xs "$@"
 }
 
 # fix invisible output with some node runners and solarized
