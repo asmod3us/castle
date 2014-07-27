@@ -60,6 +60,7 @@ alias f='find'
 alias br='brew'
 alias gl='git log --oneline --abbrev-commit --all --graph --decorate --color'
 alias gu='git-up'
+alias gr='grunt'
 alias listening='lsof +c0 -Pni -sTCP:LISTEN'
 # yellow for paths, magenta for matches
 alias ag='ag --color-path=33 --color-match=35'
