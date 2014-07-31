@@ -18,9 +18,10 @@
 " finish autocomplete with tab
 " imap <expr> <CR> pumvisible() ? "\<C-y>" : "<Plug>delimitMateCR"
 
-let g:ycm_seed_identifiers_with_syntax=1
+let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_add_preview_to_completeopt = 0
-let g:ycm_confirm_extra_conf=0
+let g:ycm_confirm_extra_conf = 0
 let g:ycm_cache_omnifunc = 0
 set completeopt-=preview
-
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_path_to_python_interpreter = '/usr/bin/python'
