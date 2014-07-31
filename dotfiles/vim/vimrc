@@ -193,23 +193,24 @@ map -- :call MyIndent()<cr>
 
 " remap mode switch to C-j
 " map! <C-j> <Esc>
+
+" disable esc for learning
+:inoremap <esc> <nop>
+" try this for a while
+:inoremap jk <esc>
+
 " nnoremap <C-j> <Esc> " cancel prefix keys
 " vnoremap <C-j> <Esc>gV " cancel selection
 " onoremap <C-j> <Esc> " cancel operator-pending commands
 " cnoremap <C-j> <C-c>
 
 " mac gui only
-map <D-Left> 0
-map <D-Right> $
-map <M-Left> b
-map <M-Right> w
+" map <D-Left> 0
+" map <D-Right> $
+" map <M-Left> b
+" map <M-Right> w
 " mode switch on command key
-inoremap <D-j> <Esc>
-
-" nnoremap <2-LeftMouse> :exe "/".expand("<cword>")<CR>
-
-" Nerd tree on Shift-Space Does not seem to work in terminal; works in GUI
-" though
+" inoremap <D-j> <Esc>
 
 " returns true iff is NERDTree open/active
 function! IsNTOpen()
