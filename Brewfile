@@ -19,9 +19,11 @@ install boost
 install boot2docker
 install brew-cask
 install bvi
+install cairo
 install cloc
 install cloudfoundry-cli
 install cmake
+install couchdb
 install cscope
 install ctags
 install docbook
@@ -32,6 +34,7 @@ install dwdiff
 install e2fsprogs
 install editorconfig
 install encfs
+install erlang
 install exiftool
 install fmdiff
 install fontconfig
@@ -47,6 +50,7 @@ install gnu-getopt
 install gnu-tar
 install gnutls
 install go
+install gobject-introspection
 install gradle
 install graphviz
 install icu4c
@@ -76,6 +80,7 @@ install libtool
 install libusb
 install libxml2
 install libyaml
+install liftoff
 install little-cms2
 install lua
 install lynx
@@ -104,6 +109,8 @@ install parallel
 install pcre
 install pdfgrep
 install phantomjs
+install pigz
+install pixman
 install pkg-config
 install poppler
 install pv
@@ -116,7 +123,9 @@ install redis
 install rlog
 install rpm2cpio
 install ruby-build
+install scala
 install scons
+install shellcheck
 install slimerjs
 install sloccount
 install snappy
@@ -134,15 +143,22 @@ install timedog
 install tmux
 install tree
 install ttyrec
+install uncrustify
+install unixodbc
+install unrar
 install usbmuxd
 install v8
 install vim --override-system-vim --with-lua --with-perl
 install webkit2png
 install wget --enable-iri
+install wxmac
+install xctool
+install xmlformat
+install xmlstarlet
 install xmlto
 install xulrunner
 install xz
 install yasm
-install pigz
+install youtube-dl
 
-cleanup
+install z
