@@ -322,7 +322,7 @@ nnoremap gj j
 let g:netrw_dirhistmax=0
 
 " tern mappings for navigation
-" map <C-]> TernDef<CR>
+map <C-]> TernDef<CR>
 
 " Alt-h, Alt-l to navigate forward/backward in the tags stack
 " only works in MacVim, not in Terminal
