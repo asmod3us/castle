@@ -19,7 +19,6 @@ export PLAY20_HOME=${TOOLS}/Play20
 export MVN_HOME=${TOOLS}/maven
 export GROOVY_HOME=${TOOLS}/groovy
 export GRAILS_HOME=${TOOLS}/grails
-export PYTHONPATH=${PYTHONPATH}:${HOME}/python
 export RBENV_ROOT=/usr/local/var/rbenv
 export SENCHA_CMD_3_0_0="/Users/achim/Tools/Sencha/Cmd/4.0.4.84"
 export SENCHA_SDK_TOOLS_2_0_0_BETA3="/Users/achim/Tools/Sencha/SenchaSDKTools-2.0.0-beta3"
@@ -58,6 +57,7 @@ pathAppend ${SENCHA_CMD_3_0_0}
 # pathAppend ${SENCHA_SDK_TOOLS_2_0_0_BETA3}
 pathAppend ${WLP_HOME}/bin
 pathAppend /usr/local/opt/go/libexec/bin
+pathAppend $PATH:$HOME/.rvm/bin
 
 export PATH
 
