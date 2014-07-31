@@ -45,6 +45,7 @@
 	inc = !git log --oneline ..@{u} && git diff --stat ..@{u}
 	recover = !sh -c 'git checkout $(git rev-list -n 1 HEAD -- "$1")^ -- "$1"'
 	eraser = !sh -c 'git rev-list -n 1 HEAD -- "$@"'
+	housekeep = !git branch -r --merged develop | sed -e 's, *origin/,,' | grep -v develop$ | grep -v master$ | xargs -I% echo git push origin --delete %
 [merge]
 # ff = false
 [diff]
