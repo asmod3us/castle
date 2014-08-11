@@ -69,6 +69,8 @@ if has("autocmd")
   autocmd FileType make set noexpandtab
   autocmd BufNewFile,BufReadPost Makefile se noexpandtab
 
+  autocmd FileType python setlocal autoindent expandtab nosmartindent shiftround shiftwidth=4 smarttab softtabstop=4 tabstop=4 textwidth=79 cinwords=if,elif,else,for,while,try,except,finally,def,class
+
   " remove trailing whitespace on save
   " http://stackoverflow.com/questions/356126/how-can-you-automatically-remove-trailing-whitespace-in-vim
 	fun! <SID>StripTrailingWhitespaces()
