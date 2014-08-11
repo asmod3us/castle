@@ -169,3 +169,6 @@
 [submodule "dotfiles/vim/bundle/gtfo"]
 	path = dotfiles/vim/bundle/gtfo
 	url = https://github.com/justinmk/vim-gtfo
+[submodule "dotfiles/vim/bundle/multiple-cursors"]
+	path = dotfiles/vim/bundle/multiple-cursors
+	url = https://github.com/eapache/vim-multiple-cursors

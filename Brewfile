@@ -4,6 +4,8 @@
 #
 update
 
+upgrade
+
 install ack
 install ant
 install apple-gcc42
@@ -19,7 +21,7 @@ install boost
 install boot2docker
 install brew-cask
 install bvi
-install cairo
+# install cairo
 install cloc
 install cloudfoundry-cli
 install cmake
@@ -60,12 +62,12 @@ install jenkins
 install jpeg
 install jpeg-turbo
 install jpegoptim
-install jpegrescan
+install --HEAD jpegrescan
 install jq
 install jsawk
 install jsonpp
 install leveldb
-install liberty-completion
+# install liberty-completion
 install libevent
 install libffi
 install libgcrypt
@@ -107,12 +109,12 @@ install p11-kit
 install p7zip
 install parallel
 install pcre
-install pdfgrep
+# install pdfgrep
 install phantomjs
 install pigz
 install pixman
 install pkg-config
-install poppler
+# install poppler
 install pv
 install python
 install qpdf
@@ -136,7 +138,7 @@ install ssh-copy-id
 install sshfs
 install subversion
 install task
-install the-silver-searcher
+install the_silver_searcher
 install thrift
 install tig
 install timedog
@@ -148,7 +150,7 @@ install unixodbc
 install unrar
 install usbmuxd
 install v8
-install vim --override-system-vim --with-lua --with-perl
+install vim --with-lua --with-perl
 install webkit2png
 install wget --enable-iri
 install wxmac
@@ -160,5 +162,6 @@ install xulrunner
 install xz
 install yasm
 install youtube-dl
-
 install z
+
+cleanup
