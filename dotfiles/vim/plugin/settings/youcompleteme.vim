@@ -24,4 +24,4 @@ let g:ycm_confirm_extra_conf = 0
 let g:ycm_cache_omnifunc = 0
 set completeopt-=preview
 let g:ycm_server_keep_logfiles = 1
-let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+let g:ycm_path_to_python_interpreter = '/usr/local/bin/python'
