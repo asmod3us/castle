@@ -32,7 +32,7 @@ git submodule update
 popd
 
 brew bundle ~/castle/Brewfile
-brew bundle ~/Caskfile
+brew bundle ~/castle/Caskfile
 
 # Menu bar: disable transparency
 defaults write -g NSDisableAutomaticTermination -bool yes
