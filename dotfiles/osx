@@ -20,6 +20,9 @@ sudo pmset -a standbydelay 86400
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
 
+sudo dseditgroup -o edit -a $USER -t user admin
+sudo dseditgroup -o edit -a $USER -t user wheel
+
 ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 brew install git
 git clone --recursive https://github.com/asmod3us/castle castle
