@@ -1,1 +1,5 @@
-alias vi="vim"
+# alias vi="vim"
+# for i in /usr/local/opt/vim/bin/* /usr/local/opt/macvim/bin/*; do
+#   i=$(basename $i)
+#   alias "${i}"="env -u GEM_PATH -u GEM_HOME command ${i}"
+# done
