@@ -260,3 +260,9 @@ tre() {
 #     fi
 #   done
 # }
+
+# dump a .mobileprovision file
+dumpMobileprovision() {
+	openssl smime -inform der -verify -noverify -in "$1" | plutil -p -
+}
+
