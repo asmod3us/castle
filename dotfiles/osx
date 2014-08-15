@@ -23,10 +23,16 @@ sudo nvram SystemAudioVolume=" "
 sudo dseditgroup -o edit -a $USER -t user admin
 sudo dseditgroup -o edit -a $USER -t user wheel
 
+# instal developer tools
+xcode-select --install
+
+# install homebrew
 ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 brew install git
-git clone --recursive https://github.com/asmod3us/castle castle
-pushd castle; 
+$(brew --prefix git)/bin/git clone --recursive https://github.com/asmod3us/castle castle
+
+# install castle
+pushd castle
 git submodule init
 git submodule update
 popd
