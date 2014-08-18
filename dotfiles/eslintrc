@@ -39,7 +39,7 @@
 		"no-fallthrough": 2,
 		"no-floating-decimal": 0,
 		"no-func-assign": 2,
-		"no-global-strict": 2,
+		"no-global-strict": 0,
 		"no-implied-eval": 2,
 		"no-invalid-regexp": 2,
 		"no-iterator": 2,
@@ -83,7 +83,6 @@
 		"no-use-before-define": 2,
 		"no-with": 2,
 		"no-wrap-func": 2,
-		"no-yoda": 1,
 
 		"block-scoped-var": 0,
 		"brace-style": 0,
@@ -118,6 +117,8 @@
 		"use-isnan": 2,
 		"valid-jsdoc": 0,
 		"wrap-iife": 0,
-		"wrap-regex": 0
+		"wrap-regex": 0,
+		"eol-last": 0,
+		"yoda": 2
 	}
 }
