@@ -79,9 +79,9 @@ zipit() {
 		# name archive after current dir
 		fn="$(pwd)"
 		fn="${fn##*/}"
-		zip -r $fn.zip *
+		zip -9r "$fn.zip" ./*
 	else
-		zip -r "$1.zip" "$1"
+		zip -9r "$1.zip" "$1"
 	fi
 }
 
