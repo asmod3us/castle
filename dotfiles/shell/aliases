@@ -71,3 +71,5 @@ alias dw='/Applications/DeltaWalker.app/Contents/MacOS/dw'
 alias prettymd='pandoc -t markdown --atx-headers --no-wrap'
 alias str='stree'
 
+alias wlb='time wl build --verbose'
+alias wld='time wl deploy --verbose'
