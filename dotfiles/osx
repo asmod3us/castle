@@ -17,7 +17,7 @@ sudo nvram SystemAudioVolume=" "
 sudo dseditgroup -o edit -a $USER -t user admin
 sudo dseditgroup -o edit -a $USER -t user wheel
 
-# instal developer tools
+# install developer tools
 xcode-select --install
 
 # install homebrew
@@ -31,8 +31,8 @@ git submodule init
 git submodule update
 popd
 
-brew bundle ~/castle/Brewfile
-brew bundle ~/castle/Caskfile
+~/castle/Brewfile
+~/castle/Caskfile
 
 # Menu bar: disable transparency
 defaults write -g NSDisableAutomaticTermination -bool yes
@@ -53,6 +53,7 @@ defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
 defaults write com.apple.Safari ProxiesInBookmarksBar "()"
 defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
+defaults write com.apple.Safari DownloadsPath -string ~/Inbox
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 defaults write com.apple.TextEdit PlainTextEncoding -int 4
@@ -63,6 +64,13 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.dock dashboard-in-overlay -bool true
 defaults write com.apple.dock hide-mirror -bool false
 defaults write com.apple.dock launchanim -bool false
+defaults write com.apple.dock static-only -bool TRUE
+defaults write com.apple.dock no-glass -boolean YES
+defaults write com.apple.dock largesize -float 256
+defaults write com.apple.dock pinning -string middle
+defaults write com.apple.dock orientation left 
+defaults write com.apple.dock autohide 1 
+defaults write com.apple.Dock autohide-delay -float 0
 defaults write com.apple.finder AppleShowAllFiles FALSE
 defaults write com.apple.finder DisableAllAnimations -bool true
 defaults write com.apple.finder EmptyTrashSecurely -bool true
@@ -191,7 +199,7 @@ defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 # Use `sudo mdutil -i off "/Volumes/foo"` to stop indexing any volume.
 sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
 
- defaults write com.apple.spotlight orderedItems -array \
+defaults write com.apple.spotlight orderedItems -array \
     '{"enabled" = 1;"name" = "APPLICATIONS";}' \
     '{"enabled" = 1;"name" = "SYSTEM_PREFS";}' \
     '{"enabled" = 1;"name" = "DOCUMENTS";}' \
@@ -253,6 +261,12 @@ killall mds > /dev/null 2>&1
 sudo mdutil -i on / > /dev/null
 # Rebuild the index from scratch
 sudo mdutil -E / > /dev/null
+
+# Set computer name (as done via System Preferences → Sharing)
+sudo scutil --set ComputerName "skynet"
+sudo scutil --set HostName "skynet"
+sudo scutil --set LocalHostName "skynet"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "skynet"
 
 chflags nohidden ~/Library
 
