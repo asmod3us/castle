@@ -172,3 +172,6 @@
 [submodule "dotfiles/vim/bundle/multiple-cursors"]
 	path = dotfiles/vim/bundle/multiple-cursors
 	url = https://github.com/kris89/vim-multiple-cursors/
+[submodule "dotfiles/vim/bundle/camelcasemotion"]
+	path = dotfiles/vim/bundle/camelcasemotion
+	url = https://github.com/vim-scripts/camelcasemotion
