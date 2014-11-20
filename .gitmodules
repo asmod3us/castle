@@ -175,3 +175,6 @@
 [submodule "dotfiles/vim/bundle/camelcasemotion"]
 	path = dotfiles/vim/bundle/camelcasemotion
 	url = https://github.com/vim-scripts/camelcasemotion
+[submodule "dotfiles/vim/bundle/gundo"]
+	path = dotfiles/vim/bundle/gundo
+	url = http://github.com/sjl/gundo.vim.git
