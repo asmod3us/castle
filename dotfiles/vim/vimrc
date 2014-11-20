@@ -310,7 +310,7 @@ endif
 
 set clipboard+=unnamed " use system clipboard
 
-" shorter keboard timeouts
+" shorter keyboard timeouts
 set ttimeout
 set ttimeoutlen=50
 
