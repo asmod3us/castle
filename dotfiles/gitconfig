@@ -27,14 +27,14 @@
 [color]
 	ui = auto
 [mergetool "p4mergetool"]
-	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $PWD/$BASE $PWD/$REMOTE $PWD/$LOCAL $PWD/$MERGED
+	cmd = ~/Applications/p4merge.app/Contents/Resources/launchp4merge $PWD/$BASE $PWD/$REMOTE $PWD/$LOCAL $PWD/$MERGED
 	trustExitCode = false
 [difftool "p4mergetool"]
-	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $LOCAL $REMOTE
+	cmd = ~//Applications/p4merge.app/Contents/Resources/launchp4merge $LOCAL $REMOTE
 [difftool "deltawalker"]
-		cmd = "/Applications/DeltaWalker.app/Contents/MacOS/git-diff" "$LOCAL" "$REMOTE"
+		cmd = "~/Applications/DeltaWalker.app/Contents/MacOS/git-diff" "$LOCAL" "$REMOTE"
 [mergetool "dw"]
-		cmd = "/Applications/DeltaWalker.app/Contents/MacOS/git-merge" "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
+		cmd = "~/Applications/DeltaWalker.app/Contents/MacOS/git-merge" "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
 [alias]
 	# list ignored files
 	ignored = ls-files --others -i --exclude-standard
