@@ -36,6 +36,7 @@ if [ -d "${HOME}/bin" ] ; then
 	pathPrepend ${HOME}/bin
 fi
 
+pathPrepend /usr/texbin
 pathPrepend /usr/local/bin
 pathPrepend /usr/local/sbin
 pathAppend /sbin
