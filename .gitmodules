@@ -178,3 +178,6 @@
 [submodule "dotfiles/vim/bundle/gundo"]
 	path = dotfiles/vim/bundle/gundo
 	url = http://github.com/sjl/gundo.vim.git
+[submodule "dotfiles/vim/bundle/MatchTagAlways"]
+	path = dotfiles/vim/bundle/MatchTagAlways
+	url = https://github.com/Valloric/MatchTagAlways
