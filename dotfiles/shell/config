@@ -101,7 +101,7 @@ if tput setaf 1 &> /dev/null; then
 	BOLD=$(tput bold)
 	RESET=$(tput sgr0)
 	CLEAREOL=$(tput el)
-	PROMPTBG=$(tput setab 0)
+	PROMPTBG=$(tput setab 7)
 else
 	# no tput, let's try with ansi escape sequences
 	BASE03="\033[0;90m" # br black
