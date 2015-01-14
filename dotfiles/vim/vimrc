@@ -81,6 +81,8 @@ if has("autocmd")
 	endfun
 
 	autocmd FileType c,cpp,css,java,php,ruby,python,javascript,html,xml autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+
+	autocmd FileType c,cpp,java,php,ruby,python,javascript set mps+==:; " use % to jump between = and ; in assignments
 else
 
   set autoindent " always set autoindenting on
@@ -121,6 +123,7 @@ set number
 set formatoptions+=j " when applicable, remove comment leader when joining lines
 set formatoptions-=t " do not auto-wrap to textwidth
 " set formatoptions-=c " do not auto-wrap comments to textwidth
+set matchpairs+=<:> " allow matching of <
 
 " show tabs, line ends and other control characters visually
 set list
