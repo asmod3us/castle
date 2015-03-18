@@ -1,2 +1,4 @@
+set completion-map-case on
+
 "\e\e[C": forward-word
 "\e\e[D": backward-word
