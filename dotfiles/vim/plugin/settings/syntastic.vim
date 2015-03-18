@@ -30,3 +30,37 @@ let g:syntastic_always_populate_loc_list=1
 " use multiple checkers if defined
 let g:syntastic_aggregate_errors=1
 
+let g:syntastic_html_tidy_blocklevel_tags = [
+	\ 'ion-header-bar',
+	\ 'ion-content',
+	\ 'ion-footer-bar',
+	\ 'ion-checkbox',
+	\ 'ion-radio',
+	\ 'ion-toggle  ',
+	\ 'ion-refresher ',
+	\ 'ion-pane  ',
+	\ 'ion-list',
+	\ 'ion-item',
+	\ 'ion-option-button',
+	\ 'ion-delete-button',
+	\ 'ion-reorder-button',
+	\ 'ion-modal-view',
+	\ 'ion-nav-view',
+	\ 'ion-view',
+	\ 'ion-nav-bar ',
+	\ 'ion-nav-back-button',
+	\ 'ion-nav-buttons',
+	\ 'ion-nav-title',
+	\ 'ion-popover-view',
+	\ 'ion-scroll',
+	\ 'ion-side-menus',
+	\ 'ion-side-menu-content',
+	\ 'ion-side-menu',
+	\ 'ion-slide-box',
+	\ 'ion-slide',
+	\ 'ion-slide-pager ',
+	\ 'ion-spinner',
+	\ 'ion-tabs',
+	\ 'ion-tab',
+\]
+
