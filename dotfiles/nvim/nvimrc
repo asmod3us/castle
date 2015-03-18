@@ -1,0 +1,385 @@
+" Use Vim settings, rather then Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+filetype off " needs to be off for pathogen
+
+" Pathogen is a submodule like all others
+runtime bundle/pathogen/autoload/pathogen.vim
+
+" Pathogen needs to run before syntax on or filetype plugin indent
+call pathogen#infect()
+Helptags " generate all helptags
+
+" Don't use Ex mode, use Q for formatting
+map Q gq
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if has('syntax') && !exists('g:syntax_on')
+	if &t_Co > 2 || has("gui_running")
+		syntax enable
+		set hlsearch
+	endif
+endif
+
+" solarized config
+if !has('gui_running')
+	" Compatibility for Terminal
+	let g:solarized_termtrans=0
+
+	if (&t_Co >= 256 || $TERM == 'xterm-256color')
+		" Do nothing, it handles itself.
+	else
+		" Make Solarized use 16 colors for Terminal support
+		let g:solarized_termcolors=16
+	endif
+endif
+
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+
+  " Enable file type detection. Use the default filetype settings
+  " Also load indent files, to automatically do language-dependent indenting.
+  filetype plugin indent on
+
+  " Put these in an autocmd group, so that we can delete them easily.
+  augroup vimrcEx
+  au!
+
+  " For all text files set 'textwidth' to 78 characters.
+  autocmd FileType text setlocal textwidth=78
+
+  " enable omnicomplete
+  autocmd Filetype java setlocal omnifunc=javacomplete#Complete
+  autocmd Filetype java setlocal completefunc=javacomplete#CompleteParamsInfo
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it when the position is invalid or when inside an event handler
+  " (happens when dropping a file on gvim).
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
+  augroup END
+
+  " disable matching parantheses detection on network volumes
+  autocmd BufReadPre //* :NoMatchParen
+  " don't expand tabs in makefiles
+  autocmd FileType make set noexpandtab
+  autocmd BufNewFile,BufReadPost Makefile se noexpandtab
+
+  autocmd FileType python setlocal autoindent expandtab nosmartindent shiftround shiftwidth=4 smarttab softtabstop=4 tabstop=4 textwidth=79 cinwords=if,elif,else,for,while,try,except,finally,def,class
+
+  " remove trailing whitespace on save
+  " http://stackoverflow.com/questions/356126/how-can-you-automatically-remove-trailing-whitespace-in-vim
+	fun! <SID>StripTrailingWhitespaces()
+		let l = line(".")
+		let c = col(".")
+		%s/\s\+$//e
+		call cursor(l, c)
+	endfun
+
+	autocmd FileType c,cpp,css,java,php,ruby,python,javascript,html,xml autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+
+	autocmd FileType c,cpp,java,php,ruby,python,javascript set mps+==:; " use % to jump between = and ; in assignments
+else
+
+  set autoindent " always set autoindenting on
+
+endif " has("autocmd")
+
+set guifont=Monaco:h13 " TODO only for os x
+set encoding=utf-8
+set termencoding=utf-8
+set ch=2
+let c_comment_strings=1
+set cindent
+set wildmenu
+set shell=bash
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
+set noexpandtab
+set autoindent
+set smartindent
+set smarttab
+set ts=4
+set ruler " show the cursor position all the time
+set laststatus=2
+set incsearch " do incremental searching
+set showmatch " show matching bracket for char at cursor
+set noshowmode " modes are shown by airline
+set showcmd " display incomplete commands
+set shellslash
+set gcr=a:block-blinkon0 " block cursor in all modes, no blinking
+set ignorecase
+set smartcase
+set shiftround " round indent to multiple of shiftwidth
+set shiftwidth=4
+set joinspaces
+set virtualedit=all
+set history=50 " keep 50 lines of command line history
+set tabstop=4
+set number
+set formatoptions+=j " when applicable, remove comment leader when joining lines
+set formatoptions-=t " do not auto-wrap to textwidth
+" set formatoptions-=c " do not auto-wrap comments to textwidth
+set matchpairs+=<:> " allow matching of <
+
+" show tabs, line ends and other control characters visually
+set list
+if &listchars ==# 'eol:$'
+  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+  if &termencoding ==# 'utf-8' || &encoding ==# 'utf-8'
+    let &listchars = "tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u00b7"
+" other choices:
+" set lcs=tab:»·
+" set lcs+=trail:·
+" set lcs+=eol:$
+  endif
+endif
+
+set nostartofline
+set mouse=
+set ls=2
+set iskeyword=@,48-57,_,192-255,-
+set visualbell " no beeps
+set nowrapscan
+let &colorcolumn="80," . join(range(120,999),",") " Mark column 80 and all after 120 with different background
+set cursorline " highlight current line
+set cursorcolumn " hightlight current column
+" set textwidth=75
+set winminheight=0
+set winminwidth=0
+set foldenable
+set mousemodel=popup_setpos
+
+" completion settings
+set wildignore=*.o,*.so,*.obj,*.bak,*.exe,*.dll,*~
+set wildignore+=*sass-cache*
+set wildignore+=*DS_Store*
+set wildignore+=log/**
+set wildignore+=tmp/**
+set wildignore+=*.png,*.jpg,*.gif
+set wildignore+=node_modules
+set wildignore+=*/ipad/native/www/*
+set wildignore+=*/ipad/native/CordovaLib/*
+set wildignore+=*/ipad/native/WorklightSDK/*
+set wildignore+=*/android/native/assets/www/*
+
+set viminfo='100,<50,s10,h,f1
+set conceallevel=2 " hide quotes in json for cleaner look
+
+" always show 999 (was eight) lines/fifteen chars of context
+if !&scrolloff
+  set scrolloff=999
+endif
+if !&sidescrolloff
+  set sidescrolloff=15
+endif
+set display+=lastline
+
+hi Comment ctermfg=Grey
+let mapleader=','
+
+syntax on
+
+nmap :W :w
+nmap :Q :q
+
+map ,dir :sp ~/tmp/vimdir<CR>G1dG:r!ls -al<CR>:se nomod<CR>
+
+fun MyIndent()
+	let oldLine=line('.')
+	normal(gg=G)
+	execute ':' . oldLine
+endfun
+
+map -- :call MyIndent()<cr>
+
+" remap mode switch to C-j
+" map! <C-j> <Esc>
+
+" disable esc for learning
+:inoremap <esc> <nop>
+" try this for a while
+:inoremap jk <esc>
+
+" nnoremap <C-j> <Esc> " cancel prefix keys
+" vnoremap <C-j> <Esc>gV " cancel selection
+" onoremap <C-j> <Esc> " cancel operator-pending commands
+" cnoremap <C-j> <C-c>
+
+" mac gui only
+" map <D-Left> 0
+" map <D-Right> $
+" map <M-Left> b
+" map <M-Right> w
+" mode switch on command key
+" inoremap <D-j> <Esc>
+
+" returns true iff is NERDTree open/active
+function! IsNTOpen()
+	return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
+
+" returns true iff focused window is NERDTree window
+function! IsNTFocused()
+  return -1 != match(expand('%'), 'NERD_Tree')
+endfunction
+
+map <expr> <C-o> IsNTOpen() ? ':NERDTreeToggle<CR>' : ':NERDTreeFind<CR>'
+
+" map tagbar toggle to C-t
+map <C-t> :TagbarToggle<CR>
+
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! %!sudo tee > /dev/null %
+
+" spelling in vim 7
+map <C-S>c <Esc>:setlocal spell spelllang=en_us<CR>
+map <C-S>u <Esc>:setlocal nospell<CR>
+hi SpellBad guifg=Red
+
+" keep swap, backup and undo files in one directory, ~/Library/Vim for Mac
+let s:dir = has('win32') ? '$APPDATA/Vim' : match(system('uname'), "Darwin") > -1 ? '~/Library/Vim' : empty($XDG_DATA_HOME) ? '~/.local/share/vim' : '$XDG_DATA_HOME/vim'
+if isdirectory(expand(s:dir))
+  if &directory =~# '^\.,'
+    let &directory = expand(s:dir) . '/swap//,' . &directory
+  endif
+  if &backupdir =~# '^\.,'
+    let &backupdir = expand(s:dir) . '/backup//,' . &backupdir
+  endif
+  if exists('+undodir') && &undodir =~# '^\.\%(,\|$\)'
+    let &undodir = expand(s:dir) . '/undo//,' . &undodir
+  endif
+endif
+if exists('+undofile')
+  set undofile
+endif
+
+" Load matchit.vim, but only if the user hasn't installed a newer version.
+if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+  runtime! macros/matchit.vim
+endif
+
+" http://stackoverflow.com/questions/676600/vim-search-and-replace-selected-text
+" Escape special characters in a string for exact matching.
+" This is useful to copying strings from the file to the search tool
+" Based on this - http://peterodding.com/code/vim/profile/autoload/xolox/escape.vim
+function! EscapeString (string)
+  let string=a:string
+  " Escape regex characters
+  let string = escape(string, '^$.*\/~[]')
+  " Escape the line endings
+  let string = substitute(string, '\n', '\\n', 'g')
+  return string
+endfunction
+
+" Get the current visual block for search and replaces
+" This function passed the visual block through a string escape function
+" Based on this - http://stackoverflow.com/questions/676600/vim-replace-selected-text/677918#677918
+function! GetVisual() range
+  " Save the current register and clipboard
+  let reg_save = getreg('"')
+  let regtype_save = getregtype('"')
+  let cb_save = &clipboard
+  set clipboard&
+
+  " Put the current visual selection in the " register
+  normal! ""gvy
+  let selection = getreg('"')
+
+  " Put the saved registers and clipboards back
+  call setreg('"', reg_save, regtype_save)
+  let &clipboard = cb_save
+
+  "Escape any special characters in the selection
+  let escaped_selection = EscapeString(selection)
+
+  return escaped_selection
+endfunction
+
+" Start the find and replace command across the entire file
+"vmap <leader>z <Esc>:%s/<c-r>=GetVisual()<cr>/
+vnoremap <C-r> <Esc>:%s/<c-r>=GetVisual()<cr>/
+
+" os-specific configuration
+let s:os = system("uname")
+if s:os =~ "Darwin"
+	so ~/.vim/os/darwin.vim
+else
+	so ~/.vim/os/linux.vim
+endif
+
+set clipboard+=unnamed " use system clipboard
+
+" shorter keyboard timeouts
+set ttimeout
+set ttimeoutlen=50
+
+" default to move by display line. use gj/gk to move by physical line
+nnoremap k gk
+nnoremap j gj
+nnoremap gk k
+nnoremap gj j
+
+" do not write netrwhist
+let g:netrw_dirhistmax=0
+
+" tern mappings for navigation
+map <C-]> TernDef<CR>
+
+" Alt-h, Alt-l to navigate forward/backward in the tags stack
+" only works in MacVim, not in Terminal
+" map <M-h> pop
+" map <M-l> <C-]>
+
+" set grepprg=ack\ -k " use ack instead of grep
+" let g:ackprg = 'ag --nogroup --nocolor --column'
+
+" Enable omni completion.
+" autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+" autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+" autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+" autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+set complete-=i
+
+" detect filetype form extension
+let g:gist_detect_filetype = 1
+
+" show gist in browser
+let g:gist_open_browser_after_post = 1
+
+" allow window movement in insert mode
+imap <C-w> <C-o><C-w>
+
+" Some convenient mappings
+" inoremap <expr> <Esc>  pumvisible() ? "\<C-e>" : "\<Esc>"
+" inoremap <expr> <CR>   pumvisible() ? "\<C-y>" : "\<CR>"
+" inoremap <expr> <Down> pumvisible() ? "\<C-n>" : "\<Down>"
+" inoremap <expr> <Up>   pumvisible() ? "\<C-p>" : "\<Up>"
+" inoremap <expr> <C-d>  pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
+" inoremap <expr> <C-u>  pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
+
+" modify search keys to center the result.
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
+
+" Activate diff mode and update the diff highlighting.
+nmap <leader>dt :diffthis<CR>
+nmap <leader>du :diffupdate<CR>
+" :do<CR> " (diff obtain) - bring changes from the other file to the current file
+" :dp<CR> " (diff put)    - send changes from the current file to the other file
+
+" adjust C-u/C-d scrolling to keep visual context
+let &scroll=winheight('%')/5
+
+" toggle between scrolloff 0 and 999
+" http://vim.wikia.com/wiki/Keep_your_cursor_centered_vertically_on_the_screen
+:nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
+
