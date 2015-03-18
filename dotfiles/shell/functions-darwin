@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # get path of finder window
 function ff {
 	osascript -e 'tell application "Finder"' -e "if (${1-1} <= (count Finder windows)) then" -e "get POSIX path of (target of window ${1-1} as alias)" -e 'else' -e 'get POSIX path of (desktop as alias)' -e 'end if' -e 'end tell';
@@ -24,5 +26,64 @@ EOF
 # find by name in current dir with mdfind
 fn() {
 	mdfind -onlyin . "kMDItemDisplayName == '$1'"
+}
+
+mkipa() {
+	DEVID='iPhone Developer: Achim Staebler (C2U6957A7Q)'
+	IPADIR=/Users/achim/Inbox
+	DIR=$(pwd)
+
+	if [[ -n $(ls -ld1 apps/*/iphone/native 2>/dev/null) ]]; then
+# worklight project
+		NAME=$(find apps -depth 1|sed -e 's/apps\///')
+		DIR="${DIR}/apps/$NAME/iphone/native"
+		TYPE=worklight
+	elif [[ -d platforms/ios/ ]]; then
+# cordova project
+		DIR="${DIR}/platforms/ios"
+		TYPE=cordova
+		NAME=$(sed -n -e 's/.*<name>\(.*\)<\/name>/\1/p' config.xml)
+	elif [[ -n $(ls -ld1 ./*.xcodeproj 2>/dev/null) ]]; then
+# native project
+		TYPE=native
+		NAME=$(xcodebuild -list 2>/dev/null | grep -v ^$ | sed '1,/Targets:/d' | sed -e 's/^[ \t]*//' | awk '/.*:/ { m=1 } !m { print }')
+	else
+		echo "Cannot find xcode project to build"
+		return
+	fi
+
+	if [[ -z $DIR || -z $NAME ]]; then
+		echo "Cannot figure out xcode project name or path"
+		return
+	fi
+
+	echo "Found $TYPE project $NAME at $DIR"
+	pushd "$DIR" > /dev/null
+
+	HASGIT=$(git rev-parse --is-inside-work-tree 2>/dev/null)
+	TS=$(date -u +"%Y%m%dT%H%M%SZ")
+	if [[ $HASGIT == "true" ]]; then
+		# git repo found
+		IPANAME="$NAME-build+$TS.sha.$(git rev-parse --short @).ipa"
+	else
+		IPANAME="$NAME-build+$TS.ipa"
+	fi
+
+	SCHEME=$(xcodebuild -list 2>/dev/null | sed '1,/Schemes:/d' | grep -v CordovaLib | sed -e 's/^[ \t]*//')
+	ARCHIVEPATH=$(mktemp -dq -t "$NAME-ipa")
+
+	echo "Building $IPANAME"
+	echo xcodebuild -scheme $SCHEME -archivePath "$ARCHIVEPATH/$NAME.xcarchive" archive
+	xcodebuild -scheme $SCHEME -archivePath "$ARCHIVEPATH/$NAME.xcarchive" archive &> /dev/null
+	echo xcodebuild -exportArchive -exportFormat ipa -archivePath "$ARCHIVEPATH/$NAME.xcarchive" -exportSigningIdentity "$DEVID" -exportPath "$IPADIR/$IPANAME"
+	xcodebuild -exportArchive -exportFormat ipa -archivePath "$ARCHIVEPATH/$NAME.xcarchive" -exportSigningIdentity "$DEVID" -exportPath "$IPADIR/$IPANAME" &> /dev/null
+	SUCCESS=$?
+	popd
+
+	if [[ $SUCCESS -eq 0 ]]; then
+		open $IPADIR
+	else
+		echo "Oops, something went wrong"
+	fi
 }
 
