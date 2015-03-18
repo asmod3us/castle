@@ -295,3 +295,11 @@ fk () {
 	unset IFS
 }
 
+# see if someone is listening on a specific tcp port
+knock() {
+	if [[ $# -eq 0 ]]; then
+		echo "missing port number"
+	else 
+		lsof +c0 -l -n -P -sTCP:LISTEN -iTCP:$1
+	fi
+}
