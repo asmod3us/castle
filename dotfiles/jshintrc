@@ -20,8 +20,10 @@
     "predef"        : [  // Extra globals.
         "google",
         "WL",
-		"cordova",
-		"angular"
+        "cordova",
+        "angular",
+        "IBMBluemix",
+        "IBMData"
     ],
 
 
