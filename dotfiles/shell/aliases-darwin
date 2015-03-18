@@ -3,3 +3,5 @@
 #   i=$(basename $i)
 #   alias "${i}"="env -u GEM_PATH -u GEM_HOME command ${i}"
 # done
+alias nameservers="scutil --dns|grep nameserver|awk '{print $3}'|sort -u"
+
