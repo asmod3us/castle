@@ -124,7 +124,7 @@ newff() {
 # open chrome with a fresh profile for development
 devcr() {
 	# or consider using /dev/null for profile
-	pn=$(mktemp -dq -t chrome-XXX)
+	pn=$(mktemp -dq -t chrome)
 	echo "Starting Chrome for development with profile in $pn"
 
 	read -d '' params <<EOM
@@ -145,7 +145,7 @@ EOM
 
 # open chrome with a fresh profile
 newcr() {
-	pn=$(mktemp -dq -t chrome-XXX)
+	pn=$(mktemp -dq -t chrome)
 
 	echo "Starting Chrome with new profile in $pn"
 
