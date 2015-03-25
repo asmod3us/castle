@@ -46,7 +46,9 @@ mkipa() {
 	elif [[ -n $(ls -ld1 ./*.xcodeproj 2>/dev/null) ]]; then
 # native project
 		TYPE=native
-		NAME=$(xcodebuild -list 2>/dev/null | grep -v ^$ | sed '1,/Targets:/d' | sed -e 's/^[ \t]*//' | awk '/.*:/ { m=1 } !m { print }')
+		# there might be more than one target
+		# NAME=$(xcodebuild -list 2>/dev/null | grep -v ^$ | sed '1,/Targets:/d' | sed -e 's/^[ \t]*//' | awk '/.*:/ { m=1 } !m { print }')
+		NAME=$(xcodebuild -list 2>/dev/null | grep "Information about project " | sed -e 's/Information about project "\(.*\)":/\1/')
 	else
 		echo "Cannot find xcode project to build"
 		return
