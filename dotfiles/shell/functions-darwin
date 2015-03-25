@@ -69,7 +69,18 @@ mkipa() {
 		IPANAME="$NAME-build+$TS.ipa"
 	fi
 
-	SCHEME=$(xcodebuild -list 2>/dev/null | sed '1,/Schemes:/d' | grep -v CordovaLib | sed -e 's/^[ \t]*//')
+	if [[ -z $1 ]]; then
+		# no scheme specified
+		SCHEMES=( $(xcodebuild -list 2>/dev/null | sed '1,/Schemes:/d' | grep -v CordovaLib | sed -e 's/^[ \t]*//') )
+		if [[ ${#SCHEMES[*]} -gt 1 ]]; then
+			echo "Multiple schemes found for $NAME. Please specify one."
+		else
+			SCHEME=${SCHEMES[0]}
+		fi
+	else 
+		SCHEME=$1
+	fi
+
 	ARCHIVEPATH=$(mktemp -dq -t "$NAME-ipa")
 
 	echo "Building $IPANAME"
