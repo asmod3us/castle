@@ -96,6 +96,7 @@ set ch=2
 let c_comment_strings=1
 set cindent
 set wildmenu
+set wildmode=longest:full,full
 set shell=bash
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set noexpandtab
