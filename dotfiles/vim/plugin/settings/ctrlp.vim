@@ -45,3 +45,5 @@ let g:ctrlp_max_files=0
 " default to filename search
 let g:ctrlp_by_filename = 1
 
+let g:ctrlp_switch_buffer = 'E'
+
