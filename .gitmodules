@@ -193,3 +193,6 @@
 [submodule "dotfiles/vim/bundle/istanbul"]
 	path = dotfiles/vim/bundle/istanbul
 	url = https://github.com/juanpabloaj/vim-istanbul
+[submodule "dotfiles/vim/bundle/autoformat"]
+	path = dotfiles/vim/bundle/autoformat
+	url = https://github.com/Chiel92/vim-autoformat
