@@ -23,13 +23,12 @@ export SENCHA_SDK_TOOLS_2_0_0_BETA3="/Users/achim/Tools/Sencha/SenchaSDKTools-2.
 export WLP_HOME=/opt/IBM/WebSphere/Liberty
 export WLP_USER_DIR=${WLP_HOME}/usr
 export GOPATH=${TOOLS}/go
+export NODE_HOME=${HOME}/.node
 
 export EDITOR=vim
 #export TERM=xterm-color
 export CLICOLOR=true
 export LSCOLORS=gxfxcxdxbxegedabagacad
-# export default docker host
-export DOCKER_HOST=tcp://192.168.59.103:2375
 
 # Set PATH so it includes user's private bin if it exists
 if [ -d "${HOME}/bin" ] ; then
@@ -55,6 +54,7 @@ pathAppend ${SENCHA_CMD_3_0_0}
 pathAppend ${WLP_HOME}/bin
 pathAppend $PATH:$HOME/.rvm/bin
 pathAppend $GOPATH/bin
+pathAppend $NODE_HOME/bin
 
 export PATH
 
