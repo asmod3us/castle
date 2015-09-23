@@ -187,3 +187,9 @@
 [submodule "dotfiles/vim/bundle/csearch"]
 	path = dotfiles/vim/bundle/csearch
 	url = https://github.com/brandonbloom/csearch.vim
+[submodule "dotfiles/vim/bundle/ultisnips"]
+	path = dotfiles/vim/bundle/ultisnips
+	url = https://github.com/SirVer/ultisnips
+[submodule "dotfiles/vim/bundle/istanbul"]
+	path = dotfiles/vim/bundle/istanbul
+	url = https://github.com/juanpabloaj/vim-istanbul
