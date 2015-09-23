@@ -362,13 +362,17 @@ imap <C-w> <C-o><C-w>
 " inoremap <expr> <C-d>  pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
 " inoremap <expr> <C-u>  pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
 
+
 " modify search keys to center the result.
 nnoremap n nzz
 nnoremap N Nzz
-nnoremap * *zz
+nmap * *zz
 nnoremap # #zz
-nnoremap g* g*zz
+nmap g* g*zz
 nnoremap g# g#zz
+
+" search without word boundary
+nmap * :let @/='<C-R><C-W>'<CR>:set hls<CR>
 
 " Activate diff mode and update the diff highlighting.
 nmap <leader>dt :diffthis<CR>
