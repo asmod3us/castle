@@ -1,3 +1,5 @@
+priority -50
+
 snippet def "define AMD" b
 define([
     ${1:mids}
@@ -29,6 +31,7 @@ return declare(${1:name}, [ ${2:parents} ] {
 });
 endsnippet
 
+# TDD
 snippet desc "describe" b
 describe("$1", function() {
     $0
@@ -45,3 +48,76 @@ it("should $1", function() {
 });
 endsnippet
 
+snippet iti "it (js, inject)" b
+it('${1:description}', inject(function($2) {
+	$0
+}));
+endsnippet
+
+snippet befi "before each (js, inject)" b
+beforeEach(inject(function($1) {
+	$0
+}));
+endsnippet
+
+# loops
+snippet for "for (...) {...} (counting up)" b
+for (var ${1:i} = 0, ${2:len} = ${3:Things.length}; $1 < $2; $1++) {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet ford "for (...) {...} (counting down, faster)" b
+for (var ${2:i} = ${1:Things.length} - 1; $2 >= 0; $2--) {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet fun "function (fun)"
+function ${1:function_name}(${2:argument}) {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet vf "Function assigned to var"
+${1:var }${2:function_name} = function $2(${3}) {
+	${VISUAL}$0
+};
+endsnippet
+
+snippet iife "Immediately-Invoked Function Expression (iife)"
+(function (${1:argument}) {
+	${VISUAL}$0
+}(${2:$1}));
+endsnippet
+
+# Snippets for Console Debug Output
+
+snippet ce "console.error" b
+console.error(${1:"${2:value}"});
+endsnippet
+
+snippet cl "console.log" b
+console.log(${1:"${2:value}"});
+endsnippet
+
+snippet cd "console.debug" b
+console.debug(${1:"${2:value}"});
+endsnippet
+
+# 'use strict';
+snippet us "use strict"
+'use strict';
+endsnippet
+
+# JSON
+
+# JSON.parse
+snippet jsonp "JSON.parse"
+	JSON.parse(${0:jstr});
+endsnippet
+
+# JSON.stringify
+snippet jsons "JSON.stringify"
+	JSON.stringify(${0:object});
+endsnippet
