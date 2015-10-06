@@ -87,3 +87,6 @@ alias mfp70='/Applications/IBM/MobileFirst-CLI-700/mfp'
 alias mfp71='/Applications/IBM/MobileFirst-CLI-710/mfp'
 
 alias cfl=cf-log
+
+alias less='less -x4 -m -N -g -i -J --underline-special -Q'
+

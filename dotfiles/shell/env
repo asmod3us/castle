@@ -75,3 +75,7 @@ export HISTSIZE=100000000
 # Ignore some controlling instructions
 export HISTIGNORE="[   ]*:&:bg:fg:exit"
 
+# syntax highlight less output
+export LESSOPEN="| /usr/local/bin/src-hilite-lesspipe.sh %s"
+export LESS=" -R "
+
