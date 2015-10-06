@@ -6,15 +6,15 @@ down4me() {
 }
 
 pathAppend()  {
-	pathRemove $1; export PATH="$PATH:$1";
+	pathRemove "$1"; export PATH="$PATH:$1";
 }
 
 pathPrepend() {
-	pathRemove $1; export PATH="$1:$PATH";
+	pathRemove "$1"; export PATH="$1:$PATH";
 }
 
 pathRemove()  {
-	export PATH=`echo -n $PATH | awk -v RS=: -v ORS=: '$0 != "'$1'"' | sed 's/:$//'`;
+	export PATH=$(echo -n "$PATH" | awk -v RS=: -v ORS=: '$0 != "'$1'"' | sed 's/:$//');
 }
 
 # acd_func 1.0.5, 10-nov-2004
@@ -59,7 +59,7 @@ cd_hist() {
 		[[ ${x2:0:1} == '~' ]] && x2="${HOME}${x2:1}"
 		if [[ "${x2}" == "${the_new_dir}" ]]; then
 			popd -n +$cnt 2>/dev/null 1>/dev/null
-			cnt=cnt-1
+			cnt=$((cnt - 1))
 		fi
 	done
 
@@ -88,7 +88,8 @@ zipit() {
 
 # Create a data URL from a file
 dataurl() {
-	local mimeType=$(file -b --mime-type "$1")
+	local mimeType
+	mimeType=$(file -b --mime-type "$1")
 	if [[ $mimeType == text/* ]]; then
 		mimeType="${mimeType};charset=utf-8"
 	fi
@@ -106,12 +107,12 @@ webserver() {
 
 # download a web page and show info on what took time
 speed() {
-	/usr/bin/curl $@ -s -o /dev/null -w "dns: %{time_namelookup}, connect: %{time_connect}, pretransfer: %{time_pretransfer}, starttransfer: %{time_starttransfer}, total: %{time_total}, #connect: %{num_connects}, size: %{size_download}, speed: %{speed_download}\n" ;
+	/usr/bin/curl "$@" -s -o /dev/null -w "dns: %{time_namelookup}, connect: %{time_connect}, pretransfer: %{time_pretransfer}, starttransfer: %{time_starttransfer}, total: %{time_total}, #connect: %{num_connects}, size: %{size_download}, speed: %{speed_download}\n" ;
 }
 
 # http_headers: get just the HTTP headers from a web page (and its redirects)
 headers() {
-	/usr/bin/curl -I -L $@ ;
+	/usr/bin/curl -I -L "$@" ;
 }
 
 # open firefox with a fresh profile
@@ -140,7 +141,7 @@ devcr() {
 --user-data-dir=$pn
 EOM
 
-	open -na 'Google Chrome' --args "$@" $params $1 &> /dev/null &
+	open -na 'Google Chrome' --args "$@" $params &> /dev/null &
 }
 
 # open chrome with a fresh profile
@@ -221,7 +222,7 @@ cdp() {
 # render a markdown document into an html file
 rendermd() {
 	local style=${HOME}/Reference/pandoc-template/style.html
-	pandoc -s -H $style $1 -f markdown+auto_identifiers+implicit_header_references -t html5 -o out.html
+	pandoc -s -H "$style" "$1" -f markdown+auto_identifiers+implicit_header_references -t html5 -o out.html
 }
 
 # show details for processes with network listeners
@@ -232,7 +233,7 @@ listeners() {
 # start a packet capture on provided network interface, default en1
 pcap() {
 	interface=${1:-en1}
-	sudo tcpdump -i $interface -n -s 0 -w capture.pcap tcp or port 53}
+	sudo tcpdump -i "$interface" -n -s 0 -w capture.pcap tcp or port 53
 }
 
 # `tre` is a shorthand for `tree` with hidden files and color enabled, ignoring
@@ -269,7 +270,7 @@ dumpMobileprovision() {
 
 # find process, http://brettterpstra.com/2014/08/15/shell-tricks-a-time-to-kill/
 fp () { #find and list processes matching a case-insensitive partial-match string
-	ps Ao pid,comm|awk '{match($0,/[^\/]+$/); print substr($0,RSTART,RLENGTH)": "$1}'|grep -i $1|grep -v grep
+	ps Ao pid,comm|awk '{match($0,/[^\/]+$/); print substr($0,RSTART,RLENGTH)": "$1}'|grep -i "$1"|grep -v grep
 }
  
 # build a menu of processes matching (case-insensitive, partial) first parameter
@@ -300,7 +301,7 @@ knock() {
 	if [[ $# -eq 0 ]]; then
 		echo "missing port number"
 	else 
-		lsof +c0 -l -n -P -sTCP:LISTEN -iTCP:$1
+		lsof +c0 -l -n -P -sTCP:LISTEN -iTCP:"$1"
 	fi
 }
 
