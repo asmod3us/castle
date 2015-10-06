@@ -64,3 +64,28 @@ let g:syntastic_html_tidy_blocklevel_tags = [
 	\ 'ion-tab',
 \]
 
+" Use nearest .jshintrc relative to file being linted.
+" From https://gist.github.com/ethagnawl/ed4bd3eba6389ffe9430
+" Stolen from: https://github.com/rlipscombe/vimrc/blob/master/vimrc#L176
+"
+function s:find_jshintrc(dir)
+    let l:found = globpath(a:dir, '.jshintrc')
+    if filereadable(l:found)
+        return l:found
+    endif
+
+    let l:parent = fnamemodify(a:dir, ':h')
+    if l:parent != a:dir
+        return s:find_jshintrc(l:parent)
+    endif
+
+    return "~/.jshintrc"
+endfunction
+
+function UpdateJsHintConf()
+    let l:dir = expand('%:p:h')
+    let l:jshintrc = s:find_jshintrc(l:dir)
+    let g:syntastic_javascript_jshint_args = l:jshintrc
+endfunction
+
+au BufEnter * call UpdateJsHintConf()
