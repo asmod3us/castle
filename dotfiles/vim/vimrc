@@ -83,6 +83,8 @@ if has("autocmd")
 	autocmd FileType c,cpp,css,java,php,ruby,python,javascript,html,xml autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
 	autocmd FileType c,cpp,java,php,ruby,python,javascript set mps+==:; " use % to jump between = and ; in assignments
+
+	autocmd FileType javascript :IstanbulShow
 else
 
   set autoindent " always set autoindenting on
