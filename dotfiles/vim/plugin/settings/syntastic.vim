@@ -30,6 +30,31 @@ let g:syntastic_always_populate_loc_list=1
 " use multiple checkers if defined
 let g:syntastic_aggregate_errors=1
 
+if !exists('g:syntastic_html_tidy_ignore_errors')
+	let g:syntastic_html_tidy_ignore_errors = []
+endif
+
+" Ignore ionic tags in HTML syntax checking
+" See http://stackoverflow.com/questions/30366621
+" ignore errors about Ionic tags
+let g:syntastic_html_tidy_ignore_errors += [
+	\ "<ion-",
+	\ "discarding unexpected </ion-"]
+
+" Angular's attributes confuse HTML Tidy
+let g:syntastic_html_tidy_ignore_errors += [
+	\ " proprietary attribute \"ng-"]
+
+" Angular UI-Router attributes confuse HTML Tidy
+let g:syntastic_html_tidy_ignore_errors += [
+	\ " proprietary attribute \"ui-sref"]
+
+" Angular in particular often makes 'empty' blocks, so ignore
+" this error. We might improve how we do this though.
+" See also https://github.com/scrooloose/syntastic/wiki/HTML:---tidy
+" specifically g:syntastic_html_tidy_empty_tags
+let g:syntastic_html_tidy_ignore_errors += ["trimming empty "]
+
 let g:syntastic_html_tidy_blocklevel_tags = [
 	\ 'ion-header-bar',
 	\ 'ion-content',
@@ -63,6 +88,12 @@ let g:syntastic_html_tidy_blocklevel_tags = [
 	\ 'ion-tabs',
 	\ 'ion-tab',
 \]
+
+" Angular ignores
+let g:syntastic_html_tidy_blocklevel_tags += [
+	\ 'ng-include',
+	\ 'ng-form'
+	\ ]
 
 " Use nearest .jshintrc relative to file being linted.
 " From https://gist.github.com/ethagnawl/ed4bd3eba6389ffe9430
