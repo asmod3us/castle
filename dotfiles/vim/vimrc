@@ -73,7 +73,6 @@ if has("autocmd")
 
   " remove trailing whitespace on save
   " http://stackoverflow.com/questions/356126/how-can-you-automatically-remove-trailing-whitespace-in-vim
-	autocmd FileType javascript :IstanbulShow
     fun! <SID>StripTrailingWhitespaces()
         let l = line(".")
         let c = col(".")
@@ -85,6 +84,10 @@ if has("autocmd")
 
     autocmd FileType c,cpp,java,php,ruby,python,javascript set mps+==:; " use % to jump between = and ; in assignments
 
+    autocmd FileType javascript
+      \ if filereadable(g:coverage_json_path) |
+      \  exe :IstanbulShow |
+      \ endif
 else
 
   set autoindent " always set autoindenting on
