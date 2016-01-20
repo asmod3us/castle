@@ -16,7 +16,7 @@ let g:ctrlp_user_command = {
       \ --ignore "**/*.pyc"
       \ --ignore platforms
       \ -g ""'],
-    \ 2: ['.git', 'cd %s && git ls-files --cached --exclude-standard --others'],
+    \ 2: ['.git', 'git --git-dir=%s/.git ls-files --cached --exclude-standard --others'],
     \ 3: ['.hg', 'hg --cwd %s locate -I .'],
   \ },
   \ 'fallback': 'ag %s -i --nocolor --nogroup --hidden
@@ -34,10 +34,10 @@ let g:ctrlp_clear_cache_on_exit = 0
 " this will exclude them from globbing: set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 
 let g:ctrlp_custom_ignore = {
-	\ 'dir':  '\v[\/](\.(git|hg|svn)|node_modules|bower_components|platforms)$',
-	\ 'file': '\v\.(exe|so|dll)$',
-	\ 'link': '',
-	\ }
+  \ 'dir':  '\v[\/](\.(git|hg|svn)|node_modules|bower_components|platforms)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': '',
+  \ }
 
 " no limit on files
 let g:ctrlp_max_files=0
