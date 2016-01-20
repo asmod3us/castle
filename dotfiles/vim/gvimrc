@@ -7,3 +7,13 @@ set mousehide " Hide the mouse when typing text
 map <S-Insert> <MiddleMouse>
 map! <S-Insert> <MiddleMouse>
 set clipboard=unnamed " use os clipboard for vim cut/paste actions
+syntax enable
+
+" if has('gui_running')
+"   set background=light
+"   let g:solarized_termcolors=256
+"   colorscheme solarized
+" endif
+
+" fix background in mim
+highlight Normal guibg=#fdf6e3
