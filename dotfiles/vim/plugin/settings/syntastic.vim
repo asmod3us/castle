@@ -30,6 +30,13 @@ let g:syntastic_always_populate_loc_list=1
 " use multiple checkers if defined
 let g:syntastic_aggregate_errors=1
 
+" also shellcheck sourced files
+let g:syntastic_sh_shellcheck_args = "-x"
+
+" ignore long lines and indentation for bashate
+let g:syntastic_sh_bashate_args = "-i E003,E006"
+let g:syntastic_sh_checkers = [ 'bashate', 'shellcheck', 'sh' ]
+
 if !exists('g:syntastic_html_tidy_ignore_errors')
 	let g:syntastic_html_tidy_ignore_errors = []
 endif
