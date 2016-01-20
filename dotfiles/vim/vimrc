@@ -85,9 +85,9 @@ if has("autocmd")
     autocmd FileType c,cpp,java,php,ruby,python,javascript set mps+==:; " use % to jump between = and ; in assignments
 
     autocmd FileType javascript
-      \ if filereadable(g:coverage_json_path) |
-      \  exe :IstanbulShow |
-      \ endif
+    \ if filereadable(g:coverage_json_path) |
+    \   exe ":IstanbulShow" |
+    \ endif
 else
 
   set autoindent " always set autoindenting on
