@@ -5,3 +5,7 @@
 # done
 alias nameservers="scutil --dns|grep nameserver|awk '{print $3}'|sort -u"
 
+alias dm="docker-machine"
+alias dc="docker-compose"
+alias denv='function __denv() { eval "$(dm env $@)"; unset -f __denv; }; __denv'
+alias cask="brew cask"
