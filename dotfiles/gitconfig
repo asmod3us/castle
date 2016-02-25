@@ -48,6 +48,7 @@
 	housekeep = !git branch -r --merged develop | sed -e 's, *origin/,,' | grep -v develop$ | grep -v master$ | xargs -I% echo git push origin --delete %
 	nuke = !sh -c 'git-nuke $1' -
 	alias = "!git config -l | grep alias | cut -c 7-"
+	dontcare = !sh -c 'git update-index --assume-unchanged "$@"'
 [merge]
 # ff = false
 [diff]
