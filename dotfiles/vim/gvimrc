@@ -15,3 +15,4 @@ highlight Normal guibg=#fdf6e3
 " maximize window without going fullscreen
 set lines=999
 set columns=999
+set macligatures
