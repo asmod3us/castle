@@ -264,7 +264,8 @@ sudo mdutil -E / > /dev/null
 
 # Set computer name (as done via System Preferences → Sharing)
 sudo scutil --set ComputerName "skynet"
-sudo scutil --set HostName "skynet"
+// never set hostname, see https://apple.stackexchange.com/questions/30552/os-x-computer-name-not-matching-what-shows-on-terminal
+sudo scutil --set HostName ''
 sudo scutil --set LocalHostName "skynet"
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "skynet"
 
