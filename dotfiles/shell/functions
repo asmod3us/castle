@@ -309,3 +309,5 @@ regex1() {
 	gawk 'match($0,/'$1'/, ary) {print ary['${2:-'1'}']}';
 }
 
+# init scmpuff
+eval "$(scmpuff init -s)"
