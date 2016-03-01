@@ -33,6 +33,12 @@
 	cmd = ~//Applications/p4merge.app/Contents/Resources/launchp4merge $LOCAL $REMOTE
 [difftool "deltawalker"]
 		cmd = "~/Applications/DeltaWalker.app/Contents/MacOS/git-diff" "$LOCAL" "$REMOTE"
+ [difftool "icdiff"]
+    cmd = icdiff --head=5000 --highlight --line-numbers -L \"$BASE\" -L \"$REMOTE\" \"$LOCAL\" \"$REMOTE\"
+# use to set pager for difftool
+[pager]
+# difftool = true
+	blame = true
 [mergetool "dw"]
 		cmd = "~/Applications/DeltaWalker.app/Contents/MacOS/git-merge" "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
 [alias]
