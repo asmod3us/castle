@@ -101,3 +101,8 @@ mkipa() {
 	fi
 }
 
+ispkg() {
+	dir=${1:-.}
+	mdls -name kMDItemContentTypeTree "$dir" | grep -q '"com.apple.package"'
+}
+
