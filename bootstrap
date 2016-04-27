@@ -7,8 +7,15 @@ fi
 export castledir=~/castle
 export dotfiles=$castledir/dotfiles
 export cfgdir=$dotfiles/shell
-export osSuffix=$(uname|tr '[:upper:]' '[:lower:]')
-export hostSuffix=$(hostname | cut -d. -f1)
+osSuffix=$(uname|tr '[:upper:]' '[:lower:]')
+
+if [[ "darwin" == "$osSuffix" ]]; then
+	hostSuffix=$(scutil --get ComputerName)
+else
+	hostSuffix=$(hostname | cut -d. -f1)
+fi
+
+export osSuffix hostSuffix
 
 include() {
 	local master=$cfgdir/$1
@@ -17,10 +24,13 @@ include() {
 
 	for bashfile in $master $os $host; do
 		if [ -r "$bashfile" ]; then
-			echo "Including $(basename $bashfile)"
+			echo "Including $(basename "$bashfile")"
 			. $bashfile
 		fi
 	done
 }
 
+shellStart=$(date +%s)
 include bashrc
+shellEnd=$(date +%s)
+export shellStart shellEnd
