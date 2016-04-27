@@ -4,11 +4,4 @@ if [[ $XTERM =~ xterm ]]; then
 	xinput set-prop 11 'Evdev Middle Button Emulation' 1
 fi
 
-export CMVC_AUTH_METHOD=HOSTPW
-export CMVC_BECOME=$LOGNAME
-export CMVC_FAMILY=wplc@wplc.raleigh.ibm.com@5150
-export CMVC_HOME=/tools/cmvc
 export TEMP=${HOME}/tmp
-export WPSYNC_BUILDTOOLS="buildtools_wp800_linux"
-export WPSYNC_BUILDTOOLS_DESTINATION="/tools/buildtools_wp800/"
-export TOOLS=/tools
