@@ -53,12 +53,19 @@
 	eraser = !sh -c 'git rev-list -n 1 HEAD -- "$@"'
 	housekeep = !git branch -r --merged develop | sed -e 's, *origin/,,' | grep -v develop$ | grep -v master$ | xargs -I% echo git push origin --delete %
 	nuke = !sh -c 'git-nuke $1' -
-	alias = "!git config -l | grep alias | cut -c 7-"
+	aliases = "!git config -l | grep alias | cut -c 7-"
 	dontcare = !sh -c 'git update-index --assume-unchanged "$@"'
 [merge]
 # ff = false
 [diff]
 	renames = copies
 [filter "media"]
-	clean = git-media-clean %f
-	smudge = git-media-smudge %f
+	required = true
+	clean = git media clean %f
+	smudge = git media smudge %f
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+[hub]
+	host = github.ibm.com
