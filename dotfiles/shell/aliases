@@ -59,6 +59,7 @@ alias gbl='git-blame-colored'
 alias gdd='git diff'
 alias gd='cdiff -s'
 alias gdt='git difftool'
+alias gdl="git diff -w -G'(^[^\*# ])|(^#\w)|(^\s+[^\*#])'"
 alias f='find'
 alias br='brew'
 alias gl='git log --oneline --abbrev-commit --all --graph --decorate --color --no-merges'
