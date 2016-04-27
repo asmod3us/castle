@@ -1,0 +1,128 @@
+priority -50
+snippet aconf "angular config" i
+config(function($1) {
+	$0
+});
+endsnippet
+
+snippet ngc "angular controller"
+(function() {
+'use strict';
+
+angular
+.module('${1:module}')
+.controller('${2:Controller}', $2});
+
+function $2(${3:dependencies}) {
+    var vm = this;
+    vm.title = '$2';
+
+    activate();
+
+    function activate() {
+    }
+}
+
+$2.resolve = {
+}
+
+})();
+
+endsnippet
+
+# a singleton, what's commonly called a "service" and implemented as an angular factory
+snippet ngs "angular service"
+(function(){
+'use strict';
+
+angular
+.module('${1:module}')
+.factory('${2:factory}', $2);
+
+function $2(${3:dependencies}) {
+    var service = {
+         ${4:func}: $4
+    };
+    return service;
+
+    function $4() {
+    }
+}
+
+})();
+
+endsnippet
+
+snippet ngm "angular module"
+(function() {
+
+'use strict';
+
+angular
+.module('${1:module}', [
+    '${2:dependencies}'
+]);
+
+})();
+endsnippet
+
+snippet ngd "angular directive"
+(function() {
+
+'use strict';
+
+angular
+.module('${1:module}')
+.directive('${2:directive}', ${2:directive});
+
+function ${2:directive}(${3:dependencies}) {
+    // Usage:
+    //
+    // Creates:
+    //
+    var directive = {
+        bindToController: true,
+        controller: ${4:Controller},
+        controllerAs: '${5:vm}',
+        link: link,
+        restrict: 'A',
+        scope: {
+        }
+    };
+    return directive;
+
+    function link(scope, element, attrs) {
+    }
+}
+
+function ${4:Controller} () {
+}
+
+})();
+
+endsnippet
+
+snippet $w "Define a $watch for an expression. You can change the expression to be watched."
+$scope.$watch('${1:watchExpr}',function(newValue, oldValue) {
+  $0
+});
+endsnippet
+
+
+snippet $on "Define a $on for a $broadcast/$emit on the $scope inside an Angular Controller. You can change the event name to listen on."
+$scope.$on('${1:eventName}', function(event, ${2:args}) {
+  $0
+});
+endsnippet
+
+
+snippet $b "Define a $broadcast for a $scope inside an Angular Controller / Angular Controller Function. You can change the event name and optional event arguments."
+$scope.$broadcast('${1:eventName}', ${2:eventArgs});
+$0
+endsnippet
+
+
+snippet $e "Define an $emit for a $scope inside an Angular Controller / Angular Controller Function. You can change the event name and optional event arguments."
+$scope.$emit('${1:eventName}', ${2:eventArgs});
+$0
+endsnippet

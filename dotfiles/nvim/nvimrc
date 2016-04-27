@@ -73,16 +73,21 @@ if has("autocmd")
 
   " remove trailing whitespace on save
   " http://stackoverflow.com/questions/356126/how-can-you-automatically-remove-trailing-whitespace-in-vim
-	fun! <SID>StripTrailingWhitespaces()
-		let l = line(".")
-		let c = col(".")
-		%s/\s\+$//e
-		call cursor(l, c)
-	endfun
+    fun! <SID>StripTrailingWhitespaces()
+        let l = line(".")
+        let c = col(".")
+        %s/\s\+$//e
+        call cursor(l, c)
+    endfun
 
-	autocmd FileType c,cpp,css,java,php,ruby,python,javascript,html,xml autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+    autocmd FileType c,cpp,css,java,php,ruby,python,javascript,html,xml autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
-	autocmd FileType c,cpp,java,php,ruby,python,javascript set mps+==:; " use % to jump between = and ; in assignments
+    autocmd FileType c,cpp,java,php,ruby,python,javascript set mps+==:; " use % to jump between = and ; in assignments
+
+    autocmd FileType javascript
+    \ if filereadable(g:coverage_json_path) |
+    \   exe ":IstanbulShow" |
+    \ endif
 else
 
   set autoindent " always set autoindenting on
@@ -96,6 +101,7 @@ set ch=2
 let c_comment_strings=1
 set cindent
 set wildmenu
+set wildmode=longest:full,full
 set shell=bash
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set noexpandtab
@@ -132,9 +138,12 @@ if &listchars ==# 'eol:$'
   if &termencoding ==# 'utf-8' || &encoding ==# 'utf-8'
     let &listchars = "tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u00b7"
 " other choices:
-" set lcs=tab:»·
+" set lcs+=eol:⏎"
+" set lcs+=tab:»·
+" set lcs+=tab:\u2b72·
 " set lcs+=trail:·
 " set lcs+=eol:$
+" set lcs+=trail:⎵ " \u23b5
   endif
 endif
 
@@ -362,13 +371,17 @@ imap <C-w> <C-o><C-w>
 " inoremap <expr> <C-d>  pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
 " inoremap <expr> <C-u>  pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
 
+
 " modify search keys to center the result.
 nnoremap n nzz
 nnoremap N Nzz
-nnoremap * *zz
+nmap * *zz
 nnoremap # #zz
-nnoremap g* g*zz
+nmap g* g*zz
 nnoremap g# g#zz
+
+" search without word boundary
+nmap * :let @/='<C-R><C-W>'<CR>:set hls<CR>
 
 " Activate diff mode and update the diff highlighting.
 nmap <leader>dt :diffthis<CR>

@@ -1,5 +1,4 @@
 " let g:UltiSnipsSnippetsDir="~/.vim/snippets"
-let g:UltiSnipsSnippetDirectories=["ultisnips"]
 
 let g:UltiSnipsExpandTrigger="<C-e>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"

@@ -1,5 +1,8 @@
 " set guioptions-=m " turn off menu bar
 set guioptions-=T " turn off toolbar
+if has("mac") || has("macunix")
+	set guifont=Monaco\ for\ Powerline:h13
+endif
 set ch=2 " Make command line two lines high
 set mousehide " Hide the mouse when typing text
 
@@ -7,3 +10,12 @@ set mousehide " Hide the mouse when typing text
 map <S-Insert> <MiddleMouse>
 map! <S-Insert> <MiddleMouse>
 set clipboard=unnamed " use os clipboard for vim cut/paste actions
+" syntax enable
+
+" fix background in mvim
+highlight Normal guibg=#fdf6e3
+
+" maximize window without going fullscreen
+set lines=999
+set columns=999
+set macligatures

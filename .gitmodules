@@ -202,9 +202,6 @@
 [submodule "dotfiles/vim/bundle/pandoc-syntax"]
 	path = dotfiles/vim/bundle/pandoc-syntax
 	url = https://github.com/vim-pandoc/vim-pandoc-syntax
-[submodule "dotfiles/nvim/bundle/solarized-truecolor"]
-	path = dotfiles/nvim/bundle/solarized-truecolor
-	url = https://github.com/frankier/neovim-colors-solarized-truecolor-only
 [submodule "dotfiles/vim/bundle/promptline"]
 	path = dotfiles/vim/bundle/promptline
 	url = https://github.com/edkolev/promptline.vim
