@@ -138,9 +138,12 @@ if &listchars ==# 'eol:$'
   if &termencoding ==# 'utf-8' || &encoding ==# 'utf-8'
     let &listchars = "tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u00b7"
 " other choices:
-" set lcs=tab:»·
+" set lcs+=eol:⏎"
+" set lcs+=tab:»·
+" set lcs+=tab:\u2b72·
 " set lcs+=trail:·
 " set lcs+=eol:$
+" set lcs+=trail:⎵ " \u23b5
   endif
 endif
 
