@@ -277,3 +277,5 @@ for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
 	killall "${app}" > /dev/null 2>&1
 done
 
+# turn off shadows in screenshots
+defaults write com.apple.screencapture disable-shadow -bool true
