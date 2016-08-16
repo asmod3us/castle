@@ -14,8 +14,8 @@ sudo pmset -a standbydelay 86400
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
 
-sudo dseditgroup -o edit -a $USER -t user admin
-sudo dseditgroup -o edit -a $USER -t user wheel
+sudo dseditgroup -o edit -a "$USER" -t user admin
+sudo dseditgroup -o edit -a "$USER" -t user wheel
 
 # install developer tools
 xcode-select --install
@@ -23,7 +23,7 @@ xcode-select --install
 # install homebrew
 ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 brew install git
-$(brew --prefix git)/bin/git clone --recursive https://github.com/asmod3us/castle castle
+"$(brew --prefix git)/bin/git" clone --recursive https://github.com/asmod3us/castle castle
 
 # install castle
 pushd castle
@@ -264,12 +264,18 @@ sudo mdutil -E / > /dev/null
 
 # Set computer name (as done via System Preferences → Sharing)
 sudo scutil --set ComputerName "skynet"
-// never set hostname, see https://apple.stackexchange.com/questions/30552/os-x-computer-name-not-matching-what-shows-on-terminal
+# never set hostname, see https://apple.stackexchange.com/questions/30552/os-x-computer-name-not-matching-what-shows-on-terminal
 sudo scutil --set HostName ''
 sudo scutil --set LocalHostName "skynet"
 sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "skynet"
 
+# disable gatekeeper  
+sudo spctl --master-disable
+
 chflags nohidden ~/Library
+
+# turn off shadows in screenshots
+defaults write com.apple.screencapture disable-shadow -bool true
 
 for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
 	"Dock" "Finder" "Mail" "Messages" "Safari" "SizeUp" "SystemUIServer" \
@@ -277,5 +283,3 @@ for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
 	killall "${app}" > /dev/null 2>&1
 done
 
-# turn off shadows in screenshots
-defaults write com.apple.screencapture disable-shadow -bool true
