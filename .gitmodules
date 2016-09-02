@@ -1,15 +1,207 @@
+[submodule "dotfiles/vim/bundle/syntastic"]
+	path = dotfiles/vim/bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git
+[submodule "dotfiles/vim/bundle/scss-syntax"]
+	path = dotfiles/vim/bundle/scss-syntax
+	url = https://github.com/cakebaker/scss-syntax.vim.git
+[submodule "dotfiles/vim/bundle/nerdtree"]
+	path = dotfiles/vim/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule "dotfiles/vim/bundle/fugitive"]
+	path = dotfiles/vim/bundle/fugitive
+	url = git://github.com/tpope/vim-fugitive.git
+[submodule "dotfiles/vim/bundle/vim-surround"]
+	path = dotfiles/vim/bundle/vim-surround
+	url = https://github.com/tpope/vim-surround
+[submodule "dotfiles/vim/bundle/less"]
+	path = dotfiles/vim/bundle/less
+	url = https://github.com/groenewege/vim-less
+[submodule "dotfiles/vim/bundle/css3-syntax"]
+	path = dotfiles/vim/bundle/css3-syntax
+	url = https://github.com/hail2u/vim-css3-syntax
+[submodule "dotfiles/vim/bundle/markdown"]
+	path = dotfiles/vim/bundle/markdown
+	url = https://github.com/tpope/vim-markdown
+[submodule "dotfiles/vim/bundle/xml"]
+	path = dotfiles/vim/bundle/xml
+	url = https://github.com/othree/xml.vim
+[submodule "dotfiles/vim/bundle/repeat"]
+	path = dotfiles/vim/bundle/repeat
+	url = git://github.com/tpope/vim-repeat.git
+[submodule "dotfiles/vim/bundle/json"]
+	path = dotfiles/vim/bundle/json
+	url = https://github.com/elzr/vim-json
+[submodule "dotfiles/vim/bundle/coffee-script"]
+	path = dotfiles/vim/bundle/coffee-script
+	url = https://github.com/kchmck/vim-coffee-script
+[submodule "dotfiles/vim/bundle/numbertoggle"]
+	path = dotfiles/vim/bundle/numbertoggle
+	url = https://github.com/jeffkreeftmeijer/vim-numbertoggle
+[submodule "dotfiles/vim/bundle/ack"]
+	path = dotfiles/vim/bundle/ack
+	url = https://github.com/mileszs/ack.vim
+[submodule "dotfiles/vim/bundle/tagbar"]
+	path = dotfiles/vim/bundle/tagbar
+	url = https://github.com/majutsushi/tagbar
+[submodule "dotfiles/vim/bundle/unimpaired"]
+	path = dotfiles/vim/bundle/unimpaired
+	url = git://github.com/tpope/vim-unimpaired.git
+[submodule "dotfiles/vim/bundle/javascript"]
+	path = dotfiles/vim/bundle/javascript
+	url = https://github.com/pangloss/vim-javascript.git
+[submodule "dotfiles/vim/bundle/stylus"]
+	path = dotfiles/vim/bundle/stylus
+	url = https://github.com/wavded/vim-stylus
+[submodule "dotfiles/vim/bundle/jade"]
+	path = dotfiles/vim/bundle/jade
+	url = https://github.com/digitaltoad/vim-jade
+[submodule "dotfiles/vim/bundle/tcomment"]
+	path = dotfiles/vim/bundle/tcomment
+	url = https://github.com/tomtom/tcomment_vim
+[submodule "dotfiles/vim/bundle/node"]
+	path = dotfiles/vim/bundle/node
+	url = https://github.com/guileen/vim-node
+[submodule "dotfiles/vim/bundle/indent-guides"]
+	path = dotfiles/vim/bundle/indent-guides
+	url = git://github.com/nathanaelkane/vim-indent-guides.git
+[submodule "dotfiles/vim/bundle/pathogen"]
+	path = dotfiles/vim/bundle/pathogen
+	url = https://github.com/tpope/vim-pathogen
+[submodule "dotfiles/vim/bundle/vim-web-indent"]
+	path = dotfiles/vim/bundle/vim-web-indent
+	url = https://github.com/asmod3us/vim-web-indent
+[submodule "dotfiles/vim/bundle/jsbeautify"]
+	path = dotfiles/vim/bundle/jsbeautify
+	url = https://github.com/maksimr/vim-jsbeautify
+[submodule "dotfiles/vim/bundle/ctrlp-matcher"]
+	path = dotfiles/vim/bundle/ctrlp-matcher
+	url = https://github.com/JazzCore/ctrlp-cmatcher
+[submodule "dotfiles/vim/bundle/easymotion"]
+	path = dotfiles/vim/bundle/easymotion
+	url = https://github.com/Lokaltog/vim-easymotion
+[submodule "dotfiles/vim/bundle/webapi"]
+	path = dotfiles/vim/bundle/webapi
+	url = https://github.com/mattn/webapi-vim
+[submodule "dotfiles/vim/bundle/gist"]
+	path = dotfiles/vim/bundle/gist
+	url = https://github.com/mattn/gist-vim
 [submodule "dotfiles/vim/bundle/snippets"]
 	path = dotfiles/vim/bundle/snippets
 	url = https://github.com/honza/vim-snippets/
+[submodule "dotfiles/vim/bundle/gitgutter"]
+	path = dotfiles/vim/bundle/gitgutter
+	url = https://github.com/airblade/vim-gitgutter
+[submodule "dotfiles/vim/bundle/tmux-navigator"]
+	path = dotfiles/vim/bundle/tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator
+[submodule "dotfiles/vim/bundle/airline"]
+	path = dotfiles/vim/bundle/airline
+	url = https://github.com/bling/vim-airline
+[submodule "dotfiles/vim/bundle/base16"]
+	path = dotfiles/vim/bundle/base16
+	url = https://github.com/chriskempson/base16-vim
 [submodule "dotfiles/vim/bundle/neocomplete"]
 	path = dotfiles/vim/bundle/neocomplete
 	url = https://github.com/Shougo/neocomplete.vim
+[submodule "dotfiles/vim/bundle/vim-node"]
+	path = dotfiles/vim/bundle/vim-node
+	url = https://github.com/moll/vim-node
+[submodule "dotfiles/vim/bundle/tabular"]
+	path = dotfiles/vim/bundle/tabular
+	url = https://github.com/godlygeek/tabular
+[submodule "dotfiles/vim/bundle/YouCompleteMe"]
+	path = dotfiles/vim/bundle/YouCompleteMe
+	url = https://github.com/Valloric/YouCompleteMe
+[submodule "dotfiles/vim/bundle/delimitMate"]
+	path = dotfiles/vim/bundle/delimitMate
+	url = https://github.com/Raimondi/delimitMate
+[submodule "dotfiles/vim/bundle/emmet"]
+	path = dotfiles/vim/bundle/emmet
+	url = https://github.com/mattn/emmet-vim
 [submodule "dotfiles/vim/bundle/neosnippet"]
 	path = dotfiles/vim/bundle/neosnippet
 	url = https://github.com/Shougo/neosnippet.vim
+[submodule "dotfiles/vim/bundle/vimproc"]
+	path = dotfiles/vim/bundle/vimproc
+	url = https://github.com/Shougo/vimproc.vim
 [submodule "dotfiles/vim/bundle/neocomplete-ultisnips"]
 	path = dotfiles/vim/bundle/neocomplete-ultisnips
 	url = https://github.com/asmod3us/neocomplete-ultisnips
+[submodule "dotfiles/vim/bundle/ag"]
+	path = dotfiles/vim/bundle/ag
+	url = https://github.com/rking/ag.vim
 [submodule "dotfiles/shell/base16-shell"]
 	path = dotfiles/shell/base16-shell
 	url = https://github.com/chriskempson/base16-shell
+[submodule "dotfiles/vim/bundle/dash"]
+	path = dotfiles/vim/bundle/dash
+	url = https://github.com/rizzatti/dash.vim.git
+[submodule "dotfiles/vim/bundle/editorconfig"]
+	path = dotfiles/vim/bundle/editorconfig
+	url = https://github.com/editorconfig/editorconfig-vim
+[submodule "dotfiles/vim/bundle/tern"]
+	path = dotfiles/vim/bundle/tern
+	url = https://github.com/marijnh/tern_for_vim
+[submodule "dotfiles/vim/bundle/jsfmt"]
+	path = dotfiles/vim/bundle/jsfmt
+	url = https://github.com/mephux/vim-jsfmt.git
+[submodule "dotfiles/vim/bundle/swift.vim"]
+	path = dotfiles/vim/bundle/swift.vim
+	url = https://github.com/Keithbsmiley/swift.vim.git
+[submodule "dotfiles/vim/bundle/matchit"]
+	path = dotfiles/vim/bundle/matchit
+	url = https://github.com/vim-scripts/matchit.zip
+[submodule "dotfiles/vim/bundle/dirdiff"]
+	path = dotfiles/vim/bundle/dirdiff
+	url = https://github.com/vim-scripts/DirDiff.vim
+[submodule "dotfiles/vim/bundle/haml"]
+	path = dotfiles/vim/bundle/haml
+	url = https://github.com/tpope/vim-haml
+[submodule "dotfiles/vim/bundle/gtfo"]
+	path = dotfiles/vim/bundle/gtfo
+	url = https://github.com/justinmk/vim-gtfo
+[submodule "dotfiles/vim/bundle/multiple-cursors"]
+	path = dotfiles/vim/bundle/multiple-cursors
+	url = https://github.com/kris89/vim-multiple-cursors/
+[submodule "dotfiles/vim/bundle/camelcasemotion"]
+	path = dotfiles/vim/bundle/camelcasemotion
+	url = https://github.com/vim-scripts/camelcasemotion
+[submodule "dotfiles/vim/bundle/gundo"]
+	path = dotfiles/vim/bundle/gundo
+	url = http://github.com/sjl/gundo.vim.git
+[submodule "dotfiles/vim/bundle/MatchTagAlways"]
+	path = dotfiles/vim/bundle/MatchTagAlways
+	url = https://github.com/Valloric/MatchTagAlways
+[submodule "dotfiles/vim/bundle/angular"]
+	path = dotfiles/vim/bundle/angular
+	url = https://github.com/burnettk/vim-angular
+[submodule "dotfiles/vim/bundle/javascript-libraries-syntax"]
+	path = dotfiles/vim/bundle/javascript-libraries-syntax
+	url = https://github.com/othree/javascript-libraries-syntax.vim
+[submodule "dotfiles/vim/bundle/csearch"]
+	path = dotfiles/vim/bundle/csearch
+	url = https://github.com/brandonbloom/csearch.vim
+[submodule "dotfiles/vim/bundle/ultisnips"]
+	path = dotfiles/vim/bundle/ultisnips
+	url = https://github.com/SirVer/ultisnips
+[submodule "dotfiles/vim/bundle/istanbul"]
+	path = dotfiles/vim/bundle/istanbul
+	url = https://github.com/juanpabloaj/vim-istanbul
+[submodule "dotfiles/vim/bundle/autoformat"]
+	path = dotfiles/vim/bundle/autoformat
+	url = https://github.com/Chiel92/vim-autoformat
+[submodule "dotfiles/vim/bundle/ctrlp"]
+	path = dotfiles/vim/bundle/ctrlp
+	url = https://github.com/ctrlpvim/ctrlp.vim
+[submodule "dotfiles/vim/bundle/javacomplete2"]
+	path = dotfiles/vim/bundle/javacomplete2
+	url = https://github.com/artur-shaik/vim-javacomplete2
+[submodule "dotfiles/vim/bundle/pandoc"]
+	path = dotfiles/vim/bundle/pandoc
+	url = https://github.com/vim-pandoc/vim-pandoc
+[submodule "dotfiles/vim/bundle/pandoc-syntax"]
+	path = dotfiles/vim/bundle/pandoc-syntax
+	url = https://github.com/vim-pandoc/vim-pandoc-syntax
+[submodule "dotfiles/vim/bundle/promptline"]
+	path = dotfiles/vim/bundle/promptline
+	url = https://github.com/edkolev/promptline.vim
