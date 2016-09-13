@@ -34,7 +34,6 @@ alias md="mkdir"
 alias grep='grep --color'
 #alias mp="makeProject"
 #alias sp=". setProject"
-alias pgrep="ps aux| grep"
 alias t='task'
 
 # If using Linux alias pbcopy and pbpaste
