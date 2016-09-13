@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# look for this authority as part of the code signature
+authority='Authority=Apple Mac OS Application Signing'
+
+# app to check
+app="$1"
+
+# append .app if necessary
+if [[ "$app" != *.app ]] ; then
+	app="${app}.app"
+fi
+
+# get code signature
+sig=$(codesign -dvvv "$app" 2>&1)
+
+echo -n "$app: "
+if [[ $sig =~ 'code object is not signed at all' ]] ; then
+	# no signature at all
+	echo "no"
+else
+	if [[ $sig =~ $authority ]] ; then
+		echo "yes"
+	else
+		echo "no"
+	fi
+fi
+

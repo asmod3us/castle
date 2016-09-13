@@ -1,0 +1,25 @@
+#!/bin/bash
+echo 'This script will reset your network settings after LMC hickups. It retarts the WiFi network interface, updates name server configuration and deletes stale routes. It requires admin privileges.'|fold -sw 80
+sudo -v || exit 1
+
+LMC_IF=$(ifconfig|grep wc|cut -d: -f1)
+# using route sometimes hangs or times out
+# LMC_IF=$(route get 9.0.0.0|awk '/interface: / { print $2 }')
+if [[ -z LMC_IF ]]; then
+	LMC_IF=$(ifconfig|grep wc|cut -d: -f1)
+	echo "No route to IBM network defined."
+fi
+echo "Resetting interface $LMC_IF"
+sudo dscacheutil -flushcache
+sudo ifconfig "${LMC_IF}" down
+sudo route delete -host 9.0.0.0
+sudo route -n flush
+echo -n .; sleep 1
+echo -n .; sleep 1
+echo .; sleep 1
+sudo route -n flush
+networksetup -setairportpower 'Wi-Fi' off
+networksetup -setairportpower 'Wi-Fi' on
+
+# Andrew's solution
+#  sudo route -n flush && sudo arp -a -d && sudo killall -HUP mDNSResponder && sudo networksetup -setv4off "Thunderbolt Ethernet" && sudo networksetup -setdhcp "Thunderbolt Ethernet" && sudo networksetup -setv4off "Wi-Fi" && sudo networksetup -setdhcp "Wi-Fi" && sudo ifconfig en0 down && sudo ifconfig en0 up

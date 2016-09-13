@@ -1,0 +1,12 @@
+#!/bin/bash
+# From: http://blog.marxy.org/2014/03/ios-icon-resizer-script.html
+# Usage: iconmaker.sh bigicon.png
+filename=$(basename "$1")
+extension="${filename##*.}"
+filename="${filename%.*}"
+echo "Resizing ${filename}..."
+for size in 29 40 50 57 58 72 76 80 100 114 120 144 152
+do
+    echo "$filename-$size.$extension"
+    convert {$1} -resize $sizex$size "$filename-$size.$extension"
+done

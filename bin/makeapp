@@ -1,0 +1,104 @@
+#!/bin/bash
+
+# Application name. [Should be less than 16 characters long](https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/TP40009249-109585). For some derived values, spaces will be replaced with dashes to match the [spec for CFBundleIdentifier](https://developer.apple.com/library/ios/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-102070).
+name="$1"
+
+# URL to make an app of
+url="$2"
+
+# Path to icon. Leave blank to use favicon from url.
+icon="$3"
+
+# chromePath="$(mdfind "kMDItemCFBundleIdentifier == 'com.google.Chrome'"| head -n 1)
+# chromeExecPath="$chromePath/Contents/MacOS/Google Chrome"
+# Location of Google Chrome
+chromePath="$HOME/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+
+# Apps will be placed in here.
+appRoot="$HOME/Applications"
+
+# derived paths used when creating the app
+resourcePath="$appRoot/${name}.app/Contents/Resources"
+execPath="$appRoot/${name}.app/Contents/MacOS" 
+profilePath="$appRoot/${name}.app/Contents/Profile"
+plistPath="$appRoot/${name}.app/Contents/Info.plist"
+
+# make the directories
+/bin/mkdir -p  "$resourcePath" "$execPath" "$profilePath"
+
+# use favicon from url if no icon provided
+if [ -z "$icon" ]; then
+    # try different app icons in decreasing quality
+    HOMEPAGE="${TMPDIR}${name}-home"
+    curl -q -s "$url" -o "$HOMEPAGE"
+    # various apple-touch-icon sizes in decreasing quality
+    SIZES=(1024 512 180 167 152 144 114 87 80 76 75 72 60 58 50 44)
+
+    for i in "${!SIZES[@]}"; do
+        SIZE=${SIZES[$i]}
+        ICONURL=$(pup 'link[rel="apple-touch-icon"][sizes="'"$SIZE"'x'"$SIZE"'"] attr{href}' < "$HOMEPAGE")
+        if [[ ! -z $ICONURL ]]; then
+            # found one!
+            break
+        fi
+    done
+
+    [[ -z $ICONURL ]] && ICONURL=$(pup 'link[rel="shortcut icon"] attr{href}' < "$HOMEPAGE")
+    [[ -z $ICONURL ]] && ICONURL=$(pup 'link[rel="icon"] attr{href}' < "$HOMEPAGE")
+
+    if [[ ! -z $ICONURL ]]; then
+        if [[ $ICONURL == //* ]]; then
+            # convert protocol relative urls
+            # TODO improvement: use protocol of provided url
+            ICONURL="http:$ICONURL"
+        elif [[ $ICONURL == /* ]]; then
+            # relative url
+            if [[ $url == */ ]]; then
+                # url already ends with a /
+                ICONURL="${url/%\//}${ICONURL}"
+            else
+                # url is without slash
+                ICONURL="${url}${ICONURL}"
+            fi
+        fi
+        icon="${TMPDIR}icon"
+        curl -q -s -o "$icon" "$ICONURL"
+    fi
+fi
+
+if [[ ! -z $icon ]]; then
+    # convert the icon and copy into Resources
+    sips -s format tiff "$icon" --out "$resourcePath/icon.tiff" --resampleHeightWidth 128 128 >& /dev/null
+    # TODO improvement: use retina icons with correct name
+    tiff2icns -noLarge "$resourcePath/icon.tiff" >& /dev/null
+fi
+
+# create the executable
+/bin/cat > "$execPath/$name" <<EOF
+#!/bin/sh
+exec $chromePath --app="$url" --user-data-dir="$profilePath" --no-default-browser-check --no-first-run "\$@"
+EOF
+/bin/chmod +x "$execPath/$name"
+
+# create the Info.plist 
+/bin/cat > "$plistPath" <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" “http://www.apple.com/DTDs/PropertyList-1.0.dtd”>
+<plist version=”1.0″>
+<dict>
+<key>CFBundleExecutable</key>
+<string>$name</string>
+<key>CFBundleName</key>
+<string>$name</string>
+<key>CFBundleIconFile</key>
+<string>icon</string>
+<key>NSHighResolutionCapable</key>
+<string>True</string>
+<key>KSProductID</key>
+<string>com.google.Chrome.${name// /-}</string>
+<key>CFBundleIdentifier</key>
+<string>com.google.Chrome.${name// /-}</string>
+</dict>
+</plist>
+EOF
+

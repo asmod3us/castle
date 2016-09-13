@@ -1,0 +1,10 @@
+#!/bin/bash
+
+JCP=~/Tools/java-comment-preprocessor/target/jcp-6.0.1.jar
+SRC=$(mktemp -dq -t src-XXX)
+DST=$(mktemp -dq -t dst-XXX) 
+cp "$1" "$SRC"
+
+java -jar "$JCP" --i:"$SRC" --o:"$DST" -ef:none --r >/dev/null 2>&1
+
+cat "$DST/$1"

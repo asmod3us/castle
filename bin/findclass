@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ -z $1 ]]; then
+	DIR=$1
+	CLASS=$2
+else
+	DIR=.
+	CLASS=$1
+fi
+
+find "$DIR" -name "*.jar" -exec sh -c 'j="$1"; c="$2"; jar -tf $j|grep -H --label=$j $c' _ {} "$CLASS" \;

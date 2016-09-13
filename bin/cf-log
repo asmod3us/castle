@@ -1,0 +1,13 @@
+#!/bin/bash
+if [ -z "$1" ]; then
+	echo "Missing app name"
+	exit
+fi
+
+# BLAN="-c 28"
+# TIME="-c 12-19"
+# WHOM="-c 29-40"
+# STDW="-c 42-44"
+# MESG="-c 46-"
+
+cf logs "$@" | grep --line-buffered --invert-match --fixed-strings "[RTR/" | cut -c 12-19 -c 28 -c 46-

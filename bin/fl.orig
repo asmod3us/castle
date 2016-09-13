@@ -1,0 +1,51 @@
+#!/bin/bash
+# Open current directory in forklift
+
+# Adapted from https://gist.github.com/elentok/6218781
+# Adapted from comment https://gist.github.com/elentok/6218781#comment-891115
+# Added optional path argument and removed using the clipboard buffer.
+
+set -e
+
+if [ -z "$@" ]; then
+  absPath=`pwd`
+else
+  pushd $@ > /dev/null
+  absPath=`pwd`
+  echo $absPath
+  popd > /dev/null
+fi
+
+(cat<<EOF
+
+if application "ForkLift" is not running then
+    # This will launch Forklift if it's not running
+    # (But it's not making it the frontmost/focused application)
+    activate application "ForkLift"
+    # We wait 1 second so that we're pretty sure ForkLift did launch
+    delay 1
+end if
+
+# Give focus to ForkLift
+activate application "ForkLift"
+set canOpenTab to "unknown"
+
+tell application "System Events"
+    tell process "ForkLift"
+        # Open new window if none, or new tab if there is one open
+        set canOpenTab to enabled of menu item 2 of menu 1 of menu bar item "File" of menu bar 1
+        if canOpenTab is true then
+            keystroke "t" using {command down}
+        else
+            keystroke "n" using {command down}
+        end if
+        # Using ForkLift's "Go to Folder"
+        keystroke "g" using {command down, shift down}
+        # keystroke "v" using {command down}
+        keystroke "$absPath"
+        keystroke return
+    end tell
+end tell
+
+EOF
+) | osascript

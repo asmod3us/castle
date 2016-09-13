@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# function cleanup {
+	# echo "$(date +%Y-%m-%d_%H%M%S) cleaning up $pn" >> ~/chrome.log
+# }
+
+# trap cleanup EXIT
+
+pn=$(mktemp -dq -t chrome-XXX);
+echo "Starting Chrome with new profile in $pn";
+read -d '' params  <<EOM
+--no-default-browser-check
+--no-first-run
+--user-data-dir=$pn
+EOM
+
+open -na 'Google Chrome' --args "$@" $params >&/dev/null &
+FOO_PID=$!
+echo "$(date +%Y-%m-%d_%H%M%S) pid is $FOO_PID" >> ~/chrome.log
