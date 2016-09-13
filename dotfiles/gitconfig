@@ -14,15 +14,16 @@
 	user = asmod3us
 [mergetool]
 	keepBackup = false
+# 	keepBackup = false
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesfile = /Users/achim/.gitignore_global
 	autocrlf = input
 	whitespace = blank-at-eol,space-before-tabs,indent-with-non-tab,-tab-in-indent,-blank-at-eof,tabwidth=4
 [difftool "sourcetree"]
 	cmd = /usr/local/bin/ksdiff -w \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
-	cmd = /opt/homebrew-cask/Caskroom/p4merge/2014.3-1007540/p4merge.app/Contents/MacOS/p4merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+	cmd = /usr/local/Caskroom/p4merge/2014.3-1007540/p4merge.app/Contents/MacOS/p4merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
 	trustExitCode = true
 [color]
 	ui = auto
@@ -30,17 +31,18 @@
 	cmd = ~/Applications/p4merge.app/Contents/Resources/launchp4merge $PWD/$BASE $PWD/$REMOTE $PWD/$LOCAL $PWD/$MERGED
 	trustExitCode = false
 [difftool "p4mergetool"]
-	cmd = ~//Applications/p4merge.app/Contents/Resources/launchp4merge $LOCAL $REMOTE
-[difftool "deltawalker"]
-		cmd = "~/Applications/DeltaWalker.app/Contents/MacOS/git-diff" "$LOCAL" "$REMOTE"
+	cmd = ~/Applications/p4merge.app/Contents/Resources/launchp4merge $LOCAL $REMOTE
+[difftool  "deltawalker"]
+	cmd = '/usr/local/Caskroom/deltawalker/2.3.0/DeltaWalker.app/Contents/Resources/git-diff' "$LOCAL" "$REMOTE"
+# 		cmd = "~/Applications/DeltaWalker.app/Contents/MacOS/git-diff" "$LOCAL" "$REMOTE"
  [difftool "icdiff"]
-    cmd = icdiff --head=5000 --highlight --line-numbers -L \"$BASE\" -L \"$REMOTE\" \"$LOCAL\" \"$REMOTE\"
+#     cmd = icdiff --head=5000 --highlight --line-numbers -L \"$BASE\" -L \"$REMOTE\" \"$LOCAL\" \"$REMOTE\"
 # use to set pager for difftool
 [pager]
 # difftool = true
 	blame = true
-[mergetool "dw"]
-		cmd = "~/Applications/DeltaWalker.app/Contents/MacOS/git-merge" "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
+[mergetool  "deltawalker"]
+	cmd = '/usr/local/Caskroom/deltawalker/2.3.0/DeltaWalker.app/Contents/Resources/git-merge' "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
 [alias]
 	# list ignored files
 	ignored = ls-files --others -i --exclude-standard
@@ -56,8 +58,10 @@
 	aliases = "!git config -l | grep alias | cut -c 7-"
 	dontcare = !sh -c 'git update-index --assume-unchanged "$@"'
 [merge]
+	tool = deltawalker
 # ff = false
 [diff]
+	tool = deltawalker
 	renames = copies
 [filter "media"]
 	required = true
@@ -69,3 +73,5 @@
 	smudge = git-lfs smudge %f
 [hub]
 	host = github.ibm.com
+[difftool]
+	prompt = false
