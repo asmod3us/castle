@@ -1,0 +1,11 @@
+#!/bin/bash --login
+# run as login shell for rvm
+
+
+rvm use system
+brew reinstall vim --with-lua --with-perl
+brew unlink python
+
+cd ~/castle/dotfiles/vim/bundle/YouCompleteMe/
+./install.sh --clang-completer
+brew link python

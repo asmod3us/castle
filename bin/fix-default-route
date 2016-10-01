@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# tunnel interface
+TUN=utun1
+# network addresses in vpn network
+NET=10
+# NET=10.0.0.0/8
+# default gateway of local network
+DEFAULT_GW=$(netstat -rn -f inet | grep -w default | grep -v "$TUN" | head -n 1 | awk '{print $2}')
+
+# route delete default
+# route add default "$DEFAULT_GW"
+
+# inject custom routes via VPN
+# repeat with _network in _networks
+# route add -interface $network $TUN
+
+route -nv add -net "$NET" -interface "$TUN"
+route change default "$DEFAULT_GW"

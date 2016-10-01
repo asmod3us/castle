@@ -1,0 +1,31 @@
+#!/bin/bash
+
+pn=$(mktemp -dq -t chrome-XXX);
+echo "Starting Chrome for development with profile in $pn";
+read -d '' params  <<EOM
+--ignore-certificate-errors
+--no-default-browser-check
+--disable-web-security
+--disable-application-cache
+--allow-file-access-from-files
+--no-first-run
+--disk-cache-dir=/dev/null
+--disk-cache-size=1
+--media-cache-size=1
+--user-data-dir=$pn
+--enable-remote-debugger
+--remote-debugging-port=9222
+--app=http://localhost:8100
+--app-shell-host-window-size=1024x768
+EOM
+
+# if [[ -e ionic.project ]]; then 
+# 	if [[ -z $(lsof -l -n -P -sTCP:LISTEN -iTCP:8100) ]]; then
+# 		echo "Running ionic"
+# 		ionic serve &
+# 	fi
+# else
+# 	echo "Not a ionic project"
+# fi
+
+open -na 'Google Chrome' --args "$@" $params "$1" >&/dev/null &

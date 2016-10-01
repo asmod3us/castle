@@ -1,0 +1,15 @@
+FILES=$1
+OUTDIR=$(pwd)
+BZ2_UTIL=lbzip2
+
+(
+  tar -c -- $FILES \
+  | tee >(shasum -a 256 >"$OUTDIR"/myfiles.tar.sha256) \
+  | pv -c -N plain 2>/dev/tty \
+  | "$BZ2_UTIL" \
+  | pv -c -N compr 2>/dev/tty \
+  > "$OUTDIR"/myfiles.tar.bz2
+) 2>"$OUTDIR"/myfiles.err
+
+"$BZ2_UTIL" -dc -- "$OUTDIR"/myfiles.tar.bz2 \
+| shasum -a 256 -c -- "$OUTDIR"/myfiles.tar.sha256
