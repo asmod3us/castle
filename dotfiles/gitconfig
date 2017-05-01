@@ -16,14 +16,14 @@
 	keepBackup = false
 # 	keepBackup = false
 [core]
-	excludesfile = /Users/achim/.gitignore_global
+	excludesfile = ~/.gitignore_global
 	autocrlf = input
 	whitespace = blank-at-eol,space-before-tabs,indent-with-non-tab,-tab-in-indent,-blank-at-eof,tabwidth=4
 [difftool "sourcetree"]
-	cmd = /usr/local/bin/ksdiff -w \"$LOCAL\" \"$REMOTE\"
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
-	cmd = /usr/local/Caskroom/p4merge/2014.3-1007540/p4merge.app/Contents/MacOS/p4merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+	cmd = ~/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [color]
 	ui = auto
@@ -57,6 +57,7 @@
 	nuke = !sh -c 'git-nuke $1' -
 	aliases = "!git config -l | grep alias | cut -c 7-"
 	dontcare = !sh -c 'git update-index --assume-unchanged "$@"'
+	up = pull --rebase --autostash
 [merge]
 	tool = deltawalker
 # ff = false
