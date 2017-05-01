@@ -1,8 +1,10 @@
 #!/bin/bash
 
-# script to fix default routes stolen by vpn
+# script to always route through vpn
 
-# default gateway of local network
+# assumption: vpn connection already up
+
+# find current default gateway
 # TUN=utun
 # DEFAULT_GW=$(netstat -rn -f inet | grep -w default | grep -v "$TUN" | head -n 1 | awk '{print $2}')
 
@@ -11,7 +13,7 @@
 
 # HOME_NET=192.168.178.0/24
 VPN_NET=192.168.1.0/24
-# DEFAULT_NS=192.168..1
+# DEFAULT_NS=192.168.178.1
 
 # before connecting:
 # DEFAULT_IF=$(route get 0.0.0.0 | grep interface | awk '{print $2}')
@@ -19,7 +21,7 @@ VPN_NET=192.168.1.0/24
 # DEFAULT_NS=$(scutil --dns | grep -Fm1 nameserver[0] | awk -F': ' '{ print $2 }')
  
 # after connecting:
-# get VPN interface stealing default route
+# get VPN interface with default route
 VPN_IF=$(route get default | grep interface | awk '{print $2}')
 
 # change default route to previous default gw
@@ -42,3 +44,4 @@ sudo route -nv add -net $VPN_NET -interface $VPN_IF
 # set State:/Network/Service/${SERVICE_ID}/DNS
 # quit
 # EOF
+
