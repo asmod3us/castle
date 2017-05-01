@@ -83,12 +83,8 @@ alias ioemulive='ionic emulate ios --consolelogs --serverlogs'
 alias wlb='time wl build --verbose'
 alias wld='time wl deploy --verbose'
 alias wlbd='wlb && wld'
-alias timing='curl -w "@/Users/achim/castle/curl-timeformat" -o /dev/null -s'
-alias mfpb='time mfp build -dd'
-alias mfpd='time mfp deploy -dd'
-
-alias mfp70='/Applications/IBM/MobileFirst-CLI-700/mfp'
-alias mfp71='/Applications/IBM/MobileFirst-CLI-710/mfp'
+alias timing='curl -w "@~/castle/curl-timeformat" -o /dev/null -s'
+alias va='vagrant'
 
 alias cfl=cf-log
 
