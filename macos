@@ -6,7 +6,7 @@
 # settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
 
-mkdir -p ~/Inbox ~/Projects ~/Reference ~/Archive
+mkdir -p ~/Inbox ~/Projects ~/Reference ~/Archive ~/Library/Vim/{swap,backup,undo}
 
 # Ask for the administrator password upfront
 sudo -v
@@ -19,6 +19,13 @@ sudo pmset -a standbydelay 86400
 
 # Disable the sound effects on boot
 sudo nvram SystemAudioVolume=" "
+sudo nvram BootAudio=%00
+
+# disable ui sounds
+defaults write com.apple.systemsound "com.apple.sound.uiaudio.enabled" -int 0
+
+# disable recent places
+defaults write -g NSNavRecentPlacesLimit -int 0
 
 sudo dseditgroup -o edit -a "$USER" -t user admin
 sudo dseditgroup -o edit -a "$USER" -t user wheel
@@ -27,7 +34,7 @@ sudo dseditgroup -o edit -a "$USER" -t user wheel
 xcode-select --install
 
 # install homebrew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+#/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 # install git
 /usr/local/bin/brew install git
@@ -36,13 +43,13 @@ xcode-select --install
 # "$(brew --prefix git)/bin/git" clone --recursive https://github.com/asmod3us/castle castle
 
 # install castle submodules modules
-pushd castle
-git submodule init
-git submodule update --init --recursive
-popd
+# pushd castle
+# git submodule init
+# git submodule update --init --recursive
+# popd
 
 # install stuff
-/usr/local/bin/brew bundle ~/castle/Brewfile
+/usr/local/bin/brew bundle --check --file=~/castle/Brewfile-skynet
 
 # Menu bar: disable transparency
 defaults write -g NSDisableAutomaticTermination -bool yes
@@ -102,7 +109,7 @@ defaults write org.n8gray.QLColorCode pathHL "$(which highlight)"
 
 # Set a blazingly fast keyboard repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write NSGlobalDomain InitialKeyRepeat -int 10
+defaults write NSGlobalDomain InitialKeyRepeat -int 25
 
 # Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
@@ -365,9 +372,43 @@ chflags nohidden ~/Library
 # turn off shadows in screenshots
 defaults write com.apple.screencapture disable-shadow -bool true
 
+# add menu bar items, from https://jamfnation.jamfsoftware.com/discussion.html?id=10576
+PreferredMenuExtras=(
+"/Applications/Utilities/Keychain Access.app/Contents/Resources/Keychain.menu"
+"/System/Library/CoreServices/Menu Extras/AirPort.menu"
+"/System/Library/CoreServices/Menu Extras/Battery.menu"
+"/System/Library/CoreServices/Menu Extras/Bluetooth.menu"
+"/System/Library/CoreServices/Menu Extras/Clock.menu"
+"/System/Library/CoreServices/Menu Extras/Eject.menu"
+)
+currentUser=$( ls -l /dev/console | awk '{print $3}' )
+userHome=$( dscl . read /Users/$currentUser NFSHomeDirectory | awk '{print $NF}' )
+
+MenuExtras=$( defaults read "$userHome/Library/Preferences/com.apple.systemuiserver.plist" menuExtras | awk -F'"' '{print $2}' )
+
+for menuExtra in "${PreferredMenuExtras[@]}"; do
+    menuShortName=$( echo "${menuExtra}" | awk -F'/' '{print $NF}' )
+    if [[ $( echo "${MenuExtras}" | grep "${menuExtra}" ) ]]; then
+        echo "Menu Extra \"${menuShortName}\" present"
+    else
+        echo "Menu Extra \"${menuShortName}\" not in plist. Opening..."
+        open "${menuExtra}"
+    fi
+done
+
+# nvalt solarized light from https://github.com/LambdaDriver/Solar-Flair/blob/master/solarALT
+defaults write net.elasticthreads.nv ColorScheme 2
+defaults write net.elasticthreads.nv BackgroundTextColor "<040b7374 7265616d 74797065 6481e803 84014084 8484074e 53436f6c 6f720084 84084e53 4f626a65 63740085 84016301 84046666 6666838f 4b7d3f83 d03b753f 8306335d 3f0186>"
+defaults write net.elasticthreads.nv ForegroundTextColor "<040b7374 7265616d 74797065 6481e803 84014084 8484074e 53436f6c 6f720084 84084e53 4f626a65 63740085 84016301 84046666 666683bc 93e13e83 1177023f 83ce5004 3f0186>"
+defaults write net.elasticthreads.nv SearchTermHighlightColor "<040b7374 7265616d 74797065 6481e803 84014084 8484074e 53436f6c 6f720084 84084e53 4f626a65 63740085 84016301 84046666 6666833a 866a3f83 dad7633f 83583d4c 3f0186>"
+
 for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
 	"Dock" "Finder" "Google Chrome" "Mail" "Messages" "Photos" "Safari" "SizeUp" \
 	"SystemUIServer" "Terminal" "Transmission" "Twitter" "iCal"; do
 	killall "${app}" > /dev/null 2>&1
 done
 
+# preview doc history
+# defaults delete com.apple.Preview.LSSharedFileList RecentDocuments
+# defaults write com.apple.Preview NSRecentDocumentsLimit 0 
+# defaults write com.apple.Preview.LSSharedFileList RecentDocuments -dict-add MaxAmount 0 
