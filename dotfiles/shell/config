@@ -260,10 +260,13 @@ preexec_invoke_exec() {
 
 STARTUID=$(id -u)
 
-# set up prompt
-function prompt_command() {
+retval() {
 	# remember exit code for coloring
-	exitCode=$?
+	RETVAL=$?
+}
+
+# set up prompt
+prompt_command() {
 
 	# red color for root
 	if [ $UID -eq 0 ]; then
@@ -276,8 +279,8 @@ function prompt_command() {
 	fi
 
 	# red exit code and prompt sign if non-zero
-	if [[ $exitCode -ne 0 ]]; then
-		EXIT_CODE="\[${RED}\]($exitCode) "
+	if [[ $RETVAL -ne 0 ]]; then
+		EXIT_CODE="\[${RED}\]($RETVAL) "
 		SIGN="\[${RED}\]❯ "
 	else
 		EXIT_CODE=""
@@ -352,6 +355,6 @@ preexec_install
 # Whenever displaying the prompt, write the previous line to disk (-a) and read
 # the new line into the history list (-n). Also run the command timing hook.
 if [[ ! ${PROMPT_COMMAND} =~ 'prompt_command' ]]; then
-	export PROMPT_COMMAND="history -a; history -n; setTabTitleToPwd; ${PROMPT_COMMAND:-} preexec_invoke_cmd; prompt_command"
+	export PROMPT_COMMAND="retval; history -a; history -n; setTabTitleToPwd; ${PROMPT_COMMAND:-} preexec_invoke_cmd; prompt_command"
 fi
 
