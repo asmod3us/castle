@@ -30,7 +30,7 @@ fn() {
 
 mkipa() {
 	DEVID='iPhone Developer: Achim Staebler (C2U6957A7Q)'
-	IPADIR=/Users/achim/Inbox
+	IPADIR=${HOME}/Inbox
 	DIR=$(pwd)
 
 	if [[ -n $(ls -ld1 apps/*/iphone/native 2>/dev/null) ]]; then
