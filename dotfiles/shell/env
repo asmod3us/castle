@@ -10,8 +10,7 @@ fi
 export GROOVY_HOME=${TOOLS}/groovy
 export GRAILS_HOME=${TOOLS}/grails
 export SCALA_HOME=${TOOLS}/scala
-export ANDROID_HOME=${TOOLS}/android-sdk
-export ANDROID_SDK_ROOT=${TOOLS}/android-sdk
+export ANDROID_HOME=/usr/local/opt/android-sdk
 export ASPECTJ_HOME=${TOOLS}/aspectj
 export SCALA_HOME=${TOOLS}/scala
 export MVN_HOME=${TOOLS}/maven
