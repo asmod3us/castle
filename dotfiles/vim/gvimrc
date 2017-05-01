@@ -2,6 +2,8 @@
 set guioptions-=T " turn off toolbar
 if has("mac") || has("macunix")
 	set guifont=Monaco\ for\ Powerline:h13
+	" set guifont=Fira\ Code:h12 " for Fira Code
+	set macligatures
 endif
 set ch=2 " Make command line two lines high
 set mousehide " Hide the mouse when typing text
@@ -18,4 +20,3 @@ highlight Normal guibg=#fdf6e3
 " maximize window without going fullscreen
 set lines=999
 set columns=999
-set macligatures
