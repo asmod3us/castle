@@ -311,5 +311,15 @@ regex1() {
 	gawk 'match($0,/'"$1"'/, ary) {print ary['"${2:-'1'}"']}';
 }
 
+todmg() {
+	if [[ $# -eq 0 ]]; then
+		echo "Usage: todmg DIR"
+	else 
+		local name
+		name=${1/.app/}
+		hdiutil create -verbose -volname "$name" -srcfolder "$1" -fs HFS+ -format UDZO "${name}.dmg"
+	fi
+}
+
 # init scmpuff
 eval "$(scmpuff init -s)"
