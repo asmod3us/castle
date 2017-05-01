@@ -81,8 +81,10 @@ zipit() {
 		fn="${fn##*/}"
 		zip -9r "$fn.zip" ./*
 	else
-		echo zip -9r "${1}.zip" "$1"
-		zip -9r "${1}.zip" "$1"
+		local name
+		name="${1%/}.zip"
+		echo zip -9r "${name}" "$1"
+		zip -9r "${name}" "$1"
 	fi
 }
 
