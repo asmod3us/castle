@@ -321,5 +321,14 @@ todmg() {
 	fi
 }
 
+
+dumpchain() {
+	if [[ $# -eq 0 ]]; then
+		echo "Usage: dumpchain FILE"
+	else
+		awk -v cmd="openssl x509 -subject -noout" '/-----BEGIN/ { c = $0; next } c { c = c "\n" $0 } /-----END/ { print c|cmd; close(cmd); c = 0 }' < "$1"
+	fi
+}
+
 # init scmpuff
 eval "$(scmpuff init -s)"
