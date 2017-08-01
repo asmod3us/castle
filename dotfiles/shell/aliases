@@ -72,7 +72,7 @@ alias ag='ag --color-path=33 --color-match=35'
 alias srct="tree -d -L 3 -I 'node_modules|bin|server|bower_components'"
 alias gf='git flow'
 alias gff='git flow feature'
-alias dw='~/Applications/DeltaWalker.app/Contents/MacOS/DeltaWalker -pwd=$(pwd)'
+alias dw='~/Applications/DeltaWalker.app/Contents/MacOS/DeltaWalker -pwd="$(pwd)"'
 alias prettymd='pandoc -t markdown --atx-headers --no-wrap'
 alias str='stree'
 alias io='ionic'
