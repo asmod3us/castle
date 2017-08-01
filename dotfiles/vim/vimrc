@@ -4,11 +4,115 @@ set nocompatible
 filetype off " needs to be off for pathogen
 
 " Pathogen is a submodule like all others
-runtime bundle/pathogen/autoload/pathogen.vim
+" runtime bundle/pathogen/autoload/pathogen.vim
 
 " Pathogen needs to run before syntax on or filetype plugin indent
-call pathogen#infect()
-Helptags " generate all helptags
+" call pathogen#infect()
+
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+" Required:
+set runtimepath+=~/.vim/bundles/repos/github.com/Shougo/dein.vim
+
+" Required:
+if dein#load_state('~/.vim/bundles')
+  call dein#begin('~/.vim/bundles')
+
+  " Let dein manage dein
+  " Required:
+  call dein#add('~/.vim/bundles/repos/github.com/Shougo/dein.vim')
+
+  " Add or remove your plugins here:
+  call dein#add('lifepillar/vim-solarized8')
+  call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
+  call dein#add('Chiel92/vim-autoformat')
+  call dein#add('JazzCore/ctrlp-cmatcher')
+  call dein#add('Keithbsmiley/swift.vim.git')
+  call dein#add('Lokaltog/vim-easymotion')
+  call dein#add('Raimondi/delimitMate')
+  " call dein#add('Shougo/neocomplete.vim')
+  " call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/vimproc.vim')
+  call dein#add('SirVer/ultisnips')
+  call dein#add('Valloric/MatchTagAlways')
+  call dein#add('Valloric/YouCompleteMe')
+  call dein#add('airblade/vim-gitgutter')
+  call dein#add('artur-shaik/vim-javacomplete2')
+  call dein#add('asmod3us/neocomplete-ultisnips')
+  call dein#add('asmod3us/vim-web-indent')
+  call dein#add('bling/vim-airline')
+  call dein#add('brandonbloom/csearch.vim')
+  call dein#add('burnettk/vim-angular')
+  call dein#add('cakebaker/scss-syntax.vim.git')
+  call dein#add('chriskempson/base16-shell')
+  call dein#add('chriskempson/base16-vim')
+  call dein#add('christoomey/vim-tmux-navigator')
+  call dein#add('ctrlpvim/ctrlp.vim')
+  call dein#add('digitaltoad/vim-jade')
+  call dein#add('editorconfig/editorconfig-vim')
+  call dein#add('edkolev/promptline.vim')
+  call dein#add('elzr/vim-json')
+  call dein#add('godlygeek/tabular')
+  call dein#add('groenewege/vim-less')
+  call dein#add('guileen/vim-node')
+  call dein#add('hail2u/vim-css3-syntax')
+  call dein#add('honza/vim-snippets')
+  call dein#add('jeffkreeftmeijer/vim-numbertoggle')
+  call dein#add('juanpabloaj/vim-istanbul')
+  call dein#add('justinmk/vim-gtfo')
+  call dein#add('kchmck/vim-coffee-script')
+  call dein#add('kris89/vim-multiple-cursors')
+  call dein#add('majutsushi/tagbar')
+  call dein#add('maksimr/vim-jsbeautify')
+  call dein#add('marijnh/tern_for_vim')
+  call dein#add('mattn/emmet-vim')
+  call dein#add('mattn/gist-vim')
+  call dein#add('mattn/webapi-vim')
+  call dein#add('mephux/vim-jsfmt.git')
+  call dein#add('mileszs/ack.vim')
+  call dein#add('moll/vim-node')
+  call dein#add('nathanaelkane/vim-indent-guides.git')
+  call dein#add('othree/javascript-libraries-syntax.vim')
+  call dein#add('othree/xml.vim')
+  call dein#add('pangloss/vim-javascript.git')
+  call dein#add('rizzatti/dash.vim.git')
+  call dein#add('rking/ag.vim')
+  call dein#add('scrooloose/nerdtree.git')
+  call dein#add('sjl/gundo.vim.git')
+  call dein#add('tomtom/tcomment_vim')
+  call dein#add('tpope/vim-fugitive.git')
+  call dein#add('tpope/vim-haml')
+  call dein#add('tpope/vim-markdown')
+  call dein#add('tpope/vim-pathogen')
+  call dein#add('tpope/vim-repeat.git')
+  call dein#add('tpope/vim-surround')
+  call dein#add('tpope/vim-unimpaired.git')
+  call dein#add('vim-airline/vim-airline-themes')
+  call dein#add('vim-pandoc/vim-pandoc')
+  call dein#add('vim-pandoc/vim-pandoc-syntax')
+  call dein#add('vim-scripts/DirDiff.vim')
+  call dein#add('vim-scripts/camelcasemotion')
+  call dein#add('vim-scripts/matchit.zip')
+  call dein#add('w0rp/ale')
+  call dein#add('wavded/vim-stylus')
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+
+"End dein Scripts-------------------------
+
+" Helptags
+" generate all helptags
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -16,23 +120,23 @@ map Q gq
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if has('syntax') && !exists('g:syntax_on')
-	if &t_Co > 2 || has("gui_running")
-		syntax enable
-		set hlsearch
-	endif
+  if &t_Co > 2 || has("gui_running")
+    syntax enable
+    set hlsearch
+  endif
 endif
 
 " solarized config
 if !has('gui_running')
-	" Compatibility for Terminal
-	let g:solarized_termtrans=0
+  " Compatibility for Terminal
+  let g:solarized_termtrans=0
 
-	if (&t_Co >= 256 || $TERM == 'xterm-256color')
-		" Do nothing, it handles itself.
-	else
-		" Make Solarized use 16 colors for Terminal support
-		let g:solarized_termcolors=16
-	endif
+  if (&t_Co >= 256 || $TERM == 'xterm-256color')
+    " Do nothing, it handles itself.
+  else
+    " Make Solarized use 16 colors for Terminal support
+    let g:solarized_termcolors=16
+  endif
 endif
 
 " Only do this part when compiled with support for autocommands.
@@ -198,9 +302,9 @@ nmap :Q :q
 map ,dir :sp ~/tmp/vimdir<CR>G1dG:r!ls -al<CR>:se nomod<CR>
 
 fun MyIndent()
-	let oldLine=line('.')
-	normal(gg=G)
-	execute ':' . oldLine
+  let oldLine=line('.')
+  normal(gg=G)
+  execute ':' . oldLine
 endfun
 
 map -- :call MyIndent()<cr>
@@ -228,7 +332,7 @@ map -- :call MyIndent()<cr>
 
 " returns true iff is NERDTree open/active
 function! IsNTOpen()
-	return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
 endfunction
 
 " returns true iff focused window is NERDTree window
@@ -315,9 +419,9 @@ vnoremap <C-r> <Esc>:%s/<c-r>=GetVisual()<cr>/
 " os-specific configuration
 let s:os = system("uname")
 if s:os =~ "Darwin"
-	so ~/.vim/os/darwin.vim
+  so ~/.vim/os/darwin.vim
 else
-	so ~/.vim/os/linux.vim
+  so ~/.vim/os/linux.vim
 endif
 
 set clipboard+=unnamed " use system clipboard
