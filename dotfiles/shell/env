@@ -17,10 +17,6 @@ export MVN_HOME=${TOOLS}/maven
 export GROOVY_HOME=${TOOLS}/groovy
 export GRAILS_HOME=${TOOLS}/grails
 export RBENV_ROOT=/usr/local/var/rbenv
-export SENCHA_CMD_3_0_0="${HOME}/Tools/Sencha/Cmd/4.0.4.84"
-export SENCHA_SDK_TOOLS_2_0_0_BETA3="${HOME}/Sencha/SenchaSDKTools-2.0.0-beta3"
-export WLP_HOME=/opt/IBM/WebSphere/Liberty
-export WLP_USER_DIR=${WLP_HOME}/usr
 export GOPATH=${TOOLS}/go
 export NODE_HOME=${HOME}/.node
 
@@ -48,9 +44,6 @@ pathAppend ${ANDROID_HOME}/platform-tools
 pathAppend ${ASPECTJ_HOME}/bin
 pathAppend ${SCALA_HOME}/bin
 pathAppend ${MVN_HOME}/bin
-pathAppend ${SENCHA_CMD_3_0_0}
-# pathAppend ${SENCHA_SDK_TOOLS_2_0_0_BETA3}
-pathAppend ${WLP_HOME}/bin
 pathAppend $PATH:$HOME/.rvm/bin
 pathAppend $GOPATH/bin
 pathAppend $NODE_HOME/bin
