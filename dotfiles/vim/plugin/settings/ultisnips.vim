@@ -3,5 +3,5 @@
 let g:UltiSnipsExpandTrigger="<C-e>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
-let g:UltiSnipsListSnippets="<c-l>"
+let g:UltiSnipsListSnippets="<C-l>"
 
