@@ -32,6 +32,7 @@ fi
 
 pathPrepend /usr/texbin
 pathPrepend /usr/local/bin
+pathPrepend $(brew --prefix)/opt/python/libexec/bin
 pathPrepend /usr/local/sbin
 pathAppend /sbin
 pathAppend /usr/sbin
