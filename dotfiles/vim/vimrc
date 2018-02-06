@@ -435,6 +435,7 @@ map <C-]> TernDef<CR>
 " autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 " autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" autocmd BufWritePost *.js AsyncRun -post=checktime eslint --fix %
 set complete-=i
 
 " detect filetype form extension
