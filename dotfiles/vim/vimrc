@@ -3,113 +3,92 @@
 set nocompatible
 filetype off " needs to be off for pathogen
 
-" Pathogen is a submodule like all others
-" runtime bundle/pathogen/autoload/pathogen.vim
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin('~/.vim/bundle')
 
-" Pathogen needs to run before syntax on or filetype plugin indent
-" call pathogen#infect()
-
-"dein Scripts-----------------------------
-if &compatible
-  set nocompatible               " Be iMproved
-endif
-
-" Required:
-set runtimepath+=~/.vim/bundles/repos/github.com/Shougo/dein.vim
-
-" Required:
-if dein#load_state('~/.vim/bundles')
-  call dein#begin('~/.vim/bundles')
-
-  " Let dein manage dein
-  " Required:
-  call dein#add('~/.vim/bundles/repos/github.com/Shougo/dein.vim')
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 
   " Add or remove your plugins here:
-  call dein#add('lifepillar/vim-solarized8')
-  call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
-  call dein#add('Chiel92/vim-autoformat')
-  call dein#add('JazzCore/ctrlp-cmatcher')
-  call dein#add('Keithbsmiley/swift.vim.git')
-  call dein#add('Lokaltog/vim-easymotion')
-  call dein#add('Raimondi/delimitMate')
-  " call dein#add('Shougo/neocomplete.vim')
-  " call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/vimproc.vim')
-  call dein#add('SirVer/ultisnips')
-  call dein#add('Valloric/MatchTagAlways')
-  call dein#add('Valloric/YouCompleteMe')
-  call dein#add('airblade/vim-gitgutter')
-  call dein#add('artur-shaik/vim-javacomplete2')
-  call dein#add('asmod3us/neocomplete-ultisnips')
-  call dein#add('asmod3us/vim-web-indent')
-  call dein#add('bling/vim-airline')
-  call dein#add('brandonbloom/csearch.vim')
-  call dein#add('burnettk/vim-angular')
-  call dein#add('cakebaker/scss-syntax.vim.git')
-  call dein#add('chriskempson/base16-shell')
-  call dein#add('chriskempson/base16-vim')
-  call dein#add('christoomey/vim-tmux-navigator')
-  call dein#add('ctrlpvim/ctrlp.vim')
-  call dein#add('digitaltoad/vim-jade')
-  call dein#add('editorconfig/editorconfig-vim')
-  call dein#add('edkolev/promptline.vim')
-  call dein#add('elzr/vim-json')
-  call dein#add('godlygeek/tabular')
-  call dein#add('groenewege/vim-less')
-  call dein#add('guileen/vim-node')
-  call dein#add('hail2u/vim-css3-syntax')
-  call dein#add('honza/vim-snippets')
-  call dein#add('jeffkreeftmeijer/vim-numbertoggle')
-  call dein#add('juanpabloaj/vim-istanbul')
-  call dein#add('justinmk/vim-gtfo')
-  call dein#add('kchmck/vim-coffee-script')
-  call dein#add('kris89/vim-multiple-cursors')
-  call dein#add('majutsushi/tagbar')
-  call dein#add('maksimr/vim-jsbeautify')
-  call dein#add('marijnh/tern_for_vim')
-  call dein#add('mattn/emmet-vim')
-  call dein#add('mattn/gist-vim')
-  call dein#add('mattn/webapi-vim')
-  call dein#add('mephux/vim-jsfmt.git')
-  call dein#add('mileszs/ack.vim')
-  call dein#add('moll/vim-node')
-  call dein#add('nathanaelkane/vim-indent-guides.git')
-  call dein#add('othree/javascript-libraries-syntax.vim')
-  call dein#add('othree/xml.vim')
-  call dein#add('pangloss/vim-javascript.git')
-  call dein#add('rizzatti/dash.vim.git')
-  call dein#add('rking/ag.vim')
-  call dein#add('scrooloose/nerdtree.git')
-  call dein#add('sjl/gundo.vim.git')
-  call dein#add('tomtom/tcomment_vim')
-  call dein#add('tpope/vim-fugitive.git')
-  call dein#add('tpope/vim-haml')
-  call dein#add('tpope/vim-markdown')
-  call dein#add('tpope/vim-pathogen')
-  call dein#add('tpope/vim-repeat.git')
-  call dein#add('tpope/vim-surround')
-  call dein#add('tpope/vim-unimpaired.git')
-  call dein#add('vim-airline/vim-airline-themes')
-  call dein#add('vim-pandoc/vim-pandoc')
-  call dein#add('vim-pandoc/vim-pandoc-syntax')
-  call dein#add('vim-scripts/DirDiff.vim')
-  call dein#add('vim-scripts/camelcasemotion')
-  call dein#add('vim-scripts/matchit.zip')
-  call dein#add('w0rp/ale')
-  call dein#add('wavded/vim-stylus')
+Plugin 'lifepillar/vim-solarized8'
+Plugin 'Shougo/vimshell', { 'rev': '3787e5' }
+Plugin 'Chiel92/vim-autoformat'
+" Plugin 'JazzCore/ctrlp-cmatcher'
+Plugin 'Keithbsmiley/swift.vim.git'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'Raimondi/delimitMate'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'Valloric/MatchTagAlways'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'artur-shaik/vim-javacomplete2'
+Plugin 'Arkham/vim-web-indent'
+Plugin 'bling/vim-airline'
+Plugin 'brandonbloom/csearch.vim'
+Plugin 'burnettk/vim-angular'
+Plugin 'cakebaker/scss-syntax.vim.git'
+Plugin 'chriskempson/base16-shell'
+Plugin 'chriskempson/base16-vim'
+Plugin 'christoomey/vim-tmux-navigator'
+" Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'digitaltoad/vim-jade'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'edkolev/promptline.vim'
+Plugin 'elzr/vim-json'
+Plugin 'godlygeek/tabular'
+Plugin 'groenewege/vim-less'
+Plugin 'guileen/vim-node-dict'
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'honza/vim-snippets'
+Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+Plugin 'juanpabloaj/vim-istanbul'
+Plugin 'justinmk/vim-gtfo'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'kris89/vim-multiple-cursors'
+Plugin 'majutsushi/tagbar'
+Plugin 'maksimr/vim-jsbeautify'
+Plugin 'marijnh/tern_for_vim'
+Plugin 'mattn/emmet-vim'
+Plugin 'mattn/gist-vim'
+Plugin 'mattn/webapi-vim'
+Plugin 'mephux/vim-jsfmt.git'
+Plugin 'mileszs/ack.vim'
+Plugin 'moll/vim-node'
+Plugin 'nathanaelkane/vim-indent-guides.git'
+Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'othree/xml.vim'
+Plugin 'pangloss/vim-javascript.git'
+Plugin 'rizzatti/dash.vim.git'
+Plugin 'rking/ag.vim'
+Plugin 'scrooloose/nerdtree.git'
+Plugin 'sjl/gundo.vim.git'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'tpope/vim-fugitive.git'
+Plugin 'tpope/vim-haml'
+Plugin 'tpope/vim-markdown'
+Plugin 'tpope/vim-pathogen'
+Plugin 'tpope/vim-repeat.git'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired.git'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plugin 'vim-scripts/DirDiff.vim'
+Plugin 'vim-scripts/camelcasemotion'
+Plugin 'vim-scripts/matchit.zip'
+Plugin 'w0rp/ale'
+Plugin 'wavded/vim-stylus'
+Plugin 'skywind3000/asyncrun.vim'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
+Plugin 'mbbill/undotree'
+Plugin 'itspriddle/vim-marked'
 
-  " Required:
-  call dein#end()
-  call dein#save_state()
-endif
-
-" If you want to install not installed plugins on startup.
-if dein#check_install()
-  call dein#install()
-endif
-
-"End dein Scripts-------------------------
+call vundle#end()            " required
+filetype plugin indent on    " required
 
 " Helptags
 " generate all helptags
