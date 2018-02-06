@@ -34,3 +34,5 @@ shellStart=$(date +%s)
 include bashrc
 shellEnd=$(date +%s)
 export shellStart shellEnd
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
