@@ -145,7 +145,7 @@ _gen_fzf_default_opts() {
   local color0D='#268bd2'
   local color0E='#6c71c4'
   local color0F='#d33682'
-  
+
   export FZF_DEFAULT_OPTS="
     --height 25%
     --color=bg+:$color0F,bg:$color00,spinner:$color0C,hl:$color0F
@@ -307,24 +307,25 @@ prompt_command() {
 
 	# red color for root
 	if [ $UID -eq 0 ]; then
-		USER_HOST="\[${RED}\]\u@\h "
+		local USER_HOST="\[${RED}\]\u@\h "
 	elif [ ! $UID -eq $STARTUID ]; then
 		# show user and host
-		USER_HOST="\[${CYAN}\]\u@\h "
+		local USER_HOST="\[${CYAN}\]\u@\h "
 	else 
-		USER_HOST=""
+		local USER_HOST=""
 	fi
 
 	# red exit code and prompt sign if non-zero
 	if [[ $RETVAL -ne 0 ]]; then
-		EXIT_CODE="\[${RED}\]($RETVAL) "
-		SIGN="\[${RED}\]❯ "
+		local EXIT_CODE="\[${RED}\]($RETVAL) "
+		local SIGN="\[${RED}\]❯ "
 	else
-		EXIT_CODE=""
-		SIGN="❯ "
+		local EXIT_CODE=""
+		local SIGN="❯ "
 	fi
 
-	TIME="\A "
+	local TIME="\A "
+	local ELAPSED=""
 	if [ -n "$lastElapsed" ]; then
 		# threshold is 5 seconds
 		if [ $lastElapsed -gt 5 ]; then
@@ -332,15 +333,13 @@ prompt_command() {
 			unset timer
 			unset lastElapsed
 		fi
-	else
-		ELAPSED=""
 	fi
 
 	local VENVINFO="\$(venvInfo)"
 	# __git_ps1 is a bit slow
 	# GITINFO="\$(type -t __git_ps1 &> /dev/null && __git_ps1 '[%s] ')"
-	GITINFO="\$(gitInfo)"
-	DISPLAYPATH="\w"
+	local GITINFO="\$(gitInfo)"
+	local DISPLAYPATH="\w"
 
 	# set the prompt
 	PS1="\[${RESET}${PROMPTBG}${BASE1}\]"
