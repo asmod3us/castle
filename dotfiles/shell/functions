@@ -321,7 +321,6 @@ todmg() {
 	fi
 }
 
-
 dumpchain() {
 	if [[ $# -eq 0 ]]; then
 		echo "Usage: dumpchain FILE"
