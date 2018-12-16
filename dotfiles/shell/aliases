@@ -90,4 +90,4 @@ alias cfl=cf-log
 
 alias less='less -x4 -m -N -g -i -J --underline-special -Q'
 alias newletter='cp ~/Dropbox/Projects/panletter/letter.md .'
-alias cdg='cd ~/Google\ Drive'
+alias cdg='cd ~/Google\ Drive\ File\ Stream/My\ Drive'
