@@ -2,6 +2,7 @@
 let g:solarized_contrast = "normal"
 set background=light
 let g:colors_contrast="high"
+set termguicolors
 
 colorscheme solarized8_light_high
 
