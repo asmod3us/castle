@@ -1,5 +1,0 @@
-#!/bin/bash
-SUT='http://localhost:59449/stwebapi/call?number=';
-NUM=$(echo $1 | tr -d ' ' | sed -e 's/^\+/00/' $1);
-
-exec curl ${SUT}${NUM}
