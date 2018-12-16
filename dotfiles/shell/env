@@ -18,7 +18,7 @@ export GROOVY_HOME=${TOOLS}/groovy
 export GRAILS_HOME=${TOOLS}/grails
 export RBENV_ROOT=/usr/local/var/rbenv
 export GOPATH=${TOOLS}/go
-export NODE_HOME=${HOME}/.node
+# export NODE_HOME=${HOME}/.node
 
 export EDITOR=vim
 #export TERM=xterm-color
@@ -47,7 +47,7 @@ pathAppend ${SCALA_HOME}/bin
 pathAppend ${MVN_HOME}/bin
 pathAppend $PATH:$HOME/.rvm/bin
 pathAppend $GOPATH/bin
-pathAppend $NODE_HOME/bin
+# pathAppend $NODE_HOME/bin
 
 export PATH
 
