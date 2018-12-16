@@ -158,6 +158,12 @@ _gen_fzf_default_opts
 
 bind -x '"\C-p": vim $(fzf);'
 
+venvInfo() {
+	[[ -z ${VIRTUAL_ENV} ]] && return
+	VENV=$(basename "${VIRTUAL_ENV}")
+	echo -n "🐍$VENV "
+}
+
 # fastest possible way to check if repo is dirty
 gitInfo() {
 	# check if we're in a git repo
@@ -330,6 +336,7 @@ prompt_command() {
 		ELAPSED=""
 	fi
 
+	local VENVINFO="\$(venvInfo)"
 	# __git_ps1 is a bit slow
 	# GITINFO="\$(type -t __git_ps1 &> /dev/null && __git_ps1 '[%s] ')"
 	GITINFO="\$(gitInfo)"
@@ -341,6 +348,7 @@ prompt_command() {
 	PS1+="\[${VIOLET}\]${ELAPSED}"
 	PS1+="${USER_HOST}"
 	PS1+="${EXIT_CODE}"
+	PS1+="\[${CYAN}\]${VENVINFO}"
 	PS1+="\[${BLUE}\]${GITINFO}"
 	PS1+="\[${ORANGE}\]${DISPLAYPATH}"
 	PS1+="\[${CLEAREOL}${RESET}\]\n"
