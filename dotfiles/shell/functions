@@ -174,11 +174,11 @@ getScreenHeight() {
 }
 
 urlencode() {
-	python -c "import sys, urllib as ul; print ul.quote_plus('$1')"
+	python -c "import sys, urllib.parse as ul; print(ul.quote_plus('$1'))"
 }
 
 urldecode() {
-	python -c "import sys, urllib as ul; print ul.unquote_plus('$1')"
+	python -c "import sys, urllib.parse as ul; print(ul.unquote_plus('$1'))"
 }
 
 # faster grep with mdfind and ack. pattern is a literal
@@ -327,6 +327,14 @@ dumpchain() {
 		echo "Usage: dumpchain FILE"
 	else
 		awk -v cmd="openssl x509 -subject -noout" '/-----BEGIN/ { c = $0; next } c { c = c "\n" $0 } /-----END/ { print c|cmd; close(cmd); c = 0 }' < "$1"
+	fi
+}
+
+sv() {
+	if [[ -d "./venv" ]] && [[ -r "./venv" ]]; then
+		source "./venv/bin/activate"
+	else
+		workon "$(basename "$(pwd)")"
 	fi
 }
 
