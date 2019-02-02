@@ -16,4 +16,4 @@ EOM
 
 open -na 'Google Chrome' --args "$@" $params >&/dev/null &
 FOO_PID=$!
-echo "$(date +%Y-%m-%d_%H%M%S) pid is $FOO_PID" >> ~/chrome.log
+# echo "$(date +%Y-%m-%d_%H%M%S) pid is $FOO_PID" >> ~/chrome.log
