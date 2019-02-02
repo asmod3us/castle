@@ -15,3 +15,9 @@ case $- in
 		fi
 		;;
 esac
+
+###-tns-completion-start-###
+if [ -f /Users/achim.staebler/.tnsrc ]; then 
+    source /Users/achim.staebler/.tnsrc 
+fi
+###-tns-completion-end-###
