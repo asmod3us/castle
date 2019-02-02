@@ -1,0 +1,317 @@
+#!/bin/bash
+
+# Firstrun script for a freshly imaged JSS managed OS X client.
+
+# Author      : r.purves@arts.ac.uk
+
+# Version 1.0 : 1-11-2012 - Initial Version
+# Version 1.1 : 5-11-2012 - Added MS DNS server settings
+# Version 1.2 : 6-11-2012 - Now forcibly resets all network services to default
+# Version 1.3 : 8-11-2012 - The above but also:
+# 1) Finds the mac model name from the current computer
+# 2) Fixes the /Library/Preferences/SystemConfiguration/preferences.plist to use correct model name
+# 3) Removed MS DNS server settinsg
+# This is because casper imaging 8.62 isn't changing the model key at all in this file causing headaches
+# Version 1.4 : 13-11-2012 - Forces a policy flush and an mcx push.
+# Version 1.5 : 19-11-2012 - Added assistive device and AD authenticated printing settings.
+
+# Version 2.0 : 22-11-2012 - Added cascading menu system to fix Casper 8.62 building/dept bug
+# Version 2.1 : 22-11-2012 - Now with added error trapping! Moved MCX refresh to just before manual software install trigger.
+# Version 2.2 : 23-11-2012 - Interrogates JSS for building/dept config and skips menu if it has one.
+# Version 2.3 : 23-11-2012 - Moved variables behind iHook invoke code to stop spurious screen on startup.
+# Version 2.4 : 26-11-2012 - Tidied up JSS interrogation and added Adobe installer policies.
+# Version 2.5 : 28-11-2012 - Implemented change of background for menu at specific points.
+# Version 2.6 : 03-12-2012 - Process check function to try and avoid multiple jamf triggers running at once.
+# Version 2.7 : 10-12-2012 - Changed timer on check function. Added code to make sure network and local hostnames are correct.
+# Version 2.8 : 20-12-2012 - Debugged (again) the JSS check and added a computer/hostname refresh. Should keep DNS up to date.
+# Version 2.9 : 18-01-2013 - Removed energy saver as this is now deployed automatically via smart groups
+# Version 2.91: 24-01-2013 - Added time zone setting for incorrect clock on first boot.
+# Version 2.92: 06-02-2013 - Removed spaces from department names.
+# Version 2.93: 22-03-2013 - Added ARD enable for remote imaging purposes.
+# Version 2.94: 28-03-2013 - Added the deletion of Adobe SpeedGrade symbolic link to fix inventory issues.
+# Version 2.95: 20-05-2013 - Moved uadmin account creation to start of script along with addition to allowed SSH users list.
+
+# Version 3.0 : 12-06-2013 - Initial Deploy version. Removed menu. Hard code building for Self Service deploy later.
+# Version 3.01: 12-06-2013 - Added final recon to keep inventory correct
+# Version 3.02: 12-08-2013 - Recording current imaging time to file for extension attribute
+# Version 3.03: 18-10-2013 - Modification to re-enroll section that checks if the "jamf manage" stuff left by Imaging has finished
+# Version 3.04: 29-01-2014 - Modified to set UAL energy saving settings before script finish, and to force curl install to use option "-3"
+#                            This option forces the use of SSLv3. It only needs to be present on Casper sshadmin management account.
+# Version 3.05: 07-02-2014 - Records last update time after performing the update
+# Version 3.1 : 04-03-2014 - Work by j.durler@arts.ac.uk and myself to detect if computer inventory building/dept settings are present.
+#                            If they are, auto image with correct software. If not, dump into holding group.
+
+# iHook 1.2 - for status display over login window
+# Copyright 2006 - Research Systems Unix Group
+# http://rsug.itd.umich.edu/software/ihook
+
+# Set up the variables we need for future changes
+
+RunLoc="/firstrun"
+AdminPW="xx"
+MacModel=$( ioreg -l | awk '/product-name/ { split($0, line, "\""); printf("%s\n", line[4]); }' )
+PrefModel=$( defaults read /Library/Preferences/SystemConfiguration/preferences.plist Model )
+errorcode=1
+EnrollLD="/Library/LaunchDaemons/com.jamfsoftware.firstrun.enroll.plist"
+EnrolWait=$(( 8 * 60 ))
+EnrolWaitIncrement=30
+
+# Start iHook progress display and to lock out the user from the mac
+
+/bin/echo %BECOMEKEY
+/bin/echo %WINDOWSIZE MAX
+/bin/echo %WINDOWLEVEL HIGH
+/bin/echo %WINDOWPOSITION CENTER
+/bin/echo %BACKGROUND ./UAL.jpg
+/bin/echo %BACKGROUNDSCALING PROPORTIONALLY
+/bin/echo %BEGINPOLE
+/bin/echo %SHOWTIMER
+/bin/echo %0 Preparing to start OS X Software Deployment
+
+# Set System Timezone to avoid clock sync issues and record imaging time.
+
+systemsetup -settimezone Europe/London
+systemsetup -setusingnetworktime on
+systemsetup -setnetworktimeserver timeserver.com
+/usr/sbin/ntpd -g -q
+
+/bin/echo %TITLE "UAL Software Deployment - Started at" $( date )
+
+/bin/echo $AdminPW | sudo -S touch /usr/lastimaged
+/bin/echo $AdminPW | sudo -S echo "`date`" > /usr/lastimaged
+
+/bin/echo %6 Detecting current building/department groups
+
+# Hide users under UID 500 and create uadmin account here if it doesn't already exist
+
+/bin/echo %12 Creating admin account
+
+defaults write /Library/Preferences/com.apple.loginwindow.plist Hide500Users -bool YES
+
+if id -u uadmin >/dev/null 2>&1; then
+    echo "admin already exists. Skipping account creation."
+else
+fi
+
+# Disable iCloud popup.
+
+/bin/echo %18 Disabling iCloud pop up on first login
+mv -f -v /System/Library/CoreServices/Setup\ Assistant.app/Contents/SharedSupport/MiniLauncher /System/Library/CoreServices/Setup\ Assistant.app/Contents/SharedSupport/MiniLauncher.backup
+
+# Enable ARD for remote access for all users.
+
+/bin/echo %24 Enabling Apple Remote Desktop access
+
+/System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -activate -configure -access -on -restart -agent -privs -all 
+
+# Make sure the computer has enrolled
+
+/bin/echo %30 Enrolling computer in JSS
+
+echo "Checking to see if JAMF enroll.sh is still running"
+
+while [ -e "$EnrollLD" ]; do
+    if [ $EnrolWait -le 0 ]; then
+        echo "Reached wait timeout of ${EnrolWait} seconds!"
+        break
+    fi
+
+    echo "Still not complete. Waiting another ${EnrolWaitIncrement} seconds..."
+    sleep $EnrolWaitIncrement 
+    (( EnrolWait -= $EnrolWaitIncrement ))
+done    
+
+# Set up error trapping function for multiple jamf binary processes
+
+function multiplejamf {
+    # Check to see if jamf binary is running, and wait for it to finish.
+    # Trying to avoid multiple triggers running at once at the expense of time taken.
+    # There are two existing jamf processes running at all times. More than that is bad for us!
+
+    TEST=$( pgrep jamf | wc -l )
+
+    while [ $TEST -gt 2 ]
+    do
+        /bin/echo Waiting for existing jamf processes to finish ...
+        sleep 3
+        TEST=$( pgrep jamf | wc -l )
+    done
+}
+
+# Set energy saving settings to never sleep
+
+/bin/echo %36 Setting Energy Saving Settings for Deployment
+
+/usr/bin/pmset -a displaysleep 0
+/usr/bin/pmset -a disksleep 0
+/usr/bin/pmset -a sleep 0
+
+# Fix the incorrect model name in /Library/Preferences/SystemConfiguration/preferences.plist
+# Also make sure the .plist is in the correct format
+
+/bin/echo %42 Setting correct network details
+
+if [[ "$PrefModel" != "$MacModel" ]];
+then
+  /bin/echo $AdminPW | sudo -S defaults write /Library/Preferences/SystemConfiguration/preferences.plist Model $MacModel
+  /bin/echo $AdminPW | sudo -S plutil -convert xml1 /Library/Preferences/SystemConfiguration/preferences.plist
+fi
+
+# Fix the incorrect network service names
+# Script lovingly stolen from https://jamfnation.jamfsoftware.com/discussion.html?id=3422
+
+# Detect new network hardware
+networksetup -detectnewhardware
+
+# List all network services and read one by one
+networksetup -listallnetworkservices | tail -n +2 | while read service
+do
+
+# Remove asterisk from string for renaming disabled services
+    service=${service#*\*}
+
+# Use filter to select next line which has the hardware port defined
+    filter=false
+
+# Display network services
+    networksetup -listnetworkserviceorder | while read serviceorder
+    do
+        if [[ ${filter} == true ]]
+        then
+            # Grab hardware port
+            hardwareport=`echo ${serviceorder} | sed -e 's/(Hardware Port: //;s/, Device:.*//'`
+
+            # Check if service name if different
+            if [[ ${service} != ${hardwareport} ]]
+            then
+                # Rename the network service
+                networksetup -renamenetworkservice "${service}" "${hardwareport}"
+                echo -e "Renamed network service \"${service}\" to \"${hardwareport}\""
+            fi
+        fi
+
+        if [[ ${serviceorder} == *${service} ]]
+        then        
+            # Got the line with the service. Set the filter to true to grab the next line which contains the hardware port
+            filter=true
+            else
+            filter=false
+        fi
+    done
+done
+
+# JAMF imaging should have set the machine name correctly. Let's make sure hostname is also set properly
+
+setName=`networksetup -getcomputername`
+scutil --set ComputerName ${setName}
+scutil --set LocalHostName ${setName}
+scutil --set HostName ${setName}
+
+# Enable Assistive Device Access
+
+/bin/echo %48 Enable Assistive Device Access
+
+/usr/bin/touch /private/var/db/.AccessibilityAPIEnabled
+
+# Enable AD authenticated printing
+
+/bin/echo %54 Enable AD authenticated printing
+
+/usr/sbin/cupsctl DefaultAuthType=Negotiate
+pause 5
+
+/bin/echo %60 Installing Department Specific Software
+
+# Based on info obtained from JSS at start of script, detect if the building or department is set.
+# If not set or incorrect, give it the holding group. Reset the building variable to stop it installing EVERYTHING!
+
+if [ "$department" = "<department />" ] || [ "$building" = "<building />" ]
+then
+    multiplejamf    
+    jamf recon -building InitialDeployment
+    multiplejamf
+    jamf recon -department InitialDeployment    
+    building="InitialDeployment"
+fi
+
+# Process building/department variables to remove XML tags. Sorry for the terse bash but it worked. Eventually.
+
+building=${building##*<building>}
+building=${building%%\<\/building\>*}
+
+department=${department##*<department>}
+department=${department%%\<\/department\>*}
+
+# If the building is correct (and it should be), install the proper departments policy load out.
+
+case $building in
+    building1|building2|building3|Unmanaged)
+        multiplejamf
+        jamf policy -trigger $department -verbose
+        multiplejamf
+        jamf recon
+    ;;
+esac
+
+/bin/echo %66 Installing Initial Software
+
+# This will install University wide software and policies (and CS6)
+
+multiplejamf    
+    jamf policy -trigger SoftwareInstall -verbose
+multiplejamf
+    jamf recon
+multiplejamf
+    jamf policy -trigger AdobeCSInstall1 -verbose
+    rm /Applications/Adobe\ SpeedGrade\ CS6/Adobe\ SpeedGrade\ CS6.app/Contents/MacOS/Adobe\ SpeedGrade\ CS6.app
+    jamf recon
+multiplejamf
+    jamf policy -trigger AdobeCSInstall2 -verbose
+
+/bin/echo %72 Installing Updates
+
+multiplejamf
+    jamf policy -trigger UALUpdatePolicy -verbose
+multiplejamf
+    jamf recon
+
+/bin/echo $AdminPW | sudo -S touch /usr/lastupdated
+/bin/echo $AdminPW | sudo -S echo "`date`" > /usr/lastupdated
+
+/bin/echo %78 Installing MCX Settings
+
+multiplejamf
+jamf mcx
+
+# Final recon to make sure Inventory is up to date.
+
+/bin/echo %84 Updating computer inventory record
+multiplejamf
+    jamf recon
+
+# Cleanup on aisle three!
+
+/bin/echo %90 Setting UAL Energy Saving settings
+
+/usr/bin/pmset -a displaysleep 30
+/usr/bin/pmset -a disksleep 0
+/usr/bin/pmset -a sleep 0
+/usr/bin/pmset -a womp 1
+/usr/bin/pmset -a ring 0
+/usr/bin/pmset -a autorestart 1
+/usr/bin/pmset -a powerbutton 0
+
+/bin/echo %96 Final cleanup of files
+
+rm -f /Library/LaunchAgents/com.ual.casperfirstrun.plist
+rm -rf /firstrun
+
+# Shutdown iHook and the computer
+
+/bin/echo %100 Complete! Mac will now restart in 10 seconds
+/bin/sleep 10
+/bin/echo echo %ENDPOLE
+
+/bin/echo $AdminPW | sudo -S /sbin/shutdown -r now
+
+exit 0
