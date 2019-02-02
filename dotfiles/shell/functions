@@ -330,10 +330,16 @@ dumpchain() {
 }
 
 sv() {
-	if [[ -d "./venv" ]] && [[ -r "./venv" ]]; then
-		source "./venv/bin/activate"
+	local thepwd
+	thepwd="$(basename "$(pwd)")"
+	local name=${1:-$thepwd}
+	local vdir="${WORKON_HOME}/${name}"
+	[[ ! -d "${WORKON_HOME}" ]] && mkdir -p "${WORKON_HOME}"
+	if [[ -d "${vdir}" ]] && [[ -r "${vdir}" ]]; then
+		source "${vdir}/bin/activate"
 	else
-		workon "$(basename "$(pwd)")"
+		python -m venv "${vdir}"
+		source "${vdir}/bin/activate"
 	fi
 }
 
