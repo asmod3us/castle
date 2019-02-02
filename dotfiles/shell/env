@@ -84,9 +84,9 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 export VIRTUAL_ENV_DISABLE_PROMPT=1
+export VIRTUALENVWRAPPER_WORKON_CD=1
 export PROJECT_HOME=~/Projects
 export WORKON_HOME=~/Tools/venvs
 # export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
 # source /usr/local/bin/virtualenvwrapper_lazy.sh
-source /usr/local/bin/virtualenvwrapper.sh
-
+#source /usr/local/bin/virtualenvwrapper.sh
