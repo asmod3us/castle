@@ -76,3 +76,5 @@
 	host = github.ibm.com
 [difftool]
 	prompt = false
+[commit]
+	template = /Users/achim.staebler/.stCommitMsg
