@@ -158,14 +158,14 @@ _gen_fzf_default_opts
 
 bind -x '"\C-p": vim $(fzf);'
 
-venvInfo() {
+_venvInfo() {
 	[[ -z ${VIRTUAL_ENV} ]] && return
 	VENV=$(basename "${VIRTUAL_ENV}")
 	echo -n "🐍$VENV "
 }
 
 # fastest possible way to check if repo is dirty
-gitInfo() {
+_gitInfo() {
 	# check if we're in a git repo
 	git rev-parse --is-inside-work-tree &>/dev/null || return
 	BRANCH=$(git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||')
@@ -181,7 +181,7 @@ timerStart() {
 
 timerStop() {
 	if [[ -n "$timer" ]]; then
-		lastElapsed=$(($SECONDS - $timer))
+		lastElapsed=$((SECONDS - timer))
 		unset timer
 	fi
 }
@@ -193,9 +193,9 @@ displayTime() {
 	local H=$((T/60/60%24))
 	local M=$((T/60%60))
 	local S=$((T%60))
-	[[ $D > 0 ]] && printf '%dd' $D
-	[[ $H > 0 ]] && printf '%dh' $H
-	[[ $M > 0 ]] && printf '%dm' $M
+	[[ $D -gt 0 ]] && printf '%dd' $D
+	[[ $H -gt 0 ]] && printf '%dh' $H
+	[[ $M -gt 0 ]] && printf '%dm' $M
 	# [[ $D > 0 || $H > 0 || $M > 0 ]] && printf ' '
 	printf '%ds' $S
 }
@@ -308,7 +308,7 @@ prompt_command() {
 	# red color for root
 	if [ $UID -eq 0 ]; then
 		local USER_HOST="\[${RED}\]\u@\h "
-	elif [ ! $UID -eq $STARTUID ]; then
+	elif [ ! "$UID" -eq "$STARTUID" ]; then
 		# show user and host
 		local USER_HOST="\[${CYAN}\]\u@\h "
 	else 
@@ -335,10 +335,10 @@ prompt_command() {
 		fi
 	fi
 
-	local VENVINFO="\$(venvInfo)"
+	local VENVINFO="\$(_venvInfo)"
 	# __git_ps1 is a bit slow
 	# GITINFO="\$(type -t __git_ps1 &> /dev/null && __git_ps1 '[%s] ')"
-	local GITINFO="\$(gitInfo)"
+	local GITINFO="\$(_gitInfo)"
 	local DISPLAYPATH="\w"
 
 	# set the prompt
