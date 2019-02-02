@@ -1,4 +1,5 @@
 #!/bin/bash
 USER=ADMIN
 PASS=$(cat ~/.ipmi-pass)
-IPMIHOST=192.168.1.47 FN=$(mktemp) JAR=$(mktemp) && curl -q -s -k -c "${JAR}" -X POST --data "name=${USER}&pwd=${PASS}" "https://${IPMIHOST}/cgi/login.cgi" >/dev/null && curl -q -s -k -b "${JAR}" -o "${FN}" -X GET "https://${IPMIHOST}/cgi/url_redirect.cgi?url_name=ikvm&url_type=jwsk" && javaws "${FN}"
+IPMIHOST=192.168.13.28
+FN=$(mktemp) JAR=$(mktemp) && curl -q -s -k -c "${JAR}" -X POST --data "name=${USER}&pwd=${PASS}" "https://${IPMIHOST}/cgi/login.cgi" >/dev/null && curl -q -s -k -b "${JAR}" -o "${FN}" -X GET "https://${IPMIHOST}/cgi/url_redirect.cgi?url_name=ikvm&url_type=jwsk" && javaws "${FN}"
